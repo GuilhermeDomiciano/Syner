@@ -1,3 +1,3 @@
 export default function Page() {
-    return <h1>sim</h1>
+    return <h1>Olá, Syner em Next.js!</h1>
 }
