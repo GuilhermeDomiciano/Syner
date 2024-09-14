@@ -38,21 +38,21 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Ordem de COMANDOS GIT para trabalhar no projeto em sua maquina
 
 obs: baixar [git]{https://git-scm.com/downloads} e [node.js]{https://nextjs.org} em seu computador<br>
-obs.2: Use no terminal do propio visual estudio code, após abrir a pasta onde ficará o projeto 
-
-1 - git config --global user.name "seu nome"
-2 - git config --global user.email "seu email"
-3 - git init
-4 - git clone https://github.com/GuilhermeDomiciano/Syner
-5 - cd Syner
-6 - npm install 
-7 - npm run dev 
-
-## Para adicionar as mudanças no github
-
-1 - git status
-2 - git add *
-3 - git commit -m "Digite o que foi feito"
-4 - git pull
-5 - git push
+obs.2: Use no terminal do propio visual estudio code, após abrir a pasta onde ficará o projeto<br> 
+<br>
+1 - git config --global user.name "seu nome"<br>
+2 - git config --global user.email "seu email"<br>
+3 - git init<br>
+4 - git clone https://github.com/GuilhermeDomiciano/Syner<br>
+5 - cd Syner<br>
+6 - npm install <br>
+7 - npm run dev <br>
+<br>
+## Para adicionar as mudanças no github<br>
+<br>
+1 - git status<br>
+2 - git add *<br>
+3 - git commit -m "Digite o que foi feito"<br>
+4 - git pull<br>
+5 - git push<br>
 
