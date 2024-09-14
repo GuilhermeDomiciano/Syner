@@ -1,5 +1,7 @@
+"use client";
 import Calculo from './img/Imagem.png';
 import Image from 'next/image';
+
 export default function Page() {
     return (
         
@@ -21,7 +23,7 @@ export default function Page() {
                     <button>Chat</button>
                 </li>
                 <li>
-                    <button>Perfil</button>
+                <button onClick={() => window.location.href = 'http://localhost:3000/perfil'}>Perfil</button>
                 </li>
             </ul>
             <Image src={Calculo} alt="foto" />
