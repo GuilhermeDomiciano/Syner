@@ -37,7 +37,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Ordem de COMANDOS GIT para trabalhar no projeto em sua maquina
 
-obs: baixar [git]{https://git-scm.com/downloads} e [node.js]{https://nextjs.org} em seu computador
+obs: baixar [git]{https://git-scm.com/downloads} e [node.js]{https://nextjs.org} em seu computador<br>
 obs.2: Use no terminal do propio visual estudio code, após abrir a pasta onde ficará o projeto 
 
 1 - git config --global user.name "seu nome"
