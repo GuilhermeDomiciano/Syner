@@ -18,7 +18,7 @@ export default function Page() {
                     <button>Chat</button>
                 </li>
                 <li>
-                    <button>Perfil</button>
+                    <button onClick={() => window.location.href = 'http://localhost:3000/perfil'}>Perfil</button>
                 </li>
             </ul>
             <div>
