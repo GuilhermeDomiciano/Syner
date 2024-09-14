@@ -1,4 +1,3 @@
-// Marcar como Client Component
 "use client";
 
 export default function Page() {
@@ -30,22 +29,32 @@ export default function Page() {
                 <h1>Olá, Inserir nome</h1>
                 <div style={{ display: 'flex', gap: '20px' }}>
                     <div>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7vnGsgBgV8QW50dp-wZ4GoCNWu4egKYuxAw&s" alt="Calculo II" />
+                        <button onClick={() => window.location.href = 'http://localhost:3000/calculo'}>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7vnGsgBgV8QW50dp-wZ4GoCNWu4egKYuxAw&s" alt="Calculo II" />
+                        </button>
                         <p><strong>Cálculo II</strong></p>
                         <p>6 Monitores</p>
+                        <button onClick={() => alert('Cálculo II selecionado')}>Ver mais</button>
                     </div>
                     <div>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7vnGsgBgV8QW50dp-wZ4GoCNWu4egKYuxAw&s" alt="Bioquimica Lab" />
+                        <button onClick={() => alert('Bioquímica Lab. selecionado')}>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7vnGsgBgV8QW50dp-wZ4GoCNWu4egKYuxAw&s" alt="Bioquimica Lab" />
+                        </button>
                         <p><strong>Bioquímica Lab.</strong></p>
                         <p>27 Monitores</p>
+                        <button onClick={() => alert('Bioquímica Lab. selecionado')}>Ver mais</button>
                     </div>
                     <div>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7vnGsgBgV8QW50dp-wZ4GoCNWu4egKYuxAw&s" alt="Fund. IA" />
+                        <button onClick={() => alert('Fund. IA selecionado')}>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7vnGsgBgV8QW50dp-wZ4GoCNWu4egKYuxAw&s" alt="Fund. IA" />
+                        </button>
                         <p><strong>Fund. IA</strong></p>
                         <p>10 Monitores</p>
+                        <button onClick={() => alert('Fund. IA selecionado')}>Ver mais</button>
                     </div>
                 </div>
             </div>
         </div>
     );
 }
+

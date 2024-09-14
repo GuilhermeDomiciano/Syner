@@ -1,3 +1,4 @@
+"use client";
 import Image from 'next/image';
 import Rate from "./img/rate.png"
 
@@ -6,7 +7,7 @@ export default function Page() {
         <div>
             <ul>
                 <li>
-                    <button>Início</button>
+                <button onClick={() => window.location.href = 'http://localhost:3000'}>Home</button>
                 </li>
                 <li>
                     <button>Comunidade</button>
