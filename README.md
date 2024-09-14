@@ -47,9 +47,9 @@ obs.2: Use no terminal do propio visual estudio code, após abrir a pasta onde f
 5 - cd Syner<br>
 6 - npm install <br>
 7 - npm run dev <br>
-<br>
-## Para adicionar as mudanças no github<br>
-<br>
+
+## Para adicionar as mudanças no github
+
 1 - git status<br>
 2 - git add *<br>
 3 - git commit -m "Digite o que foi feito"<br>
