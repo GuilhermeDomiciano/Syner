@@ -17,7 +17,7 @@ export default function Page() {
                     <button>Agenda</button>
                 </li>
                 <li>
-                    <button>Chat</button>
+                    <button onClick={() => window.location.href = 'http://localhost:3000/chat'}>Chat</button>
                 </li>
                 <li>
                     {/* Correção no onClick */}
@@ -34,7 +34,7 @@ export default function Page() {
                         </button>
                         <p><strong>Cálculo II</strong></p>
                         <p>6 Monitores</p>
-                        <button onClick={() => alert('Cálculo II selecionado')}>Ver mais</button>
+                        <button onClick={() => window.location.href = 'http://localhost:3000/calculo'}>Ver mais</button>
                     </div>
                     <div>
                         <button onClick={() => alert('Bioquímica Lab. selecionado')}>
