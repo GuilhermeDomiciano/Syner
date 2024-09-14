@@ -37,7 +37,7 @@ export default function Page() {
                     <Image src={Rate} alt="Rate"/>
                     <p><strong>Dados pessoais</strong></p>
                     <p>Nome: Lucas Vinicius</p>
-                    <p>Idade: lorem anus</p>
+                    <p>Idade: 23</p>
                     <p>De: Palmas, Tocantins</p>
                     <p>Curso: Engenharia de Software</p>
                 </div>
