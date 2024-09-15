@@ -6,7 +6,7 @@ import Image from 'next/image';
 export default function Page() {
     return (
         
-        <div>
+        <div style={{ fontSize: 12 }}>
             <ul>
                 <li>
                 <button onClick={() => window.location.href = 'http://localhost:3000'}>Home</button>

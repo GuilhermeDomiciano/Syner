@@ -20,7 +20,6 @@ export default function Page() {
                     <button onClick={() => window.location.href = 'http://localhost:3000/chat'}>Chat</button>
                 </li>
                 <li>
-                    {/* Correção no onClick */}
                     <button onClick={() => window.location.href = 'http://localhost:3000/perfil'}>Perfil</button>
                 </li>
             </ul>
