@@ -37,7 +37,7 @@ export default function Page() {
                 <div>
                     <img src="https://pbs.twimg.com/profile_images/1272953901231280136/uR2BWZEa_400x400.jpg" style={{ width: "5rem", height: "5rem", borderRadius: "50%" }} alt="pfp"></img>
                     <h1>Monitor numero 3</h1>
-                    <p>Monitor de Bioquimica</p>
+                    <p>Monitor de Bioquímica</p>
                 </div>
                 <div style={{border: "red, 2px, solid"}}>
                     <h1>Div do chat</h1>
