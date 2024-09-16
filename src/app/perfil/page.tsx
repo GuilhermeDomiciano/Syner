@@ -7,7 +7,7 @@ export default function Page() {
         <div>
             <ul>
                 <li>
-                <button onClick={() => window.location.href = 'http://localhost:3000'}>Home</button>
+                <button onClick={() => window.location.href = 'http://localhost:3000/home'}>Home</button>
                 </li>
                 <li>
                     <button>Comunidade</button>
