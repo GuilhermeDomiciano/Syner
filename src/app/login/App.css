@@ -4,15 +4,17 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
+    background-color: #fff;
 }
 
 .container{
     display: flex;
     width: 80%;
     height: 80vh;
-    background-color: white;
+    background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    
 }
 
 .container-esquerdo,
@@ -22,15 +24,16 @@ body{
 }
 
 .container-esquerdo{
-    background-color: #eee;
+    background-color: #fff;
 }
 
 .container-direito{
-    background-color: #eee;
+    background-color: #fff;
 }
 
 .divisor{
     width: 1px;
     background-color: #000;
-
+    height: 50%; 
+    align-self: flex-end; 
 }
