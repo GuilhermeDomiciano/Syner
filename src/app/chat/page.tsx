@@ -39,7 +39,7 @@ export default function Page() {
                     <h1>Monitor numero 3</h1>
                     <p>Monitor de Bioquímica</p>
                 </div>
-                <div style={{border: "red, 2px, solid"}}>
+                <div style={{border: "blue, 2px, solid"}}>
                     <h1>Div do chat</h1>
                     <p>conversasoes</p>
                     <p>conversasoes</p>
