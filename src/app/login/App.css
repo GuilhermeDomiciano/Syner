@@ -7,6 +7,10 @@ body{
     background-color: #fff;
 }
 
+.container h1{
+    color: "#4E74F9";
+}
+
 .container{
     display: flex;
     width: 80%;
@@ -14,7 +18,6 @@ body{
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
-    
 }
 
 .container-esquerdo,

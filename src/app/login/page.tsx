@@ -8,7 +8,7 @@ export default function Page() {
         <div className="container">
             <div className='container-esquerdo'>
                 <Image src={Coruja} alt="Coruja" />
-                <h1 style={{color: "#4E74F9"}}><strong>SYNER</strong></h1>
+                <h1><strong>SYNER</strong></h1>
                 <button>Criar Conta</button>
                 <button>Continuar com o Google</button>
                 <button>Entrar com instituição de ensino</button>
