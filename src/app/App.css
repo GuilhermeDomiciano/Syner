@@ -1,42 +1,117 @@
-body{
+body {
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #fff;
+    background-color: #f3f4f6;
+    font-family: 'Roboto', sans-serif;
 }
 
-.container h1{
-    color: "#4E74F9";
-}
-
-.container{
+.container {
     display: flex;
     width: 80%;
     height: 80vh;
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
     position: relative;
 }
 
+.container h1 {
+    color: #4E74F9;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
 .container-esquerdo,
-.container-direito{
+.container-direito {
     flex: 1;
-    padding: 20px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.container-esquerdo{
-    background-color: #fff;
+.container-esquerdo {
+    background-color: #f9fafb;
 }
 
-.container-direito{
-    background-color: #fff;
+.container-direito {
+    background-color: #f9fafb;
+    text-align: center;
 }
 
-.divisor{
+.container-direito p {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.divisor {
     width: 1px;
-    background-color: #000;
-    height: 50%; 
-    align-self: flex-end; 
+    background-color: #ccc;
+    height: 75%;
+    align-self: center;
+}
+
+button {
+    background-color: #4E74F9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 80%;
+}
+
+button:hover {
+    background-color: #3b5bc9;
+}
+
+button:active {
+    background-color: #324cb2;
+}
+
+button:nth-child(2) {
+    background-color: #ea4335; /* Cor do botão Google */
+}
+
+button:nth-child(2):hover {
+    background-color: #d63c30;
+}
+
+button:nth-child(3) {
+    background-color: #4E74F9; /* Cor do botão Instituição */
+}
+
+button:nth-child(3):hover {
+    background-color: #3b5bc9;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .divisor {
+        display: none;
+    }
+
+    .container-esquerdo,
+    .container-direito {
+        padding: 20px;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
 }
