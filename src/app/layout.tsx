@@ -1,3 +1,5 @@
+import './globals.css';  // Ou o nome do arquivo que você criou
+
 export default function RootLayout({
   children,
 }: {
