@@ -1,5 +1,3 @@
-// src/app/profile/page.tsx
-
 'use client'; // Para habilitar componentes dinâmicos com Next.js
 
 import { useState } from 'react';
@@ -54,219 +52,249 @@ export default function ProfilePage() {
     return stars;
   };
 
+  const [activeTab, setActiveTab] = useState<'materiais' | 'avaliacoes'>('materiais');
+
+
   return (
-    <div className="min-h-screen bg-gray-100 p-8 flex">
-      {/* Lado esquerdo: Perfil (Fixo com 'sticky') */}
-      <div className="w-full md:w-1/2 h-fit sticky top-8">
-        <div className="rounded-lg p-6">
-          {/* Capa */}
-          <div className="relative w-full h-40 bg-[#4E74F9] rounded-t-lg">
-            {/* Imagem de perfil */}
-            <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
-              <div className="rounded-full border-4 border-white w-28 h-28 bg-gray-300 overflow-hidden">
-                <Image
-                  src="/fotos/lucas.jpg" // Substitua pelo caminho real da imagem
-                  alt="Profile Image"
-                  width={112} // Tamanho da imagem (correspondente a w-28)
-                  height={112} // Tamanho da imagem (correspondente a h-28)
-                  className="object-cover"
-                />
-              </div>
+    <div className="min-h-screen flex">
+      {/* Lado esquerdo fixo com informações do perfil */}
+      <aside className="fixed top-0 left-0 w-1/2 h-full p-8 flex flex-col items-center justify-center">
+        <div className="w-full max-w-md text-center">
+          {/* Capa e Imagem do Perfil */}
+          <div className="relative w-full h-24 bg-[#4E74F9] rounded-t-lg flex justify-center items-center">
+            <div className="absolute -bottom-12 w-32 h-32 rounded-full border-4 border-white bg-gray-300 overflow-hidden">
+              <Image
+                src="/fotos/lucas.jpg" // Substitua pelo caminho real da imagem
+                alt="Profile Image"
+                width={128}
+                height={128}
+                className="object-cover w-full h-full"
+              />
             </div>
           </div>
 
           {/* Informações do usuário */}
-          <div className="mt-16 text-center">
-            <h1 className="text-2xl font-bold text-gray-800">Lucas Vinícius</h1>
-            <div className="flex justify-center items-center mt-2">
+          <div className="mt-20">
+            <h1 className="text-2xl font-semibold text-gray-800">Lucas Vinícius</h1>
+            <p className="text-lg text-gray-600 mt-1">Engenharia de Software</p>
+            <div className="flex justify-center items-center mt-4">
               <div className="flex">{renderEditableStars(profileRating, handleProfileRating)}</div>
               <span className="ml-2 text-blue-500 font-semibold text-lg">{profileRating}</span>
             </div>
           </div>
 
-          {/* Dados pessoais */}
-          <div className="mt-24">
+          {/* Dados Pessoais com Botão de Logout abaixo */}
+          <div className="mt-12">
             <h2 className="text-xl font-semibold text-gray-900 border-b pb-2 mb-4">Dados pessoais</h2>
-            <p className="text-gray-700 mb-1"><strong>Nome:</strong> Lucas Vinícius</p>
-            <p className="text-gray-700 mb-1"><strong>Idade:</strong> 21</p>
-            <p className="text-gray-700 mb-1"><strong>De:</strong> Palmas, Tocantins</p>
-            <p className="text-gray-700"><strong>Curso:</strong> Engenharia de Software</p>
+            <ul className="space-y-2 text-left">
+              <li className="text-gray-700"><strong>Nome:</strong> Lucas Vinícius</li>
+              <li className="text-gray-700"><strong>Idade:</strong> 21</li>
+              <li className="text-gray-700"><strong>De:</strong> Palmas, Tocantins</li>
+              <li className="text-gray-700"><strong>Curso:</strong> Engenharia de Software</li>
+            </ul>
           </div>
-        </div>
-        <div className="text-center w-full max-w-xs mb-8">
-            <button className="bg-blue-600 text-white w-full py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors ">
-                <Link href="/login">
+
+          {/* Botão de Logout centralizado */}
+          <div className="mt-8">
+            <Link href="/login">
+              <button className="bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
                 Sair
-                </Link>
-            </button>
-        </div>
-      </div>
-      
-
-        {/* Divisão central com uma linha vertical */}
-        <div className="hidden md:block w-[1px] bg-gray-300"></div>
-
-      {/* Lado direito: Publicações e Avaliações */}
-      <div className="w-full md:w-2/3 pl-8">
-        {/* Materiais públicos */}
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 border-b pb-2 mb-4">Materiais públicos</h2>
-          <ul className="space-y-4">
-            <li className="flex items-center justify-between">
-            <div className="flex items-center">
-                <Image
-                src="/icons/material.svg"
-                alt="Material Icon"
-                width={40} // Mantendo o tamanho como no layout original
-                height={40} // Mantendo o tamanho como no layout original
-                className="mr-2"
-                />
-                <span className="text-gray-800 font-medium ml-2">Números Decimais</span>
-            </div>
-            <button className="text-gray-400 hover:text-gray-600">...</button>
-            </li>
-            <li className="flex items-center justify-between">
-            <div className="flex items-center">
-                <Image
-                src="/icons/material.svg"
-                alt="Material Icon"
-                width={40}
-                height={40}
-                className="mr-2"
-                />
-                <span className="text-gray-800 font-medium ml-2">Equação de Segundo Grau</span>
-            </div>
-            <button className="text-gray-400 hover:text-gray-600">...</button>
-            </li>
-            <li className="flex items-center justify-between">
-            <div className="flex items-center">
-                <Image
-                src="/icons/material.svg"
-                alt="Material Icon"
-                width={40}
-                height={40}
-                className="mr-2"
-                />
-                <span className="text-gray-800 font-medium ml-2">Limites e Integradas</span>
-            </div>
-            <button className="text-gray-400 hover:text-gray-600">...</button>
-            </li>
-            <li className="flex items-center justify-between">
-            <div className="flex items-center">
-                <Image
-                src="/icons/material.svg"
-                alt="Material Icon"
-                width={40}
-                height={40}
-                className="mr-2"
-                />
-                <span className="text-gray-800 font-medium ml-2">Notação Científica</span>
-            </div>
-            <button className="text-gray-400 hover:text-gray-600">...</button>
-            </li>
-            <li className="flex items-center justify-between">
-            <div className="flex items-center">
-                <Image
-                src="/icons/material.svg"
-                alt="Material Icon"
-                width={40}
-                height={40}
-                className="mr-2"
-                />
-                <span className="text-gray-800 font-medium ml-2">Álgebra Linear</span>
-            </div>
-            <button className="text-gray-400 hover:text-gray-600">...</button>
-            </li>
-            <li className="flex items-center justify-between">
-            <div className="flex items-center">
-                <Image
-                src="/icons/material.svg"
-                alt="Material Icon"
-                width={40}
-                height={40}
-                className="mr-2"
-                />
-                <span className="text-gray-800 font-medium ml-2">Cálculo Diferencial</span>
-            </div>
-            <button className="text-gray-400 hover:text-gray-600">...</button>
-            </li>
-            <li className="flex items-center justify-between">
-            <div className="flex items-center">
-                <Image
-                src="/icons/material.svg"
-                alt="Material Icon"
-                width={40}
-                height={40}
-                className="mr-2"
-                />
-                <span className="text-gray-800 font-medium ml-2">Geometria Analítica</span>
-            </div>
-            <button className="text-gray-400 hover:text-gray-600">...</button>
-            </li>
-            <li className="flex items-center justify-between">
-            <div className="flex items-center">
-                <Image
-                src="/icons/material.svg"
-                alt="Material Icon"
-                width={40}
-                height={40}
-                className="mr-2"
-                />
-                <span className="text-gray-800 font-medium ml-2">Estatística Básica</span>
-            </div>
-            <button className="text-gray-400 hover:text-gray-600">...</button>
-            </li>
-          </ul>
-        </div>
-
-        {/* Avaliações */}
-        <div>
-          <h2 className="text-xl font-semibold text-gray-900 border-b pb-2 mb-4">Avaliações</h2>
-          <div className="flex flex-col space-y-4">
-            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-              <div className="flex items-center mb-2">
-                {/* Imagem de perfil para Monica Nascimento */}
-                <div className="rounded-full bg-gray-300 w-10 h-10 overflow-hidden">
-                  <Image
-                    src="/fotos/Monica.jpg" // Substitua pelo caminho real da imagem
-                    alt="Monica Nascimento"
-                    width={40} // Tamanho da imagem (correspondente a w-10)
-                    height={40} // Tamanho da imagem (correspondente a h-10)
-                    className="object-cover"
-                  />
-                </div>
-                <div className="ml-2">
-                  <h3 className="font-semibold text-gray-800">Monica Nascimento</h3>
-                  <div className="flex">{renderFixedStars(3)}</div>
-                </div>
-              </div>
-              <p className="text-gray-600">Gostei das explicações, mas demora a responder.</p>
-              <p className="text-gray-400 text-sm mt-2">Avaliado em 22 de janeiro de 2023</p>
-            </div>
-
-            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-              <div className="flex items-center mb-2">
-                {/* Imagem de perfil para Carlos Eduardo */}
-                <div className="rounded-full bg-gray-300 w-10 h-10 overflow-hidden">
-                  <Image
-                    src="/fotos/Carlos.jpg" // Substitua pelo caminho real da imagem
-                    alt="Carlos Eduardo"
-                    width={40} // Tamanho da imagem (correspondente a w-10)
-                    height={40} // Tamanho da imagem (correspondente a h-10)
-                    className="object-cover"
-                  />
-                </div>
-                <div className="ml-2">
-                  <h3 className="font-semibold text-gray-800">Carlos Eduardo</h3>
-                  <div className="flex">{renderFixedStars(4)}</div>
-                </div>
-              </div>
-              <p className="text-gray-600">Esse cara me ajudou bastante na minha prova.</p>
-              <p className="text-gray-400 text-sm mt-2">Avaliado em 13 de fevereiro de 2023</p>
-            </div>
+              </button>
+            </Link>
           </div>
         </div>
-      </div>
+      </aside>
+
+
+
+      {/* Separador de linha vertical */}
+      <div className="fixed top-0 left-1/2 h-full w-[1px] bg-gray-300"></div>
+
+      {/* Lado direito rolável com abas */}
+      <main className="ml-[50%] w-[50%] p-12">
+        {/* Botões de navegação para "Materiais", "Avaliações" */}
+        <div className="flex space-x-4 mb-8 justify-center">
+          <button
+            onClick={() => setActiveTab('materiais')}
+            className={`px-6 py-2 rounded-full shadow ${
+              activeTab === 'materiais' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-600'
+            } hover:bg-blue-600 transition`}
+          >
+            Materiais
+          </button>
+          <button
+            onClick={() => setActiveTab('avaliacoes')}
+            className={`px-6 py-2 rounded-full shadow ${
+              activeTab === 'avaliacoes' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-600'
+            } hover:bg-blue-600 transition`}
+          >
+            Avaliações
+          </button>
+        </div>
+
+        {/* Conteúdo dinâmico baseado na aba selecionada */}
+        <div>
+          {activeTab === 'materiais' && (
+            <div className="mb-8">
+            <h2 className="text-xl font-semibold text-gray-900 border-b pb-2 mb-4">Materiais públicos</h2>
+            <ul className="space-y-4">
+              <li className="flex items-center justify-between">
+              <div className="flex items-center">
+                  <Image
+                  src="/icons/material.svg"
+                  alt="Material Icon"
+                  width={40} // Mantendo o tamanho como no layout original
+                  height={40} // Mantendo o tamanho como no layout original
+                  className="mr-2"
+                  />
+                  <span className="text-gray-800 font-medium ml-2">Números Decimais</span>
+              </div>
+              <button className="text-gray-400 hover:text-gray-600">...</button>
+              </li>
+              <li className="flex items-center justify-between">
+              <div className="flex items-center">
+                  <Image
+                  src="/icons/material.svg"
+                  alt="Material Icon"
+                  width={40}
+                  height={40}
+                  className="mr-2"
+                  />
+                  <span className="text-gray-800 font-medium ml-2">Equação de Segundo Grau</span>
+              </div>
+              <button className="text-gray-400 hover:text-gray-600">...</button>
+              </li>
+              <li className="flex items-center justify-between">
+              <div className="flex items-center">
+                  <Image
+                  src="/icons/material.svg"
+                  alt="Material Icon"
+                  width={40}
+                  height={40}
+                  className="mr-2"
+                  />
+                  <span className="text-gray-800 font-medium ml-2">Limites e Integradas</span>
+              </div>
+              <button className="text-gray-400 hover:text-gray-600">...</button>
+              </li>
+              <li className="flex items-center justify-between">
+              <div className="flex items-center">
+                  <Image
+                  src="/icons/material.svg"
+                  alt="Material Icon"
+                  width={40}
+                  height={40}
+                  className="mr-2"
+                  />
+                  <span className="text-gray-800 font-medium ml-2">Notação Científica</span>
+              </div>
+              <button className="text-gray-400 hover:text-gray-600">...</button>
+              </li>
+              <li className="flex items-center justify-between">
+              <div className="flex items-center">
+                  <Image
+                  src="/icons/material.svg"
+                  alt="Material Icon"
+                  width={40}
+                  height={40}
+                  className="mr-2"
+                  />
+                  <span className="text-gray-800 font-medium ml-2">Álgebra Linear</span>
+              </div>
+              <button className="text-gray-400 hover:text-gray-600">...</button>
+              </li>
+              <li className="flex items-center justify-between">
+              <div className="flex items-center">
+                  <Image
+                  src="/icons/material.svg"
+                  alt="Material Icon"
+                  width={40}
+                  height={40}
+                  className="mr-2"
+                  />
+                  <span className="text-gray-800 font-medium ml-2">Cálculo Diferencial</span>
+              </div>
+              <button className="text-gray-400 hover:text-gray-600">...</button>
+              </li>
+              <li className="flex items-center justify-between">
+              <div className="flex items-center">
+                  <Image
+                  src="/icons/material.svg"
+                  alt="Material Icon"
+                  width={40}
+                  height={40}
+                  className="mr-2"
+                  />
+                  <span className="text-gray-800 font-medium ml-2">Geometria Analítica</span>
+              </div>
+              <button className="text-gray-400 hover:text-gray-600">...</button>
+              </li>
+              <li className="flex items-center justify-between">
+              <div className="flex items-center">
+                  <Image
+                  src="/icons/material.svg"
+                  alt="Material Icon"
+                  width={40}
+                  height={40}
+                  className="mr-2"
+                  />
+                  <span className="text-gray-800 font-medium ml-2">Estatística Básica</span>
+              </div>
+              <button className="text-gray-400 hover:text-gray-600">...</button>
+              </li>
+            </ul>
+          </div>
+          )}
+
+          {activeTab === 'avaliacoes' && (
+            <div className="space-y-4">
+              <h2 className="text-2xl font-semibold mb-4">Avaliações</h2>
+              <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+                <div className="flex items-center mb-2">
+                  {/* Imagem de perfil para Monica Nascimento */}
+                  <div className="rounded-full bg-gray-300 w-10 h-10 overflow-hidden">
+                    <Image
+                      src="/fotos/Monica.jpg" // Substitua pelo caminho real da imagem
+                      alt="Monica Nascimento"
+                      width={40} // Tamanho da imagem (correspondente a w-10)
+                      height={40} // Tamanho da imagem (correspondente a h-10)
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="ml-2">
+                    <h3 className="font-semibold text-gray-800">Monica Nascimento</h3>
+                    <div className="flex">{renderFixedStars(3)}</div>
+                  </div>
+                </div>
+                <p className="text-gray-600">Gostei das explicações, mas demora a responder.</p>
+                <p className="text-gray-400 text-sm mt-2">Avaliado em 22 de janeiro de 2023</p>
+              </div>
+
+              <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+                <div className="flex items-center mb-2">
+                  {/* Imagem de perfil para Carlos Eduardo */}
+                  <div className="rounded-full bg-gray-300 w-10 h-10 overflow-hidden">
+                    <Image
+                      src="/fotos/Carlos.jpg" // Substitua pelo caminho real da imagem
+                      alt="Carlos Eduardo"
+                      width={40} // Tamanho da imagem (correspondente a w-10)
+                      height={40} // Tamanho da imagem (correspondente a h-10)
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="ml-2">
+                    <h3 className="font-semibold text-gray-800">Carlos Eduardo</h3>
+                    <div className="flex">{renderFixedStars(4)}</div>
+                  </div>
+                </div>
+                <p className="text-gray-600">Esse cara me ajudou bastante na minha prova.</p>
+                <p className="text-gray-400 text-sm mt-2">Avaliado em 13 de fevereiro de 2023</p>
+              </div>
+              {/* Adicione mais avaliações conforme necessário */}
+            </div>
+          )}
+        </div>
+      </main>
     </div>
   );
 }

@@ -24,7 +24,7 @@ export default function Navbar() {
           <div></div>
           <div className="w-8 h-1 bg-[#4E74F9] mb-1"></div>
           <div className="w-8 h-1 bg-[#4E74F9] mb-1"></div>
-          <div className="w-8 h-1 bg-[#4E74F9] mb-4"></div>
+          <div className="w-8 h-1 bg-[#4E74F9] mb-0"></div>
         </button>
 
         {isDropdownOpen && (
@@ -55,7 +55,7 @@ export default function Navbar() {
           <li>
             <Link href="/history" className="flex flex-col items-center space-y-1 px-2 py-2 rounded-md hover:bg-gray-200 transition-colors duration-300">
               <Image src="/icons/history.png" alt="Histórico" width={20} height={20} />
-              <span className="text-xs font-medium text-[#4E74F9]">Histórico</span>
+              <span className="text-xs font-medium text-[#4E74F9]">Comunidade</span>
             </Link>
           </li>
           <li>

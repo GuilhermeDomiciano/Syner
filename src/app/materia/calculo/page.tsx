@@ -9,9 +9,9 @@ export default function Page() {
   const [activeTab, setActiveTab] = useState<'monitores' | 'materiais' | 'testes'>('monitores');
 
   return (
-    <div className="min-h-screen bg-gray-100 flex">
+    <div className="min-h-screen flex">
       {/* Lado esquerdo fixo */}
-      <aside className="fixed top-0 left-0 w-1/2 h-full bg-white shadow-lg p-8 flex flex-col items-center justify-center">
+      <aside className="fixed top-0 left-0 w-1/2 h-full p-8 flex flex-col items-center justify-center">
         {/* Imagem da matéria */}
         <Image src="/materias/1.png" alt="Cálculo II" width={150} height={150} className="rounded-full" />
 
@@ -20,10 +20,13 @@ export default function Page() {
         <p className="text-gray-500 text-lg">6 Monitores</p>
       </aside>
 
+      {/* Separador de linha vertical */}
+      <div className="fixed top-0 left-1/2 h-full w-[1px] bg-gray-300"></div>
+
       {/* Lado direito rolável, ajustado para começar após o lado esquerdo */}
       <main className="ml-[50%] w-[50%] p-12">
         {/* Botões de navegação para "Monitores", "Materiais", "Testes" */}
-        <div className="flex space-x-4 mb-8">
+        <div className="flex space-x-4 mb-8 justify-center">
           <button
             onClick={() => setActiveTab('monitores')}
             className={`px-6 py-2 rounded-full shadow ${
