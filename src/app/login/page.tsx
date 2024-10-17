@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center overflow-hidden fixed inset-0">
       <div className="rounded-lg max-w-6xl w-full p-12 flex flex-col md:flex-row">
         {/* Esquerda: Formulário de login */}
         <div className="w-full md:w-1/2 flex flex-col items-center justify-center">
@@ -68,7 +68,7 @@ export default function LoginPage() {
           </p>
           <div className="text-center w-full max-w-xs">
             <button className="bg-blue-600 text-white w-full py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-            <Link href="/login/signin">Login</Link>
+              <Link href="/login/signin">Login</Link>
             </button>
           </div>
         </div>

@@ -21,7 +21,7 @@ export default function Navbar() {
           onClick={toggleDropdown}
           className="flex flex-col items-center px-1 py-1 rounded-md hover:bg-gray-200 transition-colors duration-300 "
         >
-          <div className="mb-8"></div>
+          <div></div>
           <div className="w-8 h-1 bg-[#4E74F9] mb-1"></div>
           <div className="w-8 h-1 bg-[#4E74F9] mb-1"></div>
           <div className="w-8 h-1 bg-[#4E74F9] mb-4"></div>
