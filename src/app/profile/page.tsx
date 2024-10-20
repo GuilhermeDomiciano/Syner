@@ -22,7 +22,7 @@ export default function ProfilePage() {
           key={i}
           onClick={() => onClick(i)} // Clique para definir a avaliação
           xmlns="http://www.w3.org/2000/svg"
-          className={`h-8 w-8 cursor-pointer ${i <= rating ? 'text-yellow-500' : 'text-gray-300'}`}
+          className={`h-8 w-8 cursor-pointer ${i <= rating ? 'text-yellow-400' : 'text-gray-300'}`}
           fill="currentColor"
           viewBox="0 0 24 24"
         >
@@ -41,7 +41,7 @@ export default function ProfilePage() {
         <svg
           key={i}
           xmlns="http://www.w3.org/2000/svg"
-          className={`h-8 w-8 ${i <= rating ? 'text-yellow-500' : 'text-gray-300'}`}
+          className={`h-8 w-8 ${i <= rating ? 'text-yellow-400' : 'text-gray-300'}`}
           fill="currentColor"
           viewBox="0 0 24 24"
         >
@@ -54,15 +54,14 @@ export default function ProfilePage() {
 
   const [activeTab, setActiveTab] = useState<'materiais' | 'avaliacoes'>('materiais');
 
-
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex ">
       {/* Lado esquerdo fixo com informações do perfil */}
-      <aside className="fixed top-0 left-0 w-1/2 h-full p-8 flex flex-col items-center justify-center">
+      <aside className="fixed top-0 left-0 w-1/2 h-full p-8 flex flex-col items-center justify-center bg-white shadow-lg">
         <div className="w-full max-w-md text-center">
           {/* Capa e Imagem do Perfil */}
-          <div className="relative w-full h-24 bg-[#4E74F9] rounded-t-lg flex justify-center items-center">
-            <div className="absolute -bottom-12 w-32 h-32 rounded-full border-4 border-white bg-gray-300 overflow-hidden">
+          <div className="relative w-full h-24 bg-gradient-to-r from-blue-500 to-blue-500 rounded-t-lg flex justify-center items-center">
+            <div className="absolute -bottom-12 w-32 h-32 rounded-full border-4 border-white bg-gray-300 overflow-hidden shadow-md">
               <Image
                 src="/fotos/lucas.jpg" // Substitua pelo caminho real da imagem
                 alt="Profile Image"
@@ -75,8 +74,8 @@ export default function ProfilePage() {
 
           {/* Informações do usuário */}
           <div className="mt-20">
-            <h1 className="text-2xl font-semibold text-gray-800">Lucas Vinícius</h1>
-            <p className="text-lg text-gray-600 mt-1">Engenharia de Software</p>
+            <h1 className="text-3xl font-bold text-gray-800">Lucas Vinícius</h1>
+            <p className="text-lg text-gray-500 mt-1">Engenharia de Software</p>
             <div className="flex justify-center items-center mt-4">
               <div className="flex">{renderEditableStars(profileRating, handleProfileRating)}</div>
               <span className="ml-2 text-blue-500 font-semibold text-lg">{profileRating}</span>
@@ -97,15 +96,13 @@ export default function ProfilePage() {
           {/* Botão de Logout centralizado */}
           <div className="mt-8">
             <Link href="/login">
-              <button className="bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+              <button className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg">
                 Sair
               </button>
             </Link>
           </div>
         </div>
       </aside>
-
-
 
       {/* Separador de linha vertical */}
       <div className="fixed top-0 left-1/2 h-full w-[1px] bg-gray-300"></div>
@@ -116,7 +113,7 @@ export default function ProfilePage() {
         <div className="flex space-x-4 mb-8 justify-center">
           <button
             onClick={() => setActiveTab('materiais')}
-            className={`px-6 py-2 rounded-full shadow ${
+            className={`px-6 py-2 rounded-full shadow-lg ${
               activeTab === 'materiais' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-600'
             } hover:bg-blue-600 transition`}
           >
@@ -124,7 +121,7 @@ export default function ProfilePage() {
           </button>
           <button
             onClick={() => setActiveTab('avaliacoes')}
-            className={`px-6 py-2 rounded-full shadow ${
+            className={`px-6 py-2 rounded-full shadow-lg ${
               activeTab === 'avaliacoes' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-600'
             } hover:bg-blue-600 transition`}
           >
@@ -136,10 +133,10 @@ export default function ProfilePage() {
         <div>
           {activeTab === 'materiais' && (
             <div className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 border-b pb-2 mb-4">Materiais públicos</h2>
-            <ul className="space-y-4">
-              <li className="flex items-center justify-between">
-              <div className="flex items-center">
+              <h2 className="text-2xl font-semibold text-gray-900 border-b pb-2 mb-4">Materiais públicos</h2>
+              <ul className="space-y-4">
+                <li className="flex items-center justify-between">
+                <div className="flex items-center">
                   <Image
                   src="/icons/material.svg"
                   alt="Material Icon"
@@ -249,15 +246,15 @@ export default function ProfilePage() {
           {activeTab === 'avaliacoes' && (
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold mb-4">Avaliações</h2>
-              <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+              <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
                 <div className="flex items-center mb-2">
                   {/* Imagem de perfil para Monica Nascimento */}
-                  <div className="rounded-full bg-gray-300 w-10 h-10 overflow-hidden">
+                  <div className="rounded-full bg-gray-300 w-10 h-10 overflow-hidden shadow-md">
                     <Image
                       src="/fotos/Monica.jpg" // Substitua pelo caminho real da imagem
                       alt="Monica Nascimento"
-                      width={40} // Tamanho da imagem (correspondente a w-10)
-                      height={40} // Tamanho da imagem (correspondente a h-10)
+                      width={40}
+                      height={40}
                       className="object-cover"
                     />
                   </div>
@@ -270,15 +267,15 @@ export default function ProfilePage() {
                 <p className="text-gray-400 text-sm mt-2">Avaliado em 22 de janeiro de 2023</p>
               </div>
 
-              <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+              <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
                 <div className="flex items-center mb-2">
                   {/* Imagem de perfil para Carlos Eduardo */}
-                  <div className="rounded-full bg-gray-300 w-10 h-10 overflow-hidden">
+                  <div className="rounded-full bg-gray-300 w-10 h-10 overflow-hidden shadow-md">
                     <Image
                       src="/fotos/Carlos.jpg" // Substitua pelo caminho real da imagem
                       alt="Carlos Eduardo"
-                      width={40} // Tamanho da imagem (correspondente a w-10)
-                      height={40} // Tamanho da imagem (correspondente a h-10)
+                      width={40}
+                      height={40}
                       className="object-cover"
                     />
                   </div>

@@ -45,7 +45,7 @@ export default function HomePage() {
   const userName = "Lucas Vinícius"; // Trocar pelo nome real do usuário se possível
 
   return (
-    <div className="min-h-screen p-8 bg-gray-100">
+    <div className="min-h-screen p-8 ">
       {/* Barra de pesquisa */}
       <div className="flex justify-center mb-8">
         <input
@@ -53,20 +53,20 @@ export default function HomePage() {
           value={searchTerm}
           onChange={handleSearch}
           placeholder="O que quer aprender hoje?"
-          className="bg-[#D8DCFF] w-full md:w-1/2 p-4 rounded-full border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
+          className="bg-white w-full md:w-1/2 p-4 rounded-full border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
         />
       </div>
 
       {/* Saudação com o nome do usuário */}
-      <h1 className="text-2xl font-semibold mb-6 text-left ml-2">Olá, {userName}</h1>
+      <h1 className="text-3xl font-bold mb-6 text-left ml-2 text-blue-600">Olá, {userName}!</h1>
 
       {/* Grid de matérias */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-8 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-6">
         {filteredMaterias.map((materia) => (
           <div key={materia.id}>
             {/* Link dinâmico para cada matéria */}
             <Link href={materia.link} passHref>
-              <button className="bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-xl transition-shadow duration-300">
+              <button className="bg-white p-6 rounded-3xl shadow-lg text-center hover:shadow-xl hover:scale-105 transform transition-transform duration-300">
                 <Image
                   src={materia.imagemSrc}
                   alt={materia.nome}
@@ -78,10 +78,10 @@ export default function HomePage() {
             </Link>
 
             {/* Nome da matéria */}
-            <h2 className="text-lg font-semibold text-center mt-2">{materia.nome}</h2>
+            <h2 className="text-lg font-semibold text-center mt-4 text-blue-800">{materia.nome}</h2>
 
             {/* Quantidade de monitores */}
-            <p className="text-gray-500 text-center">Monitores: {materia.monitores}</p>
+            <p className="text-gray-600 text-center">Monitores: {materia.monitores}</p>
           </div>
         ))}
       </div>

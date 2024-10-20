@@ -4,7 +4,7 @@ import './globals.css';
 import ClientLayout from './components/ClientLayout'; // Importa o layout cliente
 
 export const metadata = {
-  title: 'Syner',
+  title: 'SYNER',
   description: 'Plataforma de aprendizado personalizada',
 };
 

@@ -5,6 +5,7 @@ export default function Page() {
         <div>
             <p>Ta foda essa pagina ass:JP</p>
             <p>ta msm paae ass:Domiciano</p>
+            <p>É verdade ass:JP</p>
         </div>
     );
 }
