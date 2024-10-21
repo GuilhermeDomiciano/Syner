@@ -7,7 +7,7 @@ import { useState } from 'react'; // Importar o estado para controlar os cards
 export default function HomePage() {
   // Exemplo de dados das matérias com o link incluído
   const materias = [
-    { id: 1, nome: 'Cálculo II', monitores: 3, imagemSrc: '/materias/1.png', link: '/materia/calculo' },
+    { id: 1, nome: 'Cálculo II', monitores: 300, imagemSrc: '/materias/1.png', link: '/materia/calculo' },
     { id: 2, nome: 'Bioquimica Lab.', monitores: 4, imagemSrc: '/materias/2.png', link: '/materia/calculo' },
     { id: 3, nome: 'Fund. IA', monitores: 2, imagemSrc: '/materias/3.png', link: '/materia/calculo' },
     { id: 4, nome: 'Python', monitores: 5, imagemSrc: '/materias/4.png', link: '/materia/calculo' },
