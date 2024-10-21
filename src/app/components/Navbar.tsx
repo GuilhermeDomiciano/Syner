@@ -17,11 +17,8 @@ export default function Navbar() {
     <aside className="bg-white shadow-lg w-24 h-full fixed top-0 left-0 flex flex-col items-center py-4 z-50">
       {/* Botão de menu com 3 barrinhas */}
       <div className="relative mb-6">
-        <button
-          onClick={toggleDropdown}
-          className="flex flex-col items-center px-1 py-1 rounded-md hover:bg-gray-200 transition-colors duration-300 "
+        <button onClick={toggleDropdown} className="flex flex-col items-center px-1 py-1 rounded-md hover:bg-gray-200 transition-colors duration-300 "
         >
-          <div></div>
           <div className="w-8 h-1 bg-[#4E74F9] mb-1"></div>
           <div className="w-8 h-1 bg-[#4E74F9] mb-1"></div>
           <div className="w-8 h-1 bg-[#4E74F9] mb-0"></div>

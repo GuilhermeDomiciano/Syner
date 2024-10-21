@@ -42,7 +42,7 @@ export default function HomePage() {
   );
 
   // Nome fictício para saudação
-  const userName = "Lucas Vinícius"; // Trocar pelo nome real do usuário se possível
+  const userName = "const userName"; // Trocar pelo nome real do usuário se possível
 
   return (
     <div className="min-h-screen p-8 ">
