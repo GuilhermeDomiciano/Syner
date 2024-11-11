@@ -1,9 +1,7 @@
-// src/app/login/signup/page.tsx
-
-"use client"; // Marca como Client Component
+"use client";
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Para redirecionamento
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -12,35 +10,27 @@ export default function SignupPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const router = useRouter(); // Hook para redirecionamento
+  const router = useRouter(); 
 
-  // Função para lidar com a submissão do formulário
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Verifica se todos os campos estão preenchidos
     if (!name || !email || !password || !confirmPassword) {
       alert('Por favor, preencha todos os campos.');
       return;
     }
-
-    // Verifica se as senhas coincidem
     if (password !== confirmPassword) {
       alert('As senhas não coincidem.');
       return;
     }
-
-    // Redireciona para a página principal após o preenchimento correto
     router.push('/');
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white shadow-lg rounded-lg max-w-3xl w-full p-8 flex flex-col items-center">
-        {/* Título e logo */}
         <div className="mb-8 text-center">
           <Image
-            src="/icons/syner-logo.png" // Substitua pelo caminho da logo do Syner
+            src="/icons/syner-logo.png" 
             alt="Logo Syner"
             width={200}
             height={200}
@@ -48,7 +38,6 @@ export default function SignupPage() {
           <h1 className="text-2xl font-semibold text-gray-800 mt-4">Crie sua conta</h1>
         </div>
 
-        {/* Formulário de criação de conta */}
         <form onSubmit={handleSubmit} className="w-full max-w-md space-y-6">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nome</label>
@@ -95,7 +84,6 @@ export default function SignupPage() {
             />
           </div>
 
-          {/* Botão de criar conta */}
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
@@ -104,7 +92,6 @@ export default function SignupPage() {
           </button>
         </form>
 
-        {/* Link para voltar ao login */}
         <div className="mt-6">
           <p className="text-gray-600">
             Já tem uma conta?{' '}
