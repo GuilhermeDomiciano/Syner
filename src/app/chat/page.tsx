@@ -13,7 +13,7 @@ export default function Page() {
           <p className="text-sm text-gray-600">9 novas mensagens</p>
         </div>
       </div>
-
+           
       <div className="flex flex-col w-2/3 bg-white relative">
         <div className="flex-grow p-4 overflow-y-auto">
           <div className="mb-4 text-left">
