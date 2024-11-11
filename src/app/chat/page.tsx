@@ -3,9 +3,9 @@
 import { useState } from "react";
 
 const contatosIniciais = [
-  { nome: "Matheus", novasMsg: 9, mensagens: [{ texto: "Oi, tudo bem?", autor: "Matheus" }] },
-  { nome: "Luis", novasMsg: 9, mensagens: [{ texto: "E aí, vai sair hoje?", autor: "Luis" }] },
-  { nome: "Ana", novasMsg: 3, mensagens: [{ texto: "Bom dia!", autor: "Ana" }] }
+  { nome: "Matheus", novasMsg: 9, mensagens: [{ texto: "Oi, tudo bem?", autor: "Matheus", dataHora: new Date(2024, 10, 11, 9, 30) }] },
+  { nome: "Luis", novasMsg: 9, mensagens: [{ texto: "Oi, como vai?", autor: "Luis", dataHora: new Date(2024, 10, 11, 10, 15) }] },
+  { nome: "Ana", novasMsg: 3, mensagens: [{ texto: "Bom dia!", autor: "Ana", dataHora: new Date(2024, 10, 11, 8, 45) }] }
 ];
 
 export default function Page() {
@@ -20,7 +20,10 @@ export default function Page() {
       if (contato.nome === contatoAtivo.nome) {
         return {
           ...contato,
-          mensagens: [...contato.mensagens, { texto: mensagem, autor: "Você" }]
+          mensagens: [
+            ...contato.mensagens,
+            { texto: mensagem, autor: "Você", dataHora: new Date() }
+          ]
         };
       }
       return contato;
@@ -28,7 +31,13 @@ export default function Page() {
 
     setContatos(novosContatos);
     setMensagem("");
-    setContatoAtivo((prev) => ({ ...prev, mensagens: [...prev.mensagens, { texto: mensagem, autor: "Você" }] }));
+    setContatoAtivo((prev) => ({
+      ...prev,
+      mensagens: [
+        ...prev.mensagens,
+        { texto: mensagem, autor: "Você", dataHora: new Date() }
+      ]
+    }));
   };
 
   const handleKeyPress = (e) => {
@@ -39,7 +48,6 @@ export default function Page() {
 
   return (
     <div className="flex h-screen overflow-hidden bg-gray-100">
-      {/* Lista de conversas */}
       <div className="w-1/4 bg-white border-r shadow-lg p-4 overflow-y-auto">
         <h2 className="text-2xl font-semibold mb-6 text-gray-800">Conversas</h2>
         {contatos.map((contato, index) => (
@@ -65,9 +73,7 @@ export default function Page() {
         ))}
       </div>
 
-      {/* Janela de chat */}
       <div className="flex flex-col w-3/4 bg-white relative">
-        {/* Header do chat */}
         <div className="p-4 bg-blue-600 text-white shadow-md flex items-center justify-between">
           {contatoAtivo ? (
             <>
@@ -79,7 +85,6 @@ export default function Page() {
           )}
         </div>
 
-        {/* Corpo do chat */}
         <div className="flex-grow p-6 bg-gray-50 overflow-y-auto">
           {contatoAtivo ? (
             contatoAtivo.mensagens.map((mensagem, index) => (
@@ -89,12 +94,13 @@ export default function Page() {
               >
                 <div
                   className={`p-3 rounded-lg max-w-xs ${
-                    mensagem.autor === "Você"
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-gray-700"
+                    mensagem.autor === "Você" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"
                   }`}
                 >
-                  {mensagem.texto}
+                  <p>{mensagem.texto}</p>
+                  <span className="text-xs text-gray-500">
+                    {mensagem.dataHora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </span>
                 </div>
               </div>
             ))
@@ -105,7 +111,6 @@ export default function Page() {
           )}
         </div>
 
-        {/* Campo de entrada de mensagem */}
         {contatoAtivo && (
           <div className="p-4 border-t bg-white flex items-center">
             <input
