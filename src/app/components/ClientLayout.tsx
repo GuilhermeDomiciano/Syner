@@ -19,7 +19,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         </aside>
       )}
       
-      <main className={`flex-1 p-8 bg-gray-100 min-h-screen ${showNavbar ? 'ml-[6rem]' : ''}`}>
+      <main className={`flex-1 bg-gray-100 min-h-screen ${showNavbar ? 'ml-[6rem]' : ''}`}>
         {children}
       </main>
     </div>

@@ -1,43 +1,129 @@
 "use client";
 
+import { useState } from "react";
+
+const contatosIniciais = [
+  { nome: "Matheus", novasMsg: 9, mensagens: [{ texto: "Oi, tudo bem?", autor: "Matheus" }] },
+  { nome: "Luis", novasMsg: 9, mensagens: [{ texto: "E aí, vai sair hoje?", autor: "Luis" }] },
+  { nome: "Ana", novasMsg: 3, mensagens: [{ texto: "Bom dia!", autor: "Ana" }] }
+];
+
 export default function Page() {
+  const [contatos, setContatos] = useState(contatosIniciais);
+  const [contatoAtivo, setContatoAtivo] = useState(null);
+  const [mensagem, setMensagem] = useState("");
+
+  const enviarMensagem = () => {
+    if (!mensagem || !contatoAtivo) return;
+
+    const novosContatos = contatos.map((contato) => {
+      if (contato.nome === contatoAtivo.nome) {
+        return {
+          ...contato,
+          mensagens: [...contato.mensagens, { texto: mensagem, autor: "Você" }]
+        };
+      }
+      return contato;
+    });
+
+    setContatos(novosContatos);
+    setMensagem("");
+    setContatoAtivo((prev) => ({ ...prev, mensagens: [...prev.mensagens, { texto: mensagem, autor: "Você" }] }));
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      enviarMensagem();
+    }
+  };
+
   return (
-    <div className="flex h-screen">
-      <div className="w-1/3 bg-blue-100 p-4">
-        <div className="mb-2 p-4 border-b cursor-pointer hover:bg-blue-200 rounded-lg">
-          <h2 className="text-xl font-semibold">Matheus</h2>
-          <p className="text-sm text-gray-600">9 novas mensagens</p>
-        </div>
-        <div className="mb-2 p-4 border-b cursor-pointer hover:bg-blue-200 rounded-lg">
-          <h2 className="text-xl font-semibold">Luis</h2>
-          <p className="text-sm text-gray-600">9 novas mensagens</p>
-        </div>
+    <div className="flex h-screen overflow-hidden bg-gray-100">
+      {/* Lista de conversas */}
+      <div className="w-1/4 bg-white border-r shadow-lg p-4 overflow-y-auto">
+        <h2 className="text-2xl font-semibold mb-6 text-gray-800">Conversas</h2>
+        {contatos.map((contato, index) => (
+          <div
+            key={index}
+            onClick={() => setContatoAtivo(contato)}
+            className={`mb-4 p-4 border-b cursor-pointer hover:bg-blue-50 rounded-lg transition-all duration-300 ${
+              contatoAtivo?.nome === contato.nome ? "bg-blue-100 border-blue-300" : ""
+            }`}
+          >
+            <div className="flex justify-between items-center">
+              <h3 className="text-lg font-semibold text-gray-900">{contato.nome}</h3>
+              {contato.novasMsg > 0 && (
+                <span className="bg-blue-500 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center">
+                  {contato.novasMsg}
+                </span>
+              )}
+            </div>
+            <p className="text-sm text-gray-600 mt-1 truncate">
+              {contato.mensagens[contato.mensagens.length - 1]?.texto}
+            </p>
+          </div>
+        ))}
       </div>
-           
-      <div className="flex flex-col w-2/3 bg-white relative">
-        <div className="flex-grow p-4 overflow-y-auto">
-          <div className="mb-4 text-left">
-            <p className="text-gray-600 bg-gray-100 p-2 rounded-lg inline-block">
-              Matheus: Oi, tudo bem?
-            </p>
-          </div>
-          <div className="mb-4 text-right">
-            <p className="text-white bg-blue-500 p-2 rounded-lg inline-block">
-              Você: Sim, e você?
-            </p>
-          </div>
+
+      {/* Janela de chat */}
+      <div className="flex flex-col w-3/4 bg-white relative">
+        {/* Header do chat */}
+        <div className="p-4 bg-blue-600 text-white shadow-md flex items-center justify-between">
+          {contatoAtivo ? (
+            <>
+              <h3 className="text-xl font-semibold">{contatoAtivo.nome}</h3>
+              <p className="text-sm font-light">{contatoAtivo.novasMsg} novas mensagens</p>
+            </>
+          ) : (
+            <h3 className="text-xl font-semibold">Selecione uma conversa</h3>
+          )}
         </div>
 
-        <div className="p-4 border-t bg-white sticky bottom-0 flex items-center">
-          <input
-            type="text"
-            placeholder="Digite sua mensagem"
-            className="w-full p-3 border rounded-full bg-blue-500 text-white placeholder-blue-200 focus:bg-blue-600 focus:outline-none"
-          />
-          <button className="ml-4 p-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full">
-            Enviar
-          </button>
+        {/* Corpo do chat */}
+        <div className="flex-grow p-6 bg-gray-50 overflow-y-auto">
+          {contatoAtivo ? (
+            contatoAtivo.mensagens.map((mensagem, index) => (
+              <div
+                key={index}
+                className={`mb-4 flex ${mensagem.autor === "Você" ? "justify-end" : "justify-start"}`}
+              >
+                <div
+                  className={`p-3 rounded-lg max-w-xs ${
+                    mensagem.autor === "Você"
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 text-gray-700"
+                  }`}
+                >
+                  {mensagem.texto}
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="text-gray-600 text-center">
+              <p>Selecione um contato para ver as mensagens.</p>
+            </div>
+          )}
         </div>
+
+        {/* Campo de entrada de mensagem */}
+        {contatoAtivo && (
+          <div className="p-4 border-t bg-white flex items-center">
+            <input
+              type="text"
+              placeholder="Digite sua mensagem"
+              className="flex-grow p-3 rounded-full border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500 transition"
+              value={mensagem}
+              onChange={(e) => setMensagem(e.target.value)}
+              onKeyPress={handleKeyPress}
+            />
+            <button
+              className="ml-4 p-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-md transition"
+              onClick={enviarMensagem}
+            >
+              Enviar
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
