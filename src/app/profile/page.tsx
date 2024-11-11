@@ -1,26 +1,22 @@
-'use client'; // Para habilitar componentes dinâmicos com Next.js
-
+'use client'; 
 import { useState } from 'react';
-import Image from 'next/image'; // Importa o componente de imagem do Next.js
+import Image from 'next/image'; 
 import Link from 'next/link';
 
 export default function ProfilePage() {
-  // Estado para armazenar a avaliação do perfil do usuário
-  const [profileRating, setProfileRating] = useState(3); // Valor inicial de avaliação do perfil
+  const [profileRating, setProfileRating] = useState(3); 
 
-  // Função para lidar com a seleção de estrelas no perfil
   const handleProfileRating = (value: number) => {
     setProfileRating(value);
   };
 
-  // Função para renderizar estrelas editáveis (cheias e vazias) para o perfil
   const renderEditableStars = (rating: number, onClick: (value: number) => void) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       stars.push(
         <svg
           key={i}
-          onClick={() => onClick(i)} // Clique para definir a avaliação
+          onClick={() => onClick(i)} 
           xmlns="http://www.w3.org/2000/svg"
           className={`h-8 w-8 cursor-pointer ${i <= rating ? 'text-yellow-400' : 'text-gray-300'}`}
           fill="currentColor"
@@ -33,7 +29,6 @@ export default function ProfilePage() {
     return stars;
   };
 
-  // Função para renderizar estrelas fixas (sem clique) nas avaliações
   const renderFixedStars = (rating: number) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -56,14 +51,12 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen flex ">
-      {/* Lado esquerdo fixo com informações do perfil */}
       <aside className="fixed top-0 left-0 w-1/2 h-full p-8 flex flex-col items-center justify-center bg-white shadow-lg">
         <div className="w-full max-w-md text-center">
-          {/* Capa e Imagem do Perfil */}
           <div className="relative w-full h-24 bg-gradient-to-r from-blue-500 to-blue-500 rounded-t-lg flex justify-center items-center">
             <div className="absolute -bottom-12 w-32 h-32 rounded-full border-4 border-white bg-gray-300 overflow-hidden shadow-md">
               <Image
-                src="/fotos/lucas.jpg" // Substitua pelo caminho real da imagem
+                src="/fotos/lucas.jpg" 
                 alt="Profile Image"
                 width={128}
                 height={128}
@@ -72,7 +65,6 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Informações do usuário */}
           <div className="mt-20">
             <h1 className="text-3xl font-bold text-gray-800">Lucas Vinícius</h1>
             <p className="text-lg text-gray-500 mt-1">Engenharia de Software</p>
@@ -82,7 +74,6 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Dados Pessoais com Botão de Logout abaixo */}
           <div className="mt-12">
             <h2 className="text-xl font-semibold text-gray-900 border-b pb-2 mb-4">Dados pessoais</h2>
             <ul className="space-y-2 text-left">
@@ -93,7 +84,6 @@ export default function ProfilePage() {
             </ul>
           </div>
 
-          {/* Botão de Logout centralizado */}
           <div className="mt-8">
             <Link href="/login">
               <button className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg">
@@ -104,12 +94,9 @@ export default function ProfilePage() {
         </div>
       </aside>
 
-      {/* Separador de linha vertical */}
       <div className="fixed top-0 left-1/2 h-full w-[1px] bg-gray-300"></div>
 
-      {/* Lado direito rolável com abas */}
       <main className="ml-[50%] w-[50%] p-12">
-        {/* Botões de navegação para "Materiais", "Avaliações" */}
         <div className="flex space-x-4 mb-8 justify-center">
           <button
             onClick={() => setActiveTab('materiais')}
@@ -129,7 +116,7 @@ export default function ProfilePage() {
           </button>
         </div>
 
-        {/* Conteúdo dinâmico baseado na aba selecionada */}
+
         <div>
           {activeTab === 'materiais' && (
             <div className="mb-8">
@@ -140,8 +127,8 @@ export default function ProfilePage() {
                   <Image
                   src="/icons/material.svg"
                   alt="Material Icon"
-                  width={40} // Mantendo o tamanho como no layout original
-                  height={40} // Mantendo o tamanho como no layout original
+                  width={40} 
+                  height={40} 
                   className="mr-2"
                   />
                   <span className="text-gray-800 font-medium ml-2">Números Decimais</span>
@@ -248,10 +235,9 @@ export default function ProfilePage() {
               <h2 className="text-2xl font-semibold mb-4">Avaliações</h2>
               <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
                 <div className="flex items-center mb-2">
-                  {/* Imagem de perfil para Monica Nascimento */}
                   <div className="rounded-full bg-gray-300 w-10 h-10 overflow-hidden shadow-md">
                     <Image
-                      src="/fotos/Monica.jpg" // Substitua pelo caminho real da imagem
+                      src="/fotos/Monica.jpg" 
                       alt="Monica Nascimento"
                       width={40}
                       height={40}
@@ -269,10 +255,9 @@ export default function ProfilePage() {
 
               <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
                 <div className="flex items-center mb-2">
-                  {/* Imagem de perfil para Carlos Eduardo */}
                   <div className="rounded-full bg-gray-300 w-10 h-10 overflow-hidden shadow-md">
                     <Image
-                      src="/fotos/Carlos.jpg" // Substitua pelo caminho real da imagem
+                      src="/fotos/Carlos.jpg" 
                       alt="Carlos Eduardo"
                       width={40}
                       height={40}
@@ -287,7 +272,6 @@ export default function ProfilePage() {
                 <p className="text-gray-600">Esse cara me ajudou bastante na minha prova.</p>
                 <p className="text-gray-400 text-sm mt-2">Avaliado em 13 de fevereiro de 2023</p>
               </div>
-              {/* Adicione mais avaliações conforme necessário */}
             </div>
           )}
         </div>

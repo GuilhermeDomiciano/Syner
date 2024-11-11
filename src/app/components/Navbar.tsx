@@ -1,6 +1,4 @@
-// src/app/components/Navbar.tsx
-
-"use client"; // Informa ao Next.js que este é um Client Component
+"use client";
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -15,7 +13,6 @@ export default function Navbar() {
 
   return (
     <aside className="bg-white shadow-lg w-24 h-full fixed top-0 left-0 flex flex-col items-center py-4 z-50">
-      {/* Botão de menu com 3 barrinhas */}
       <div className="relative mb-6">
         <button onClick={toggleDropdown} className="flex flex-col items-center px-1 py-1 rounded-md hover:bg-gray-200 transition-colors duration-300 "
         >
@@ -36,7 +33,6 @@ export default function Navbar() {
         )}
       </div>
 
-      {/* Botão "+" */}
       <button className="bg-[#D8DCFF] text-[#4E74F9] text-3xl font-bold rounded-2xl w-16 h-16 mb-6 flex items-center justify-center shadow-lg hover:bg-blue-600 transition-colors duration-300">
         +
       </button>

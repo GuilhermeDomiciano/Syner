@@ -1,4 +1,4 @@
-// src/app/login/page.tsx
+
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,21 +7,17 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center overflow-hidden fixed inset-0">
       <div className="rounded-lg max-w-6xl w-full p-12 flex flex-col md:flex-row">
-        {/* Esquerda: Formulário de login */}
         <div className="w-full md:w-1/2 flex flex-col items-center justify-center">
           <div className="text-center mb-12">
-            {/* Logo do Syner maior e centralizada */}
             <Image
-              src="/icons/syner-logo.png" // Substitua pelo caminho da logo do Syner
+              src="/icons/syner-logo.png" 
               alt="Logo Syner"
               width={300}
               height={300}
             />
           </div>
 
-          {/* Botões de ação */}
           <div className="space-y-6 w-full max-w-xs">
-            {/* Alterando o botão de criar conta para redirecionar para a página de signup */}
             <Link href="/login/signup">
               <button className="bg-blue-600 text-white w-full py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
                 Criar conta
@@ -29,7 +25,7 @@ export default function LoginPage() {
             </Link>
             <button className="bg-white border border-gray-300 w-full py-4 rounded-lg flex items-center justify-center space-x-2 font-semibold hover:bg-gray-50 transition-colors">
               <Image
-                src="/icons/google-logo.png" // Substitua pelo caminho do logo do Google
+                src="/icons/google-logo.png" 
                 alt="Google Logo"
                 width={24}
                 height={24}
@@ -38,7 +34,7 @@ export default function LoginPage() {
             </button>
             <button className="bg-black text-white w-full py-4 rounded-lg flex items-center justify-center space-x-2 font-semibold hover:bg-gray-800 transition-colors">
               <Image
-                src="/icons/institution-logo.png" // Substitua pelo caminho do logo da instituição
+                src="/icons/institution-logo.png" 
                 alt="Institution Logo"
                 width={24}
                 height={24}
@@ -48,15 +44,13 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Linha de divisão */}
         <div className="w-[1px] bg-gray-300 mx-8 hidden md:block"></div>
 
-        {/* Direita: Texto descritivo */}
         <div className="w-full md:w-1/2 flex flex-col items-center justify-center pl-8">
-          {/* Logo de conexão na direita */}
+
           <div className="text-center mb-8">
             <Image
-              src="/icons/conexao.png" // Substitua pelo caminho da logo de conexão
+              src="/icons/conexao.png" 
               alt="Conexão Syner"
               width={300}
               height={350}

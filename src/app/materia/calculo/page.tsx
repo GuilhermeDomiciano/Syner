@@ -1,31 +1,24 @@
-'use client'; // Para habilitar hooks e componentes dinâmicos
+'use client'; 
 
 import Image from 'next/image';
 import User from './img/user.png';
 import { useState } from 'react';
 
 export default function Page() {
-  // Controlar qual aba está selecionada (Monitores, Materiais, Testes)
   const [activeTab, setActiveTab] = useState<'monitores' | 'materiais' | 'testes'>('monitores');
 
   return (
     <div className="min-h-screen flex">
-      {/* Lado esquerdo fixo */}
       <aside className="fixed top-0 left-0 w-1/2 h-full p-8 flex flex-col items-center justify-center">
-        {/* Imagem da matéria */}
         <Image src="/materias/1.png" alt="Cálculo II" width={150} height={150} className="rounded-full" />
 
-        {/* Nome da matéria e informações */}
         <h1 className="text-3xl font-bold mt-4">Cálculo II</h1>
         <p className="text-gray-500 text-lg">6 Monitores</p>
       </aside>
 
-      {/* Separador de linha vertical */}
       <div className="fixed top-0 left-1/2 h-full w-[1px] bg-gray-300"></div>
 
-      {/* Lado direito rolável, ajustado para começar após o lado esquerdo */}
       <main className="ml-[50%] w-[50%] p-12">
-        {/* Botões de navegação para "Monitores", "Materiais", "Testes" */}
         <div className="flex space-x-4 mb-8 justify-center">
           <button
             onClick={() => setActiveTab('monitores')}
@@ -53,7 +46,6 @@ export default function Page() {
           </button>
         </div>
 
-        {/* Conteúdo dinâmico baseado na aba selecionada */}
         <div>
           {activeTab === 'monitores' && (
             <div className="space-y-4">
@@ -82,7 +74,6 @@ export default function Page() {
           {activeTab === 'materiais' && (
             <div>
               <h2 className="text-2xl font-semibold mb-4">Materiais</h2>
-              {/* Aqui você pode colocar a lista de materiais */}
               <p>Conteúdo dos materiais vai aqui.</p>
             </div>
           )}
@@ -90,7 +81,7 @@ export default function Page() {
           {activeTab === 'testes' && (
             <div>
               <h2 className="text-2xl font-semibold mb-4">Testes</h2>
-              {/* Aqui você pode colocar a lista de testes */}
+
               <p>Conteúdo dos testes vai aqui.</p>
             </div>
           )}

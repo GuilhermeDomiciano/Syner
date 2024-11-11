@@ -1,11 +1,11 @@
-'use client'; // Necessário para habilitar o uso de hooks e componentes dinâmicos
+'use client'; 
 
-import Image from 'next/image'; // Importar imagem do Next.js
-import Link from 'next/link'; // Importar o Link do Next.js
-import { useState } from 'react'; // Importar o estado para controlar os cards
+import Image from 'next/image'; 
+import Link from 'next/link'; 
+import { useState } from 'react'; 
 
 export default function HomePage() {
-  // Exemplo de dados das matérias com o link incluído
+  
   const materias = [
     { id: 1, nome: 'Cálculo II', monitores: 300, imagemSrc: '/materias/1.png', link: '/materia/calculo' },
     { id: 2, nome: 'Bioquimica Lab.', monitores: 4, imagemSrc: '/materias/2.png', link: '/materia/calculo' },
@@ -24,29 +24,25 @@ export default function HomePage() {
     { id: 15, nome: 'Contabilidade', monitores: 2, imagemSrc: '/materias/15.png', link: '/materia/calculo' },
     { id: 16, nome: 'Farmacologia', monitores: 2, imagemSrc: '/materias/16.png', link: '/materia/calculo' },
     { id: 17, nome: 'Redação', monitores: 2, imagemSrc: '/materias/17.png', link: '/materia/calculo' },
-    { id: 18, nome: 'Geografia', monitores: 2, imagemSrc: '/materias/18.png', link: '/materia/calculo' },
-    // Continue adicionando mais matérias conforme necessário
+    { id: 18, nome: 'Geografia', monitores: 2, imagemSrc: '/materias/18.png', link: '/materia/calculo' },  
   ];
 
-  // Estado para armazenar o termo de busca
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Função para lidar com a mudança no campo de pesquisa
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
-  // Filtrar as matérias com base no termo de pesquisa
+
   const filteredMaterias = materias.filter((materia) =>
     materia.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Nome fictício para saudação
-  const userName = "const userName"; // Trocar pelo nome real do usuário se possível
+
+  const userName = "const userName"; 
 
   return (
     <div className="min-h-screen p-8 ">
-      {/* Barra de pesquisa */}
       <div className="flex justify-center mb-8">
         <input
           type="text"
@@ -57,14 +53,13 @@ export default function HomePage() {
         />
       </div>
 
-      {/* Saudação com o nome do usuário */}
+
       <h1 className="text-3xl font-bold mb-6 text-left ml-2 text-blue-600">Olá, {userName}!</h1>
 
-      {/* Grid de matérias */}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-6">
         {filteredMaterias.map((materia) => (
           <div key={materia.id}>
-            {/* Link dinâmico para cada matéria */}
             <Link href={materia.link} passHref>
               <button className="bg-white p-6 rounded-3xl shadow-lg text-center hover:shadow-xl hover:scale-105 transform transition-transform duration-300">
                 <Image
@@ -77,10 +72,8 @@ export default function HomePage() {
               </button>
             </Link>
 
-            {/* Nome da matéria */}
             <h2 className="text-lg font-semibold text-center mt-4 text-blue-800">{materia.nome}</h2>
 
-            {/* Quantidade de monitores */}
             <p className="text-gray-600 text-center">Monitores: {materia.monitores}</p>
           </div>
         ))}
