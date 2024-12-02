@@ -10,15 +10,14 @@ export default function ProfilePage() {
     setProfileRating(value);
   };
 
-  const renderEditableStars = (rating: number, onClick: (value: number) => void) => {
+  const renderStars = (rating: number) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       stars.push(
         <svg
           key={i}
-          onClick={() => onClick(i)} 
           xmlns="http://www.w3.org/2000/svg"
-          className={`h-8 w-8 cursor-pointer ${i <= rating ? 'text-yellow-400' : 'text-gray-300'}`}
+          className={`h-8 w-8 ${i <= rating ? 'text-yellow-400' : 'text-gray-300'}`}
           fill="currentColor"
           viewBox="0 0 24 24"
         >
@@ -28,6 +27,7 @@ export default function ProfilePage() {
     }
     return stars;
   };
+  
 
   const renderFixedStars = (rating: number) => {
     const stars = [];
@@ -69,7 +69,7 @@ export default function ProfilePage() {
             <h1 className="text-3xl font-bold text-gray-800">Lucas Vinícius</h1>
             <p className="text-lg text-gray-500 mt-1">Engenharia de Software</p>
             <div className="flex justify-center items-center mt-4">
-              <div className="flex">{renderEditableStars(profileRating, handleProfileRating)}</div>
+              <div className="flex">{renderStars(profileRating)}</div>
               <span className="ml-2 text-blue-500 font-semibold text-lg">{profileRating}</span>
             </div>
           </div>
