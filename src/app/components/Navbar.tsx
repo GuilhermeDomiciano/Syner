@@ -33,10 +33,6 @@ export default function Navbar() {
         )}
       </div>
 
-      <button className="bg-[#D8DCFF] text-[#4E74F9] text-3xl font-bold rounded-2xl w-16 h-16 mb-6 flex items-center justify-center shadow-lg hover:bg-blue-600 transition-colors duration-300">
-        +
-      </button>
-
       <nav className="w-full relative">
         <ul className="flex flex-col space-y-4 px-1">
           <li>
