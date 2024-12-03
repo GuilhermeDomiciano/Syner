@@ -40,7 +40,7 @@ export default function HomePage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-6">
         {filteredMaterias.map((materia) => (
           <div key={materia.id}>
-            <Link href={`/materia/${materia.slug}`} passHref>
+            <Link href={`/materias/${materia.id}`} passHref>
               <div className="bg-white p-6 rounded-3xl shadow-lg text-center hover:shadow-xl hover:scale-105 transform transition-transform duration-300">
                 <Image
                   src={materia.imagemSrc}

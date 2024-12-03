@@ -5,8 +5,8 @@
     "slug": "calculo",
     "imagemSrc": "/materias/1.png",
     "monitores": [
-      { "name": "Silas Oliveira", "role": "Monitor de Matemática" },
-      { "name": "Amon Silva", "role": "Monitor de Matemática" }
+      { "name": "Silas Oliveira", "role": "Monitor de Matemática", "img": "/fotos/Carlos.jpg"},
+      { "name": "Amon Silva", "role": "Monitor de Matemática", "img": "/fotos/Lucas.jpg"}
     ],
     "materiais": ["Apostila de cálculo I", "Resolução de exercícios avançados"],
     "testes": ["Teste de conhecimento inicial", "Prova simulada"]
