@@ -52,7 +52,7 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen flex">
       {/* Lado Esquerdo */}
-      <aside className="fixed top-0 left-0 w-1/2 h-full p-8 flex flex-col items-center justify-center bg-white shadow-lg">
+      <aside className="fixed top-0 left-0 w-1/2 h-full p-8 flex flex-col items-center justify-center">
         <Image
           src={materia.imagemSrc}
           alt={materia.nome}
@@ -70,11 +70,11 @@ export default function ProfilePage() {
       {/* Lado Direito */}
       <main className="ml-[50%] w-[50%] p-12">
         {/* Abas */}
-        <div className="flex gap-4 mb-6">
+        <div className="flex justify-center items-center gap-6 mb-8">
           <button
-            className={`px-4 py-2 rounded ${
+            className={`px-6 py-3 rounded-full text-sm font-medium shadow-md ${
               activeTab === "monitores"
-                ? "bg-blue-500 text-white"
+                ? "bg-blue-500 text-white shadow-lg"
                 : "bg-gray-200 text-gray-700"
             }`}
             onClick={() => setActiveTab("monitores")}
@@ -82,9 +82,9 @@ export default function ProfilePage() {
             Monitores
           </button>
           <button
-            className={`px-4 py-2 rounded ${
+            className={`px-6 py-3 rounded-full text-sm font-medium shadow-md ${
               activeTab === "materiais"
-                ? "bg-blue-500 text-white"
+                ? "bg-blue-500 text-white shadow-lg"
                 : "bg-gray-200 text-gray-700"
             }`}
             onClick={() => setActiveTab("materiais")}
@@ -92,9 +92,9 @@ export default function ProfilePage() {
             Materiais
           </button>
           <button
-            className={`px-4 py-2 rounded ${
+            className={`px-6 py-3 rounded-full text-sm font-medium shadow-md ${
               activeTab === "testes"
-                ? "bg-blue-500 text-white"
+                ? "bg-blue-500 text-white shadow-lg"
                 : "bg-gray-200 text-gray-700"
             }`}
             onClick={() => setActiveTab("testes")}
@@ -102,6 +102,7 @@ export default function ProfilePage() {
             Testes
           </button>
         </div>
+
 
         {/* Conteúdo Dinâmico */}
         <div>
