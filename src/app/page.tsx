@@ -1,18 +1,33 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+
+type Materia = {
+  id: number;
+  nome: string;
+  imagemSrc: string;
+  monitores: { name: string; role: string }[];
+};
 
 export default function HomePage() {
-  const [materias, setMaterias] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [materias, setMaterias] = useState<Materia[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  // Fetch data from the JSON file
   useEffect(() => {
-    fetch('/materias.json')
-      .then((response) => response.json())
-      .then((data) => setMaterias(data));
+    const fetchMaterias = async () => {
+      try {
+        const response = await fetch("/materias.json");
+        if (!response.ok) throw new Error("Erro ao carregar as matérias.");
+        const data = await response.json();
+        setMaterias(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchMaterias();
   }, []);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,13 +50,15 @@ export default function HomePage() {
         />
       </div>
 
-      <h1 className="text-3xl font-bold mb-6 text-left ml-2 text-blue-600">Bem-vindo!</h1>
+      <h1 className="text-3xl font-bold mb-6 text-left ml-2 text-blue-600">
+        Bem-vindo!
+      </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-6">
         {filteredMaterias.map((materia) => (
           <div key={materia.id}>
             <Link href={`/materias/${materia.id}`} passHref>
-              <div className="bg-white p-6 rounded-3xl shadow-lg text-center hover:shadow-xl hover:scale-105 transform transition-transform duration-300">
+              <div className="bg-white p-6 rounded-3xl shadow-lg text-center hover:shadow-xl hover:scale-105 transform transition-transform duration-300 cursor-pointer">
                 <Image
                   src={materia.imagemSrc}
                   alt={materia.nome}
@@ -51,8 +68,12 @@ export default function HomePage() {
                 />
               </div>
             </Link>
-            <h2 className="text-lg font-semibold text-center mt-4 text-blue-800">{materia.nome}</h2>
-            <p className="text-gray-600 text-center">Monitores: {materia.monitores.length}</p>
+            <h2 className="text-lg font-semibold text-center mt-4 text-blue-800">
+              {materia.nome}
+            </h2>
+            <p className="text-gray-600 text-center">
+              Monitores: {materia.monitores.length}
+            </p>
           </div>
         ))}
       </div>
