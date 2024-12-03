@@ -5,35 +5,60 @@
     "slug": "calculo",
     "imagemSrc": "/materias/1.png",
     "monitores": [
-      { "name": "Silas Oliveira", "role": "Monitor de Matemática", "img": "/fotos/Carlos.jpg"},
-      { "name": "Amon Silva", "role": "Monitor de Matemática", "img": "/fotos/Lucas.jpg"}
+      { "name": "Silas Oliveira", "role": "Monitor de Matemática", "img": "/fotos/Carlos.jpg", "nota": 4.2 },
+      { "name": "Amon Silva", "role": "Monitor de Matemática", "img": "/fotos/Lucas.jpg", "nota": 4.3 },
+      { "name": "Cleide Nascimento", "role": "Monitor de Matemática", "img": "/icons/user.png", "nota": 4.4 },
+      { "name": "Josefina Silva", "role": "Monitor de Matemática", "img": "/icons/user.png", "nota": 4.5 },
+      { "name": "Maria Paula", "role": "Monitor de Matemática", "img": "/icons/user.png", "nota": 4.6 }
     ],
-    "materiais": ["Apostila de cálculo I", "Resolução de exercícios avançados"],
-    "testes": ["Teste de conhecimento inicial", "Prova simulada"]
+    "materiais": [
+      { "titulo": "Apostila de cálculo I", "monitor": "Silas Oliveira" },
+      { "titulo": "Resolução de exercícios avançados", "monitor": "Amon Silva" },
+      { "titulo": "Resumo teórico de derivadas", "monitor": "Cleide Nascimento" },
+      { "titulo": "Tabela de integrais comuns", "monitor": "Josefina Silva" }
+    ],
+    "testes": [
+      { "titulo": "Teste de conhecimento inicial", "monitor": "Maria Paula" },
+      { "titulo": "Prova simulada", "monitor": "Simone Lucas" },
+      { "titulo": "Desafio de integrais", "monitor": "Silas Oliveira" },
+      { "titulo": "Exercícios de limites", "monitor": "Amon Silva" }
+    ]
   },
   {
     "id": 2,
-    "nome": "Bioquímica Lab.",
-    "slug": "bioquimica",
+    "nome": "Bioquímica Laboratorial",
+    "slug": "bioquimica-laboratorial",
     "imagemSrc": "/materias/2.png",
     "monitores": [
-      { "name": "Lucas Silva", "role": "Monitor de Bioquímica", "img": "/fotos/Carlos.jpg" },
-      { "name": "Ana Costa", "role": "Monitor de Bioquímica", "img": "/fotos/Carlos.jpg" }
+      { "name": "Lucas Silva", "role": "Monitor de Bioquímica", "img": "/icons/user.png", "nota": 4.4 },
+      { "name": "Ana Costa", "role": "Monitor de Bioquímica", "img": "/icons/user.png", "nota": 4.4 }
     ],
-    "materiais": ["Protocolo de laboratório", "Exercícios de revisão"],
-    "testes": ["Teste prático", "Prova teórica"]
+    "materiais": [
+      { "titulo": "Protocolo de laboratório", "monitor": "Lucas Silva" },
+      { "titulo": "Exercícios de revisão", "monitor": "Ana Costa" }
+    ],
+    "testes": [
+      { "titulo": "Teste prático", "monitor": "Lucas Silva" },
+      { "titulo": "Prova teórica", "monitor": "Ana Costa" }
+    ]
   },
   {
     "id": 3,
-    "nome": "Fund. IA",
-    "slug": "fund-ia",
+    "nome": "Fundamentos de Inteligência Artificial",
+    "slug": "fundamentos-inteligencia-artificial",
     "imagemSrc": "/materias/3.png",
     "monitores": [
-      { "name": "Ricardo Almeida", "role": "Monitor de Inteligência Artificial", "img": "/fotos/Carlos.jpg" },
-      { "name": "Camila Lima", "role": "Monitor de Inteligência Artificial", "img": "/fotos/Carlos.jpg" }
+      { "name": "Ricardo Almeida", "role": "Monitor de Inteligência Artificial", "img": "/icons/user.png", "nota": 4.4 },
+      { "name": "Camila Lima", "role": "Monitor de Inteligência Artificial", "img": "/icons/user.png", "nota": 4.4 }
     ],
-    "materiais": ["Introdução à IA", "Algoritmos de aprendizado"],
-    "testes": ["Prova prática", "Exercício de implementação"]
+    "materiais": [
+      { "titulo": "Introdução à IA", "monitor": "Ricardo Almeida" },
+      { "titulo": "Algoritmos de aprendizado", "monitor": "Camila Lima" }
+    ],
+    "testes": [
+      { "titulo": "Prova prática", "monitor": "Ricardo Almeida" },
+      { "titulo": "Exercício de implementação", "monitor": "Camila Lima" }
+    ]
   },
   {
     "id": 4,
@@ -41,23 +66,35 @@
     "slug": "python",
     "imagemSrc": "/materias/4.png",
     "monitores": [
-      { "name": "Gabriel Souza", "role": "Monitor de Python", "img": "/fotos/Carlos.jpg" },
-      { "name": "Mariana Costa", "role": "Monitor de Python", "img": "/fotos/Carlos.jpg" }
+      { "name": "Gabriel Souza", "role": "Monitor de Python", "img": "/icons/user.png", "nota": 4.4 },
+      { "name": "Mariana Costa", "role": "Monitor de Python", "img": "/icons/user.png", "nota": 4.4 }
     ],
-    "materiais": ["Manual de Python", "Exercícios práticos"],
-    "testes": ["Prova de sintaxe", "Desafio de programação"]
+    "materiais": [
+      { "titulo": "Manual de Python", "monitor": "Gabriel Souza" },
+      { "titulo": "Exercícios práticos", "monitor": "Mariana Costa" }
+    ],
+    "testes": [
+      { "titulo": "Prova de sintaxe", "monitor": "Gabriel Souza" },
+      { "titulo": "Desafio de programação", "monitor": "Mariana Costa" }
+    ]
   },
   {
     "id": 5,
     "nome": "Lógica de Predicados",
-    "slug": "logica-predicados",
+    "slug": "logica-de-predicados",
     "imagemSrc": "/materias/5.png",
     "monitores": [
-      { "name": "José Pereira", "role": "Monitor de Lógica", "img": "/fotos/Carlos.jpg" },
-      { "name": "Luciana Martins", "role": "Monitor de Lógica", "img": "/fotos/Carlos.jpg" }
+      { "name": "José Pereira", "role": "Monitor de Lógica", "img": "/icons/user.png", "nota": 4.4 },
+      { "name": "Luciana Martins", "role": "Monitor de Lógica", "img": "/icons/user.png", "nota": 4.4 }
     ],
-    "materiais": ["Introdução à lógica de predicados", "Exercícios de demonstração"],
-    "testes": ["Exame de lógica formal", "Problema de lógica"]
+    "materiais": [
+      { "titulo": "Introdução à lógica de predicados", "monitor": "José Pereira" },
+      { "titulo": "Exercícios de demonstração", "monitor": "Luciana Martins" }
+    ],
+    "testes": [
+      { "titulo": "Exame de lógica formal", "monitor": "José Pereira" },
+      { "titulo": "Problema de lógica", "monitor": "Luciana Martins" }
+    ]
   },
   {
     "id": 6,
@@ -65,11 +102,17 @@
     "slug": "fisica",
     "imagemSrc": "/materias/6.png",
     "monitores": [
-      { "name": "Eduardo Lima", "role": "Monitor de Física", "img": "/fotos/Carlos.jpg" },
-      { "name": "Fernanda Alves", "role": "Monitor de Física", "img": "/fotos/Carlos.jpg" }
+      { "name": "Eduardo Lima", "role": "Monitor de Física", "img": "/icons/user.png", "nota": 4.4 },
+      { "name": "Fernanda Alves", "role": "Monitor de Física", "img": "/icons/user.png", "nota": 4.4 }
     ],
-    "materiais": ["Teoria de mecânica", "Experimentos de física"],
-    "testes": ["Teste de movimento", "Prova de forças e leis"]
+    "materiais": [
+      { "titulo": "Teoria de mecânica", "monitor": "Eduardo Lima" },
+      { "titulo": "Experimentos de física", "monitor": "Fernanda Alves" }
+    ],
+    "testes": [
+      { "titulo": "Teste de movimento", "monitor": "Eduardo Lima" },
+      { "titulo": "Prova de forças e leis", "monitor": "Fernanda Alves" }
+    ]
   },
   {
     "id": 7,
@@ -77,23 +120,35 @@
     "slug": "javascript",
     "imagemSrc": "/materias/7.png",
     "monitores": [
-      { "name": "Carlos Silva", "role": "Monitor de JavaScript", "img": "/fotos/Carlos.jpg" },
-      { "name": "Patricia Oliveira", "role": "Monitor de JavaScript", "img": "/fotos/Carlos.jpg" }
+      { "name": "Carlos Silva", "role": "Monitor de JavaScript", "img": "/icons/user.png", "nota": 4.4 },
+      { "name": "Patricia Oliveira", "role": "Monitor de JavaScript", "img": "/icons/user.png", "nota": 4.4 }
     ],
-    "materiais": ["Manual de JavaScript", "Exercícios de programação web"],
-    "testes": ["Prova de lógica em JS", "Desafio de desenvolvimento"]
+    "materiais": [
+      { "titulo": "Manual de JavaScript", "monitor": "Carlos Silva" },
+      { "titulo": "Exercícios de programação web", "monitor": "Patricia Oliveira" }
+    ],
+    "testes": [
+      { "titulo": "Prova de lógica em JavaScript", "monitor": "Carlos Silva" },
+      { "titulo": "Desafio de desenvolvimento", "monitor": "Patricia Oliveira" }
+    ]
   },
   {
     "id": 8,
-    "nome": "Estrutura de Dados",
-    "slug": "estruturas-dados",
+    "nome": "Estruturas de Dados",
+    "slug": "estruturas-de-dados",
     "imagemSrc": "/materias/8.png",
     "monitores": [
-      { "name": "Roberto Santos", "role": "Monitor de Estruturas de Dados", "img": "/fotos/Carlos.jpg" },
-      { "name": "Marcos Pereira", "role": "Monitor de Estruturas de Dados", "img": "/fotos/Carlos.jpg" }
+      { "name": "Roberto Santos", "role": "Monitor de Estruturas de Dados", "img": "/icons/user.png", "nota": 4.4 },
+      { "name": "Marcos Pereira", "role": "Monitor de Estruturas de Dados", "img": "/icons/user.png", "nota": 4.4 }
     ],
-    "materiais": ["Livro de estruturas de dados", "Algoritmos e problemas"],
-    "testes": ["Prova de listas encadeadas", "Exercício de árvores"]
+    "materiais": [
+      { "titulo": "Livro de Estruturas de Dados", "monitor": "Roberto Santos" },
+      { "titulo": "Algoritmos e Problemas", "monitor": "Marcos Pereira" }
+    ],
+    "testes": [
+      { "titulo": "Prova de Listas Encadeadas", "monitor": "Roberto Santos" },
+      { "titulo": "Exercício de Árvores", "monitor": "Marcos Pereira" }
+    ]
   },
   {
     "id": 9,
@@ -101,11 +156,17 @@
     "slug": "quimica",
     "imagemSrc": "/materias/9.png",
     "monitores": [
-      { "name": "Roberta Lima", "role": "Monitor de Química", "img": "/fotos/Carlos.jpg" },
-      { "name": "Carlos Martins", "role": "Monitor de Química", "img": "/fotos/Carlos.jpg" }
+      { "name": "Roberta Lima", "role": "Monitor de Química", "img": "/icons/user.png", "nota": 4.4 },
+      { "name": "Carlos Martins", "role": "Monitor de Química", "img": "/icons/user.png", "nota": 4.4 }
     ],
-    "materiais": ["Tabela periódica", "Experimentos de reações químicas"],
-    "testes": ["Prova de reações químicas", "Exercício de análise"]
+    "materiais": [
+      { "titulo": "Tabela Periódica", "monitor": "Roberta Lima" },
+      { "titulo": "Experimentos de Reações Químicas", "monitor": "Carlos Martins" }
+    ],
+    "testes": [
+      { "titulo": "Prova de Reações Químicas", "monitor": "Roberta Lima" },
+      { "titulo": "Exercício de Análise", "monitor": "Carlos Martins" }
+    ]
   },
   {
     "id": 10,
@@ -113,11 +174,17 @@
     "slug": "historia",
     "imagemSrc": "/materias/10.png",
     "monitores": [
-      { "name": "Felipe Rodrigues", "role": "Monitor de História", "img": "/fotos/Carlos.jpg" },
-      { "name": "Ana Julia", "role": "Monitor de História", "img": "/fotos/Carlos.jpg" }
+      { "name": "Felipe Rodrigues", "role": "Monitor de História", "img": "/icons/user.png", "nota": 4.4 },
+      { "name": "Ana Julia", "role": "Monitor de História", "img": "/icons/user.png", "nota": 4.4 }
     ],
-    "materiais": ["Livro de história moderna", "Documentos históricos"],
-    "testes": ["Prova sobre revoluções", "Exame de períodos históricos"]
+    "materiais": [
+      { "titulo": "Livro de História Moderna", "monitor": "Felipe Rodrigues" },
+      { "titulo": "Documentos Históricos", "monitor": "Ana Julia" }
+    ],
+    "testes": [
+      { "titulo": "Prova sobre Revoluções", "monitor": "Felipe Rodrigues" },
+      { "titulo": "Exame de Períodos Históricos", "monitor": "Ana Julia" }
+    ]
   },
   {
     "id": 11,
@@ -125,11 +192,17 @@
     "slug": "ingles",
     "imagemSrc": "/materias/11.png",
     "monitores": [
-      { "name": "Joana Silva", "role": "Monitor de Inglês", "img": "/fotos/Carlos.jpg" },
-      { "name": "Paulo Alves", "role": "Monitor de Inglês", "img": "/fotos/Carlos.jpg" }
+      { "name": "Joana Silva", "role": "Monitor de Inglês", "img": "/icons/user.png", "nota": 4.4 },
+      { "name": "Paulo Alves", "role": "Monitor de Inglês", "img": "/icons/user.png", "nota": 4.4 }
     ],
-    "materiais": ["Gramática inglesa", "Livros de leitura"],
-    "testes": ["Teste de vocabulário", "Exame de compreensão"]
+    "materiais": [
+      { "titulo": "Gramática Inglesa", "monitor": "Joana Silva" },
+      { "titulo": "Livros de Leitura", "monitor": "Paulo Alves" }
+    ],
+    "testes": [
+      { "titulo": "Teste de Vocabulário", "monitor": "Joana Silva" },
+      { "titulo": "Exame de Compreensão", "monitor": "Paulo Alves" }
+    ]
   },
   {
     "id": 12,
@@ -137,11 +210,17 @@
     "slug": "espanhol",
     "imagemSrc": "/materias/12.png",
     "monitores": [
-      { "name": "Sofia Oliveira", "role": "Monitor de Espanhol", "img": "/fotos/Carlos.jpg" },
-      { "name": "Daniel Costa", "role": "Monitor de Espanhol", "img": "/fotos/Carlos.jpg" }
+      { "name": "Sofia Oliveira", "role": "Monitor de Espanhol", "img": "/icons/user.png", "nota": 4.4 },
+      { "name": "Daniel Costa", "role": "Monitor de Espanhol", "img": "/icons/user.png", "nota": 4.4 }
     ],
-    "materiais": ["Guia de conjugação verbal", "Frases úteis em espanhol"],
-    "testes": ["Prova de gramática", "Exercício de compreensão oral"]
+    "materiais": [
+      { "titulo": "Guia de Conjugação Verbal", "monitor": "Sofia Oliveira" },
+      { "titulo": "Frases Úteis em Espanhol", "monitor": "Daniel Costa" }
+    ],
+    "testes": [
+      { "titulo": "Prova de Gramática", "monitor": "Sofia Oliveira" },
+      { "titulo": "Exercício de Compreensão Oral", "monitor": "Daniel Costa" }
+    ]
   },
   {
     "id": 13,
@@ -149,23 +228,35 @@
     "slug": "direito-penal",
     "imagemSrc": "/materias/13.png",
     "monitores": [
-      { "name": "Rafael Almeida", "role": "Monitor de Direito Penal", "img": "/fotos/Carlos.jpg" },
-      { "name": "Viviane Costa", "role": "Monitor de Direito Penal", "img": "/fotos/Carlos.jpg" }
+      { "name": "Rafael Almeida", "role": "Monitor de Direito Penal", "img": "/icons/user.png", "nota": 4.4 },
+      { "name": "Viviane Costa", "role": "Monitor de Direito Penal", "img": "/icons/user.png", "nota": 4.4 }
     ],
-    "materiais": ["Código penal", "Estudos de casos"],
-    "testes": ["Prova sobre crimes", "Estudo de jurisprudência"]
+    "materiais": [
+      { "titulo": "Código Penal", "monitor": "Rafael Almeida" },
+      { "titulo": "Estudos de Casos", "monitor": "Viviane Costa" }
+    ],
+    "testes": [
+      { "titulo": "Prova sobre Crimes", "monitor": "Rafael Almeida" },
+      { "titulo": "Estudo de Jurisprudência", "monitor": "Viviane Costa" }
+    ]
   },
   {
     "id": 14,
-    "nome": "Fund. Psicologia",
-    "slug": "fund-psicologia",
+    "nome": "Fundamentos de Psicologia",
+    "slug": "fundamentos-de-psicologia",
     "imagemSrc": "/materias/14.png",
     "monitores": [
-      { "name": "Gustavo Santos", "role": "Monitor de Psicologia", "img": "/fotos/Carlos.jpg" },
-      { "name": "Juliana Pereira", "role": "Monitor de Psicologia", "img": "/fotos/Carlos.jpg" }
+      { "name": "Gustavo Santos", "role": "Monitor de Psicologia", "img": "/icons/user.png", "nota": 4.4 },
+      { "name": "Juliana Pereira", "role": "Monitor de Psicologia", "img": "/icons/user.png", "nota": 4.4 }
     ],
-    "materiais": ["Introdução à psicologia", "Teorias psicológicas"],
-    "testes": ["Prova sobre teorias", "Estudo de comportamentos"]
+    "materiais": [
+      { "titulo": "Introdução à Psicologia", "monitor": "Gustavo Santos" },
+      { "titulo": "Teorias Psicológicas", "monitor": "Juliana Pereira" }
+    ],
+    "testes": [
+      { "titulo": "Prova sobre Teorias", "monitor": "Gustavo Santos" },
+      { "titulo": "Estudo de Comportamentos", "monitor": "Juliana Pereira" }
+    ]
   },
   {
     "id": 15,
@@ -173,11 +264,17 @@
     "slug": "contabilidade",
     "imagemSrc": "/materias/15.png",
     "monitores": [
-      { "name": "Marcio Silva", "role": "Monitor de Contabilidade", "img": "/fotos/Carlos.jpg" },
-      { "name": "Lúcia Costa", "role": "Monitor de Contabilidade", "img": "/fotos/Carlos.jpg" }
+      { "name": "Marcio Silva", "role": "Monitor de Contabilidade", "img": "/icons/user.png", "nota": 4.4 },
+      { "name": "Lúcia Costa", "role": "Monitor de Contabilidade", "img": "/icons/user.png", "nota": 4.4 }
     ],
-    "materiais": ["Manual de contabilidade", "Exercícios de lançamento contábil"],
-    "testes": ["Prova sobre balanço patrimonial", "Exame de lançamentos"]
+    "materiais": [
+      { "titulo": "Manual de Contabilidade", "monitor": "Marcio Silva" },
+      { "titulo": "Exercícios de Lançamento Contábil", "monitor": "Lúcia Costa" }
+    ],
+    "testes": [
+      { "titulo": "Prova sobre Balanço Patrimonial", "monitor": "Marcio Silva" },
+      { "titulo": "Exame de Lançamentos", "monitor": "Lúcia Costa" }
+    ]
   },
   {
     "id": 16,
@@ -185,10 +282,17 @@
     "slug": "farmacologia",
     "imagemSrc": "/materias/16.png",
     "monitores": [
-      { "name": "Carlos Lima", "role": "Monitor de Farmacologia", "img": "/fotos/Carlos.jpg" },
-      { "name": "Patrícia Silva", "role": "Monitor de Farmacologia", "img": "/fotos/Carlos.jpg" }
+      { "name": "Carlos Lima", "role": "Monitor de Farmacologia", "img": "/icons/user.png", "nota": 4.4 },
+      { "name": "Patrícia Silva", "role": "Monitor de Farmacologia", "img": "/icons/user.png", "nota": 4.4 }
     ],
-    "materiais": ["Farmacologia básica", "Estudos de medicamentos"],
-    "testes": ["Prova sobre farmacocinética", "Exame de toxicologia"]
+    "materiais": [
+      { "titulo": "Farmacologia Básica", "monitor": "Carlos Lima" },
+      { "titulo": "Estudos de Medicamentos", "monitor": "Patrícia Silva" }
+    ],
+    "testes": [
+      { "titulo": "Prova sobre Farmacocinética", "monitor": "Carlos Lima" },
+      { "titulo": "Exame de Toxicologia", "monitor": "Patrícia Silva" }
+    ]
   }
 ]
+  

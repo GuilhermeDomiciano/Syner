@@ -8,6 +8,17 @@ type Monitor = {
   name: string;
   role: string;
   img: string;
+  nota: number;
+};
+
+type Material = {
+  titulo: string;
+  monitor: string; 
+};
+
+type Teste = {
+  titulo: string;
+  monitor: string; 
 };
 
 type Materia = {
@@ -16,8 +27,8 @@ type Materia = {
   slug: string;
   imagemSrc: string;
   monitores: Monitor[];
-  materiais: string[];
-  testes: string[];
+  materiais: Material[];
+  testes: Teste[];
 };
 
 export default function ProfilePage() {
@@ -97,19 +108,40 @@ export default function ProfilePage() {
         {activeTab === "monitores" && (
           <div>
             <h2 className="text-xl font-bold mb-4">Monitores</h2>
-            <ul>
+            <ul className="w-full">
               {materia.monitores.map((monitor, index) => (
-                <li key={index} className="mb-4 flex items-center gap-4">
-                  <Image
-                    src={`${monitor.img}`}
-                    alt={monitor.name}
-                    width={40}
-                    height={40}
-                    className="rounded-full"
-                  />
-                  <div>
-                    <p className="font-semibold">{monitor.name}</p>
-                    <p className="text-sm text-gray-500">{monitor.role}</p>
+                <li
+                  key={index}
+                  className="flex items-center justify-between py-4 border-b border-gray-300"
+                >
+                  {/* Informações do monitor */}
+                  <div className="flex items-center gap-4">
+                    <Image
+                      src={monitor.img}
+                      alt={monitor.name}
+                      width={50}
+                      height={50}
+                      className="rounded-full"
+                    />
+                    <div>
+                      <p className="font-semibold text-lg">{monitor.name}</p>
+                      <p className="text-sm text-gray-500">{monitor.role}</p>
+                    </div>
+                  </div>
+
+                  {/* Nota e estrela */}
+                  <div className="flex items-center gap-2">
+                    <span className="text-blue-500 font-bold text-lg">
+                      {monitor.nota.toFixed(1)}
+                    </span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-blue-500"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 .587l3.668 7.431 8.2 1.194-5.934 5.781 1.402 8.164L12 18.896l-7.336 3.861 1.402-8.164L.13 9.212l8.2-1.194z" />
+                    </svg>
                   </div>
                 </li>
               ))}
@@ -117,31 +149,64 @@ export default function ProfilePage() {
           </div>
         )}
 
-          {activeTab === "materiais" && (
-            <div>
-              <h2 className="text-xl font-bold mb-4">Materiais</h2>
-              <ul>
-                {materia.materiais.map((material, index) => (
-                  <li key={index} className="mb-2">
-                    <p>{material}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
 
-          {activeTab === "testes" && (
-            <div>
-              <h2 className="text-xl font-bold mb-4">Testes</h2>
-              <ul>
-                {materia.testes.map((teste, index) => (
-                  <li key={index} className="mb-2">
-                    <p>{teste}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+        {activeTab === "materiais" && (
+          <div>
+            <h2 className="text-xl font-bold mb-4">Materiais</h2>
+            <ul className="w-full">
+              {materia.materiais.map((material, index) => (
+                <li
+                  key={index}
+                  className="flex items-center justify-between py-4 border-b border-gray-300"
+                >
+                  {/* Ícone do material */}
+                  <div className="flex items-center gap-4">
+                    <Image
+                      src="/icons/material.png"
+                      alt="Ícone de material"
+                      width={50}
+                      height={50}
+                      className="rounded-full"
+                    />
+                    <div>
+                      <p className="font-semibold text-lg">{material.titulo}</p>
+                      <p className="text-sm text-gray-500">Por {material.monitor}</p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {activeTab === "testes" && (
+          <div>
+            <h2 className="text-xl font-bold mb-4">Testes</h2>
+            <ul className="w-full">
+              {materia.testes.map((teste, index) => (
+                <li
+                  key={index}
+                  className="flex items-center justify-between py-4 border-b border-gray-300"
+                >
+                  {/* Ícone do teste */}
+                  <div className="flex items-center gap-4">
+                    <Image
+                      src="/icons/teste.png"
+                      alt="Ícone de teste"
+                      width={50}
+                      height={50}
+                      className="rounded-full"
+                    />
+                    <div>
+                      <p className="font-semibold text-lg">{teste.titulo}</p>
+                      <p className="text-sm text-gray-500">Por {teste.monitor}</p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         </div>
       </main>
     </div>
