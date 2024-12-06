@@ -46,6 +46,19 @@ export default function Page() {
     }
   };
 
+  const selecionarContato = (contato) => {
+    // Atualiza a contagem de novas mensagens para 0 ao selecionar o contato
+    const novosContatos = contatos.map((contatoItem) => {
+      if (contatoItem.nome === contato.nome) {
+        return { ...contatoItem, novasMsg: 0 }; // Marca como lido
+      }
+      return contatoItem;
+    });
+
+    setContatos(novosContatos);
+    setContatoAtivo(contato);
+  };
+
   return (
     <div className="flex h-screen overflow-hidden bg-gray-100">
       <div className="w-1/4 bg-white border-r shadow-lg p-4 overflow-y-auto">
@@ -53,7 +66,7 @@ export default function Page() {
         {contatos.map((contato, index) => (
           <div
             key={index}
-            onClick={() => setContatoAtivo(contato)}
+            onClick={() => selecionarContato(contato)} // Modificado para chamar selecionarContato
             className={`mb-4 p-4 border-b cursor-pointer hover:bg-blue-50 rounded-lg transition-all duration-300 ${
               contatoAtivo?.nome === contato.nome ? "bg-blue-100 border-blue-300" : ""
             }`}
@@ -78,7 +91,6 @@ export default function Page() {
           {contatoAtivo ? (
             <>
               <h3 className="text-xl font-semibold">{contatoAtivo.nome}</h3>
-              <p className="text-sm font-light">{contatoAtivo.novasMsg} novas mensagens</p>
             </>
           ) : (
             <h3 className="text-xl font-semibold">Selecione uma conversa</h3>
