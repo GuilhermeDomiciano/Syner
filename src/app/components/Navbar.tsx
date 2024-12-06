@@ -48,7 +48,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link href="/messages" className="flex flex-col items-center space-y-1 px-2 py-2 rounded-md hover:bg-gray-200 transition-colors duration-300">
+            <Link href="/recados" className="flex flex-col items-center space-y-1 px-2 py-2 rounded-md hover:bg-gray-200 transition-colors duration-300">
               <Image src="/icons/messages.png" alt="Recados" width={20} height={20} />
               <span className="text-xs font-medium text-[#4E74F9]">Recados</span>
             </Link>
