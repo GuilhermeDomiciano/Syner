@@ -1,18 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function ComunidadePage() {
-  const [activeTab, setActiveTab] = useState("grupos");
-
-  const destaques = [
-    { id: 1, nome: "POO 2N Ultra", imagem: "/icons/poo.png" },
-    { id: 2, nome: "Grupo de Estudos FDBt", imagem: "/icons/fdb.png" },
-    { id: 3, nome: "Unidos da Estrutura", imagem: "/icons/arvore.png" },
-  ];
-
   const comunidadesParticipando = [
     { id: 1, nome: "POO 2N Ulbra", imagem: "/comunidades/POO 2N Ulbra.png" },
     { id: 2, nome: "Unidos da Estrutura de Dados", imagem: "/comunidades/Unidos da Estrutura.png" },

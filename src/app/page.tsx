@@ -14,6 +14,7 @@ type Materia = {
 export default function HomePage() {
   const [materias, setMaterias] = useState<Materia[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [error, setError] = useState(false); // Para lidar com erros de carregamento
 
   useEffect(() => {
     const fetchMaterias = async () => {
@@ -24,6 +25,7 @@ export default function HomePage() {
         setMaterias(data);
       } catch (error) {
         console.error(error);
+        setError(true); // Marcar erro como verdadeiro
       }
     };
 
@@ -37,6 +39,16 @@ export default function HomePage() {
   const filteredMaterias = materias.filter((materia) =>
     materia.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <h1 className="text-2xl font-bold text-red-600">
+          Erro ao carregar as matérias. Tente novamente mais tarde.
+        </h1>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen p-8">
@@ -60,8 +72,8 @@ export default function HomePage() {
             <Link href={`/materias/${materia.id}`} passHref>
               <div className="bg-white p-6 rounded-3xl shadow-lg text-center hover:shadow-xl hover:scale-105 transform transition-transform duration-300 cursor-pointer">
                 <Image
-                  src={materia.imagemSrc}
-                  alt={materia.nome}
+                  src={materia.imagemSrc || "/fallback.png"} // Adicionado fallback
+                  alt={materia.nome || "Matéria"}
                   width={150}
                   height={150}
                   className="rounded-md object-cover mx-auto"

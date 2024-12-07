@@ -2,7 +2,19 @@
 
 import { useState } from "react";
 
-const contatosIniciais = [
+interface Mensagem {
+  texto: string;
+  autor: string;
+  dataHora: Date;
+}
+
+interface Contato {
+  nome: string;
+  novasMsg: number;
+  mensagens: Mensagem[];
+}
+
+const contatosIniciais: Contato[] = [
   { nome: "Matheus", novasMsg: 9, mensagens: [{ texto: "Oi, tudo bem?", autor: "Matheus", dataHora: new Date(2024, 10, 11, 9, 30) }] },
   { nome: "Luis", novasMsg: 9, mensagens: [{ texto: "Oi, como vai?", autor: "Luis", dataHora: new Date(2024, 10, 11, 10, 15) }] },
   { nome: "Ana", novasMsg: 3, mensagens: [{ texto: "Bom dia!", autor: "Ana", dataHora: new Date(2024, 10, 11, 8, 45) }] }
@@ -10,7 +22,7 @@ const contatosIniciais = [
 
 export default function Page() {
   const [contatos, setContatos] = useState(contatosIniciais);
-  const [contatoAtivo, setContatoAtivo] = useState(null);
+  const [contatoAtivo, setContatoAtivo] = useState<Contato | null>(null);
   const [mensagem, setMensagem] = useState("");
 
   const enviarMensagem = () => {
@@ -31,23 +43,22 @@ export default function Page() {
 
     setContatos(novosContatos);
     setMensagem("");
-    setContatoAtivo((prev) => ({
-      ...prev,
+    setContatoAtivo({
+      ...contatoAtivo,
       mensagens: [
-        ...prev.mensagens,
+        ...contatoAtivo.mensagens,
         { texto: mensagem, autor: "Você", dataHora: new Date() }
       ]
-    }));
+    });
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       enviarMensagem();
     }
   };
 
-  const selecionarContato = (contato) => {
-    // Atualiza a contagem de novas mensagens para 0 ao selecionar o contato
+  const selecionarContato = (contato: Contato) => {
     const novosContatos = contatos.map((contatoItem) => {
       if (contatoItem.nome === contato.nome) {
         return { ...contatoItem, novasMsg: 0 }; // Marca como lido
@@ -66,7 +77,7 @@ export default function Page() {
         {contatos.map((contato, index) => (
           <div
             key={index}
-            onClick={() => selecionarContato(contato)} // Modificado para chamar selecionarContato
+            onClick={() => selecionarContato(contato)}
             className={`mb-4 p-4 border-b cursor-pointer hover:bg-blue-50 rounded-lg transition-all duration-300 ${
               contatoAtivo?.nome === contato.nome ? "bg-blue-100 border-blue-300" : ""
             }`}
@@ -89,9 +100,7 @@ export default function Page() {
       <div className="flex flex-col w-3/4 bg-white relative">
         <div className="p-4 bg-blue-600 text-white shadow-md flex items-center justify-between">
           {contatoAtivo ? (
-            <>
-              <h3 className="text-xl font-semibold">{contatoAtivo.nome}</h3>
-            </>
+            <h3 className="text-xl font-semibold">{contatoAtivo.nome}</h3>
           ) : (
             <h3 className="text-xl font-semibold">Selecione uma conversa</h3>
           )}

@@ -13,12 +13,12 @@ type Monitor = {
 
 type Material = {
   titulo: string;
-  monitor: string; 
+  monitor: string;
 };
 
 type Teste = {
   titulo: string;
-  monitor: string; 
+  monitor: string;
 };
 
 type Materia = {
@@ -31,17 +31,22 @@ type Materia = {
   testes: Teste[];
 };
 
-export default function ProfilePage() {
-  const { id } = useParams() as { id: string }; // Obtem o ID dinâmico da URL
+export default function MateriaPage() {
+  const { id } = useParams() as { id: string }; // Obtém o ID da URL
   const [materia, setMateria] = useState<Materia | null>(null);
-  const [activeTab, setActiveTab] = useState("monitores");
+  const [activeTab, setActiveTab] = useState<"monitores" | "materiais" | "testes">("monitores");
 
   useEffect(() => {
     const fetchMaterias = async () => {
-      const response = await fetch("/materias.json"); // Carrega o JSON da pasta public
-      const data: Materia[] = await response.json();
-      const selectedMateria = data.find((m) => m.id === parseInt(id));
-      setMateria(selectedMateria || null);
+      try {
+        const response = await fetch("/materias.json");
+        if (!response.ok) throw new Error("Erro ao carregar as matérias.");
+        const materias: Materia[] = await response.json();
+        const selectedMateria = materias.find((m) => m.id === parseInt(id));
+        setMateria(selectedMateria || null);
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     fetchMaterias();
@@ -54,14 +59,14 @@ export default function ProfilePage() {
       {/* Lado Esquerdo */}
       <aside className="fixed top-0 left-0 w-1/2 h-full p-8 flex flex-col items-center justify-center">
         <Image
-          src={materia.imagemSrc}
-          alt={materia.nome}
+          src={materia.imagemSrc || "/icons/fallback.png"}
+          alt={materia.nome || "Imagem da Matéria"}
           width={200}
           height={200}
           className="rounded-full mb-4"
         />
         <h1 className="text-2xl font-bold">{materia.nome}</h1>
-        <p className="text-gray-600">{materia.monitores.length} monitores</p>
+        <p className="text-gray-600">{materia.monitores?.length || 0} monitores</p>
       </aside>
 
       {/* Linha divisória */}
@@ -103,111 +108,94 @@ export default function ProfilePage() {
           </button>
         </div>
 
-
         {/* Conteúdo Dinâmico */}
         <div>
-        {activeTab === "monitores" && (
-          <div>
-            <h2 className="text-xl font-bold mb-4">Monitores</h2>
-            <ul className="w-full">
-              {materia.monitores.map((monitor, index) => (
-                <li
-                  key={index}
-                  className="flex items-center justify-between py-4 border-b border-gray-300"
-                >
-                  {/* Informações do monitor */}
-                  <div className="flex items-center gap-4">
-                    <Image
-                      src={monitor.img}
-                      alt={monitor.name}
-                      width={50}
-                      height={50}
-                      className="rounded-full"
-                    />
-                    <div>
-                      <p className="font-semibold text-lg">{monitor.name}</p>
-                      <p className="text-sm text-gray-500">{monitor.role}</p>
+          {activeTab === "monitores" && (
+            <div>
+              <h2 className="text-xl font-bold mb-4">Monitores</h2>
+              <ul className="w-full">
+                {materia.monitores.map((monitor, index) => (
+                  <li
+                    key={index}
+                    className="flex items-center justify-between py-4 border-b border-gray-300"
+                  >
+                    <div className="flex items-center gap-4">
+                      <Image
+                        src={monitor.img || "/icons/monitor.png"}
+                        alt={monitor.name || "Monitor"}
+                        width={50}
+                        height={50}
+                        className="rounded-full"
+                      />
+                      <div>
+                        <p className="font-semibold text-lg">{monitor.name}</p>
+                        <p className="text-sm text-gray-500">{monitor.role}</p>
+                      </div>
                     </div>
-                  </div>
-
-                  {/* Nota e estrela */}
-                  <div className="flex items-center gap-2">
                     <span className="text-blue-500 font-bold text-lg">
-                      {monitor.nota.toFixed(1)}
+                      {monitor.nota?.toFixed(1) || "N/A"}
                     </span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-blue-500"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 .587l3.668 7.431 8.2 1.194-5.934 5.781 1.402 8.164L12 18.896l-7.336 3.861 1.402-8.164L.13 9.212l8.2-1.194z" />
-                    </svg>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-
-        {activeTab === "materiais" && (
-          <div>
-            <h2 className="text-xl font-bold mb-4">Materiais</h2>
-            <ul className="w-full">
-              {materia.materiais.map((material, index) => (
-                <li
-                  key={index}
-                  className="flex items-center justify-between py-4 border-b border-gray-300"
-                >
-                  {/* Ícone do material */}
-                  <div className="flex items-center gap-4">
-                    <Image
-                      src="/icons/material.png"
-                      alt="Ícone de material"
-                      width={50}
-                      height={50}
-                      className="rounded-full"
-                    />
-                    <div>
-                      <p className="font-semibold text-lg">{material.titulo}</p>
-                      <p className="text-sm text-gray-500">Por {material.monitor}</p>
+          {activeTab === "materiais" && (
+            <div>
+              <h2 className="text-xl font-bold mb-4">Materiais</h2>
+              <ul className="w-full">
+                {materia.materiais.map((material, index) => (
+                  <li
+                    key={index}
+                    className="flex items-center justify-between py-4 border-b border-gray-300"
+                  >
+                    <div className="flex items-center gap-4">
+                      <Image
+                        src="/icons/material.png"
+                        alt="Ícone de material"
+                        width={50}
+                        height={50}
+                        className="rounded-full"
+                      />
+                      <div>
+                        <p className="font-semibold text-lg">{material.titulo}</p>
+                        <p className="text-sm text-gray-500">Por {material.monitor}</p>
+                      </div>
                     </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-        {activeTab === "testes" && (
-          <div>
-            <h2 className="text-xl font-bold mb-4">Testes</h2>
-            <ul className="w-full">
-              {materia.testes.map((teste, index) => (
-                <li
-                  key={index}
-                  className="flex items-center justify-between py-4 border-b border-gray-300"
-                >
-                  {/* Ícone do teste */}
-                  <div className="flex items-center gap-4">
-                    <Image
-                      src="/icons/teste.png"
-                      alt="Ícone de teste"
-                      width={50}
-                      height={50}
-                      className="rounded-full"
-                    />
-                    <div>
-                      <p className="font-semibold text-lg">{teste.titulo}</p>
-                      <p className="text-sm text-gray-500">Por {teste.monitor}</p>
+          {activeTab === "testes" && (
+            <div>
+              <h2 className="text-xl font-bold mb-4">Testes</h2>
+              <ul className="w-full">
+                {materia.testes.map((teste, index) => (
+                  <li
+                    key={index}
+                    className="flex items-center justify-between py-4 border-b border-gray-300"
+                  >
+                    <div className="flex items-center gap-4">
+                      <Image
+                        src="/icons/teste.png"
+                        alt="Ícone de teste"
+                        width={50}
+                        height={50}
+                        className="rounded-full"
+                      />
+                      <div>
+                        <p className="font-semibold text-lg">{teste.titulo}</p>
+                        <p className="text-sm text-gray-500">Por {teste.monitor}</p>
+                      </div>
                     </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </main>
     </div>
