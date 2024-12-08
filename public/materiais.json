@@ -1,0 +1,73 @@
+[
+    {
+      "id": 1,
+      "nome": "Introdução à Programação Orientada a Objetos",
+      "autor": "João Silva",
+      "tema": "POO",
+      "link": "https://example.com/downloads/introducao_poo.pdf"
+    },
+    {
+      "id": 2,
+      "nome": "Estruturas de Dados: Pilhas e Filas",
+      "autor": "Maria Santos",
+      "tema": "Estruturas de Dados",
+      "link": "https://example.com/downloads/estruturas_pilhas_filas.pdf"
+    },
+    {
+      "id": 3,
+      "nome": "Modelagem de Software na Prática",
+      "autor": "Ana Costa",
+      "tema": "Modelagem de Software",
+      "link": "https://example.com/downloads/modelagem_software.pdf"
+    },
+    {
+      "id": 4,
+      "nome": "Algoritmos de Busca e Ordenação",
+      "autor": "Carlos Pereira",
+      "tema": "Algoritmos",
+      "link": "https://example.com/downloads/algoritmos_busca_ordenacao.pdf"
+    },
+    {
+      "id": 5,
+      "nome": "Clean Code: Práticas Essenciais",
+      "autor": "Mariana Oliveira",
+      "tema": "Boas Práticas",
+      "link": "https://example.com/downloads/clean_code_praticas.pdf"
+    },
+    {
+      "id": 6,
+      "nome": "Cálculo Avançado para Engenharia",
+      "autor": "Pedro Fernandes",
+      "tema": "Matemática",
+      "link": "https://example.com/downloads/calculo_avancado.pdf"
+    },
+    {
+      "id": 7,
+      "nome": "Exercícios de Estruturas de Dados",
+      "autor": "Roberta Lima",
+      "tema": "Estruturas de Dados",
+      "link": "https://example.com/downloads/exercicios_estruturas_dados.pdf"
+    },
+    {
+      "id": 8,
+      "nome": "Metodologias Ágeis em Projetos",
+      "autor": "Felipe Andrade",
+      "tema": "Gestão de Projetos",
+      "link": "https://example.com/downloads/metodologias_ageis.pdf"
+    },
+    {
+      "id": 9,
+      "nome": "Introdução ao Desenvolvimento Web",
+      "autor": "Laura Martins",
+      "tema": "Desenvolvimento Web",
+      "link": "https://example.com/downloads/introducao_web.pdf"
+    },
+    {
+      "id": 10,
+      "nome": "Segurança da Informação na Prática",
+      "autor": "Gabriel Silva",
+      "tema": "Segurança",
+      "link": "https://example.com/downloads/seguranca_informacao.pdf"
+    }
+  ]
+  
