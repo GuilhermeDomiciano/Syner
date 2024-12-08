@@ -1,53 +1,82 @@
 [
-    {
-      "id": 1,
-      "titulo": "Introdução à Programação Orientada a Objetos",
-      "duracao": "15:30",
-      "link": "https://www.youtube.com/watch?v=HhkwsoBGFV8",
-      "imagem": "https://i.ytimg.com/vi/HhkwsoBGFV8/hq720.jpg",
-      "tema": "POO",
-      "publicadoPor": "João Silva",
-      "visualizacoes": 10230
-    },
-    {
-      "id": 2,
-      "titulo": "Estruturas de Dados - Pilhas e Filas",
-      "duracao": "20:45",
-      "link": "https://example.com/videos/estruturas",
-      "imagem": "https://i.ytimg.com/vi/HhkwsoBGFV8/hq720.jpg",
-      "tema": "POO",
-      "publicadoPor": "Maria Santos",
-      "visualizacoes": 8790
-    },
-    {
-      "id": 3,
-      "titulo": "Modelagem de Software na Prática",
-      "duracao": "12:10",
-      "link": "https://example.com/videos/modelagem",
-      "imagem": "https://i.ytimg.com/vi/HhkwsoBGFV8/hq720.jpg",
-      "tema": "POO",
-      "publicadoPor": "Ana Costa",
-      "visualizacoes": 6590
-    },
-    {
-      "id": 4,
-      "titulo": "Algoritmos de Busca e Ordenação",
-      "duracao": "18:50",
-      "link": "https://example.com/videos/algoritmos",
-      "imagem": "https://i.ytimg.com/vi/HhkwsoBGFV8/hq720.jpg",
-      "tema": "POO",
-      "publicadoPor": "Carlos Souza",
-      "visualizacoes": 12500
-    },
-    {
-      "id": 5,
-      "titulo": "Clean Code: Práticas Essenciais",
-      "duracao": "25:00",
-      "link": "https://example.com/videos/clean-code",
-      "imagem": "https://i.ytimg.com/vi/HhkwsoBGFV8/hq720.jpg",
-      "tema": "POO",
-      "publicadoPor": "Lúcia Ferreira",
-      "visualizacoes": 14300
-    }
+  {
+    "id": 1,
+    "titulo": "Introdução à Programação Orientada a Objetos (POO): uma explicação fácil",
+    "duracao": "15:34",
+    "link": "https://www.youtube.com/watch?v=dXZRgW-X2ls",
+    "imagem": "https://i.ytimg.com/vi/dXZRgW-X2ls/hq720.jpg",
+    "tema": "POO",
+    "publicadoPor": "Attekita Dev",
+    "visualizacoes": 16730
+  },
+  {
+    "id": 2,
+    "titulo": "PROGRAMAÇÃO ORIENTADA A OBJETO (POO) - O que é? Entenda",
+    "duracao": "6:59",
+    "link": "https://www.youtube.com/watch?v=f-aDDLRmugU",
+    "imagem": "https://i.ytimg.com/vi/f-aDDLRmugU/hq720.jpg",
+    "tema": "POO",
+    "publicadoPor": "Maria Santos",
+    "visualizacoes": 8790
+  },
+  {
+    "id": 3,
+    "titulo": "Programação Orientada a Objetos (POO) // Dicionário do Programador",
+    "duracao": "9:56",
+    "link": "https://www.youtube.com/watch?v=QY0Kdg83orY",
+    "imagem": "https://i.ytimg.com/vi/QY0Kdg83orY/hq720.jpg",
+    "tema": "POO",
+    "publicadoPor": "Ana Costa",
+    "visualizacoes": 6590
+  },
+  {
+    "id": 4,
+    "titulo": "Curso POO em C# - DIA 01",
+    "duracao": "2:28:26",
+    "link": "https://www.youtube.com/watch?v=tHDZnz7Jplc",
+    "imagem": "https://i.ytimg.com/vi/tHDZnz7Jplc/hq720.jpg",
+    "tema": "POO",
+    "publicadoPor": "Michel Banagouro",
+    "visualizacoes": 12500
+  },
+  {
+    "id": 5,
+    "titulo": "Como Funcionam Classes e Programação Orientada a Objetos em Python - Aprenda em 10 Minutos!",
+    "duracao": "11:53",
+    "link": "https://www.youtube.com/watch?v=97A_Cyyh-eU",
+    "imagem": "https://i.ytimg.com/vi/97A_Cyyh-eU/hq720.jpg",
+    "tema": "POO",
+    "publicadoPor": "Pedro Ferreira",
+    "visualizacoes": 14300
+  },
+  {
+    "id": 6,
+    "titulo": "Árvores: O Começo de TUDO | Estruturas de Dados e Algoritmos",
+    "duracao": "57:40",
+    "link": "https://www.youtube.com/watch?v=9GdesxWtOgs",
+    "imagem": "https://i.ytimg.com/vi/9GdesxWtOgs/hq720.jpg",
+    "tema": "Estrutura de Dados",
+    "publicadoPor": "Joaquin Costa",
+    "visualizacoes": 6590
+  },
+  {
+    "id": 7,
+    "titulo": "Estrutura de Dados e Algoritmos em Python #01 - Introdução",
+    "duracao": "8:32",
+    "link": "https://www.youtube.com/watch?v=hCXDjdcn31A&list=PLE1UtdMhwaEonmSRDkSzpFV5m5zKiqM94",
+    "imagem": "https://i.ytimg.com/vi/hCXDjdcn31A/hqdefault.jpg",
+    "tema": "Estrutura de Dados",
+    "publicadoPor": "Guilherme Domciano",
+    "visualizacoes": 12500
+  },
+  {
+    "id": 8,
+    "titulo": "ÁRVORES na Computação I Estrutura de Dados #9",
+    "duracao": "18:55",
+    "link": "https://www.youtube.com/watch?v=NpJVZtgSY4U",
+    "imagem": "https://i.ytimg.com/vi/NpJVZtgSY4U/hq720.jpg",
+    "tema": "Estrutura de Dados",
+    "publicadoPor": "Davi O Grande 7",
+    "visualizacoes": 14300
+  } 
 ]
-  
