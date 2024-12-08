@@ -54,6 +54,10 @@ export default function MateriaPage() {
 
   if (!materia) return <p>Carregando...</p>;
 
+  const handleViewAll = (section: string) => {
+    router.push(`/materias/${materia.id}/${section}`);
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center bg-gray-50">
       {/* Cabeçalho */}
@@ -81,7 +85,7 @@ export default function MateriaPage() {
         <section>
           <h2 className="text-3xl font-bold mb-6 text-gray-800">Monitores</h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {materia.monitores.map((monitor) => (
+            {materia.monitores.slice(0, 6).map((monitor) => (
               <li
                 key={monitor.id}
                 className="flex flex-col items-center p-6 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition"
@@ -119,14 +123,21 @@ export default function MateriaPage() {
               </li>
             ))}
           </ul>
+          {materia.monitores.length > 6 && (
+            <button
+              onClick={() => handleViewAll("monitores")}
+              className="mt-4 text-blue-600 hover:underline"
+            >
+              Ver todos
+            </button>
+          )}
         </section>
-
 
         {/* Seção de Materiais */}
         <section>
           <h2 className="text-3xl font-bold mb-6 text-gray-800">Materiais</h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {materia.materiais.map((material, index) => (
+            {materia.materiais.slice(0, 6).map((material, index) => (
               <li
                 key={index}
                 className="p-6 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition"
@@ -136,13 +147,21 @@ export default function MateriaPage() {
               </li>
             ))}
           </ul>
+          {materia.materiais.length > 6 && (
+            <button
+              onClick={() => handleViewAll("materiais")}
+              className="mt-4 text-blue-600 hover:underline"
+            >
+              Ver todos
+            </button>
+          )}
         </section>
 
         {/* Seção de Testes */}
         <section>
           <h2 className="text-3xl font-bold mb-6 text-gray-800">Testes</h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {materia.testes.map((teste, index) => (
+            {materia.testes.slice(0, 6).map((teste, index) => (
               <li
                 key={index}
                 className="p-6 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition"
@@ -152,6 +171,14 @@ export default function MateriaPage() {
               </li>
             ))}
           </ul>
+          {materia.testes.length > 6 && (
+            <button
+              onClick={() => handleViewAll("testes")}
+              className="mt-4 text-blue-600 hover:underline"
+            >
+              Ver todos
+            </button>
+          )}
         </section>
       </main>
     </div>
