@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 type Monitor = {
+  id: number;
   name: string;
   role: string;
   img: string;
@@ -32,9 +33,9 @@ type Materia = {
 };
 
 export default function MateriaPage() {
-  const { id } = useParams() as { id: string }; // Obtém o ID da URL
+  const { id } = useParams() as { id: string };
   const [materia, setMateria] = useState<Materia | null>(null);
-  const [activeTab, setActiveTab] = useState<"monitores" | "materiais" | "testes">("monitores");
+  const router = useRouter();
 
   useEffect(() => {
     const fetchMaterias = async () => {
@@ -48,155 +49,110 @@ export default function MateriaPage() {
         console.error(error);
       }
     };
-
     fetchMaterias();
   }, [id]);
 
   if (!materia) return <p>Carregando...</p>;
 
   return (
-    <div className="min-h-screen flex">
-      {/* Lado Esquerdo */}
-      <aside className="fixed top-0 left-0 w-1/2 h-full p-8 flex flex-col items-center justify-center">
-        <Image
-          src={materia.imagemSrc || "/icons/fallback.png"}
-          alt={materia.nome || "Imagem da Matéria"}
-          width={200}
-          height={200}
-          className="rounded-full mb-4"
-        />
-        <h1 className="text-2xl font-bold">{materia.nome}</h1>
-        <p className="text-gray-600">{materia.monitores?.length || 0} monitores</p>
-      </aside>
-
-      {/* Linha divisória */}
-      <div className="fixed top-0 left-1/2 h-full w-[1px] bg-gray-300"></div>
-
-      {/* Lado Direito */}
-      <main className="ml-[50%] w-[50%] p-12">
-        {/* Abas */}
-        <div className="flex justify-center items-center gap-6 mb-8">
-          <button
-            className={`px-6 py-3 rounded-full text-sm font-medium shadow-md ${
-              activeTab === "monitores"
-                ? "bg-blue-500 text-white shadow-lg"
-                : "bg-gray-200 text-gray-700"
-            }`}
-            onClick={() => setActiveTab("monitores")}
-          >
-            Monitores
-          </button>
-          <button
-            className={`px-6 py-3 rounded-full text-sm font-medium shadow-md ${
-              activeTab === "materiais"
-                ? "bg-blue-500 text-white shadow-lg"
-                : "bg-gray-200 text-gray-700"
-            }`}
-            onClick={() => setActiveTab("materiais")}
-          >
-            Materiais
-          </button>
-          <button
-            className={`px-6 py-3 rounded-full text-sm font-medium shadow-md ${
-              activeTab === "testes"
-                ? "bg-blue-500 text-white shadow-lg"
-                : "bg-gray-200 text-gray-700"
-            }`}
-            onClick={() => setActiveTab("testes")}
-          >
-            Testes
-          </button>
+    <div className="min-h-screen flex flex-col items-center bg-gray-50">
+      {/* Cabeçalho */}
+      <header className="w-full max-w-6xl p-6 bg-white rounded-lg shadow-lg flex flex-col md:flex-row md:items-center md:justify-between">
+        <div className="flex items-center gap-6">
+          <Image
+            src={materia.imagemSrc || "/icons/fallback.png"}
+            alt={materia.nome || "Imagem da Matéria"}
+            width={150}
+            height={150}
+            className="rounded-full"
+          />
+          <div>
+            <h1 className="text-5xl font-bold text-gray-800">{materia.nome}</h1>
+            <p className="text-2xl text-gray-600 mt-4">
+              {materia.monitores?.length || 0} monitores disponíveis
+            </p>
+          </div>
         </div>
+      </header>
 
-        {/* Conteúdo Dinâmico */}
-        <div>
-          {activeTab === "monitores" && (
-            <div>
-              <h2 className="text-xl font-bold mb-4">Monitores</h2>
-              <ul className="w-full">
-                {materia.monitores.map((monitor, index) => (
-                  <li
-                    key={index}
-                    className="flex items-center justify-between py-4 border-b border-gray-300"
+      {/* Conteúdo Dinâmico */}
+      <main className="w-full max-w-6xl flex-1 mt-8 bg-white rounded-lg shadow-lg p-8 space-y-12">
+        {/* Seção de Monitores */}
+        <section>
+          <h2 className="text-3xl font-bold mb-6 text-gray-800">Monitores</h2>
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {materia.monitores.map((monitor) => (
+              <li
+                key={monitor.id}
+                className="flex flex-col items-center p-6 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition"
+              >
+                <button
+                  onClick={() => router.push(`/monitores/${monitor.id}`)}
+                  className="hover:opacity-80"
+                >
+                  <Image
+                    src={monitor.img || "/icons/monitor.png"}
+                    alt={monitor.name || "Monitor"}
+                    width={80}
+                    height={80}
+                    className="rounded-full"
+                  />
+                </button>
+                <button
+                  onClick={() => router.push(`/monitores/${monitor.id}`)}
+                  className="text-center mt-4 hover:underline"
+                >
+                  <p className="text-xl font-semibold">{monitor.name}</p>
+                  <p className="text-gray-500 text-sm">{monitor.role}</p>
+                </button>
+                <div className="flex items-center gap-4 mt-4">
+                  <span className="text-blue-600 font-bold text-xl">
+                    {monitor.nota?.toFixed(1) || "N/A"}
+                  </span>
+                  <button
+                    onClick={() => router.push(`/monitores/${monitor.id}`)}
+                    className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm shadow-md hover:bg-blue-700 transition"
                   >
-                    <div className="flex items-center gap-4">
-                      <Image
-                        src={monitor.img || "/icons/monitor.png"}
-                        alt={monitor.name || "Monitor"}
-                        width={50}
-                        height={50}
-                        className="rounded-full"
-                      />
-                      <div>
-                        <p className="font-semibold text-lg">{monitor.name}</p>
-                        <p className="text-sm text-gray-500">{monitor.role}</p>
-                      </div>
-                    </div>
-                    <span className="text-blue-500 font-bold text-lg">
-                      {monitor.nota?.toFixed(1) || "N/A"}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+                    Ver Perfil
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-          {activeTab === "materiais" && (
-            <div>
-              <h2 className="text-xl font-bold mb-4">Materiais</h2>
-              <ul className="w-full">
-                {materia.materiais.map((material, index) => (
-                  <li
-                    key={index}
-                    className="flex items-center justify-between py-4 border-b border-gray-300"
-                  >
-                    <div className="flex items-center gap-4">
-                      <Image
-                        src="/icons/material.png"
-                        alt="Ícone de material"
-                        width={50}
-                        height={50}
-                        className="rounded-full"
-                      />
-                      <div>
-                        <p className="font-semibold text-lg">{material.titulo}</p>
-                        <p className="text-sm text-gray-500">Por {material.monitor}</p>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
 
-          {activeTab === "testes" && (
-            <div>
-              <h2 className="text-xl font-bold mb-4">Testes</h2>
-              <ul className="w-full">
-                {materia.testes.map((teste, index) => (
-                  <li
-                    key={index}
-                    className="flex items-center justify-between py-4 border-b border-gray-300"
-                  >
-                    <div className="flex items-center gap-4">
-                      <Image
-                        src="/icons/teste.png"
-                        alt="Ícone de teste"
-                        width={50}
-                        height={50}
-                        className="rounded-full"
-                      />
-                      <div>
-                        <p className="font-semibold text-lg">{teste.titulo}</p>
-                        <p className="text-sm text-gray-500">Por {teste.monitor}</p>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
+        {/* Seção de Materiais */}
+        <section>
+          <h2 className="text-3xl font-bold mb-6 text-gray-800">Materiais</h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {materia.materiais.map((material, index) => (
+              <li
+                key={index}
+                className="p-6 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition"
+              >
+                <p className="text-xl font-semibold text-gray-800">{material.titulo}</p>
+                <p className="text-sm text-gray-600 mt-2">Por {material.monitor}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Seção de Testes */}
+        <section>
+          <h2 className="text-3xl font-bold mb-6 text-gray-800">Testes</h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {materia.testes.map((teste, index) => (
+              <li
+                key={index}
+                className="p-6 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition"
+              >
+                <p className="text-xl font-semibold text-gray-800">{teste.titulo}</p>
+                <p className="text-sm text-gray-600 mt-2">Por {teste.monitor}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
       </main>
     </div>
   );
