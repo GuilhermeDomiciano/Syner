@@ -1,0 +1,129 @@
+[
+    {
+      "id": 1,
+      "nome": "POO 2N Ulbra",
+      "imagem": "/comunidades/POO 2N Ulbra.png",
+      "participando": true,
+      "participantes": [
+        { "name": "Marcio Silva", "role": "Monitor de POO", "img": "/icons/user.png", "nota": 4.5 },
+        { "name": "Lúcia Costa", "role": "Monitor de POO", "img": "/icons/user.png", "nota": 4.3 }
+      ],
+      "materiais": [
+        { "titulo": "Introdução à POO", "monitor": "Marcio Silva" },
+        { "titulo": "Exercícios de POO", "monitor": "Lúcia Costa" }
+      ]
+    },
+    {
+      "id": 2,
+      "nome": "Unidos da Estrutura de Dados",
+      "imagem": "/comunidades/Unidos da Estrutura.png",
+      "participando": true,
+      "participantes": [
+        { "name": "Carlos Mendes", "role": "Monitor de Estrutura de Dados", "img": "/icons/user.png", "nota": 4.7 },
+        { "name": "Ana Souza", "role": "Monitor de Estrutura de Dados", "img": "/icons/user.png", "nota": 4.6 }
+      ],
+      "materiais": [
+        { "titulo": "Árvores Binárias", "monitor": "Carlos Mendes" },
+        { "titulo": "Lista Encadeada", "monitor": "Ana Souza" }
+      ]
+    },
+    {
+      "id": 3,
+      "nome": "Cálculo 4N -0609",
+      "imagem": "/comunidades/Cálculo 4N -0609.png",
+      "participando": true,
+      "participantes": [
+        { "name": "João Pereira", "role": "Monitor de Cálculo", "img": "/icons/user.png", "nota": 4.8 },
+        { "name": "Maria Silva", "role": "Monitor de Cálculo", "img": "/icons/user.png", "nota": 4.5 }
+      ],
+      "materiais": [
+        { "titulo": "Derivadas e Integrais", "monitor": "João Pereira" },
+        { "titulo": "Problemas Resolvidos de Cálculo", "monitor": "Maria Silva" }
+      ]
+    },
+    {
+      "id": 4,
+      "nome": "Grupo de Estudos",
+      "imagem": "/comunidades/Grupo de Estudos.png",
+      "participando": true,
+      "participantes": [
+        { "name": "Eduardo Lima", "role": "Coordenador do Grupo", "img": "/icons/user.png", "nota": 4.9 },
+        { "name": "Paula Almeida", "role": "Participante do Grupo", "img": "/icons/user.png", "nota": 4.3 }
+      ],
+      "materiais": [
+        { "titulo": "Cronograma de Estudos", "monitor": "Eduardo Lima" },
+        { "titulo": "Material Base", "monitor": "Paula Almeida" }
+      ]
+    },
+    {
+      "id": 5,
+      "nome": "Modelagem de Software",
+      "imagem": "/comunidades/Modelagem de .png",
+      "participando": true,
+      "participantes": [
+        { "name": "Rafael Santos", "role": "Monitor de Modelagem", "img": "/icons/user.png", "nota": 4.6 },
+        { "name": "Carla Menezes", "role": "Monitor de Modelagem", "img": "/icons/user.png", "nota": 4.4 }
+      ],
+      "materiais": [
+        { "titulo": "UML Básico", "monitor": "Rafael Santos" },
+        { "titulo": "Diagramas de Classes", "monitor": "Carla Menezes" }
+      ]
+    },
+    {
+      "id": 6,
+      "nome": "SYNER - Desenvolvimento",
+      "imagem": "/comunidades/SYNER.png",
+      "participando": true,
+      "participantes": [
+        { "name": "Leonardo Oliveira", "role": "Líder do Desenvolvimento", "img": "/icons/user.png", "nota": 4.9 },
+        { "name": "Camila Rocha", "role": "Membro do Desenvolvimento", "img": "/icons/user.png", "nota": 4.7 }
+      ],
+      "materiais": [
+        { "titulo": "Guia do SYNER", "monitor": "Leonardo Oliveira" },
+        { "titulo": "Documentação de APIs", "monitor": "Camila Rocha" }
+      ]
+    },
+    {
+      "id": 7,
+      "nome": "Unidos da Computação",
+      "imagem": "/comunidades/computacao.png",
+      "participando": false,
+      "participantes": [
+        { "name": "Bruno Nascimento", "role": "Monitor de Computação", "img": "/icons/user.png", "nota": 4.5 },
+        { "name": "Mariana Costa", "role": "Monitor de Computação", "img": "/icons/user.png", "nota": 4.6 }
+      ],
+      "materiais": [
+        { "titulo": "Introdução à Computação", "monitor": "Bruno Nascimento" },
+        { "titulo": "Exercícios de Lógica", "monitor": "Mariana Costa" }
+      ]
+    },
+    {
+      "id": 8,
+      "nome": "Engenharia de Software",
+      "imagem": "/comunidades/software.png",
+      "participando": false,
+      "participantes": [
+        { "name": "Renato Farias", "role": "Monitor de Engenharia", "img": "/icons/user.png", "nota": 4.6 },
+        { "name": "Juliana Alves", "role": "Monitor de Engenharia", "img": "/icons/user.png", "nota": 4.5 }
+      ],
+      "materiais": [
+        { "titulo": "Planejamento de Software", "monitor": "Renato Farias" },
+        { "titulo": "Práticas de Scrum", "monitor": "Juliana Alves" }
+      ]
+    },
+    {
+      "id": 9,
+      "nome": "Estruturas de Dados",
+      "imagem": "/comunidades/estruturas.png",
+      "participando": false,
+      "participantes": [
+        { "name": "Felipe Andrade", "role": "Monitor de Estruturas", "img": "/icons/user.png", "nota": 4.4 },
+        { "name": "Priscila Moura", "role": "Monitor de Estruturas", "img": "/icons/user.png", "nota": 4.3 }
+      ],
+      "materiais": [
+        { "titulo": "Filas e Pilhas", "monitor": "Felipe Andrade" },
+        { "titulo": "Algoritmos em Grafos", "monitor": "Priscila Moura" }
+      ]
+    }
+  ]
+  
