@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { FaTrashAlt, FaPlusCircle, FaUserAlt, FaCalendarAlt } from "react-icons/fa";
+import { MdMessage, MdChat } from "react-icons/md";
 
 // Definição do tipo Recado
 type Recado = {
@@ -81,8 +83,8 @@ export default function RecadosPage() {
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 p-8">
-      <h1 className="text-4xl font-bold mb-6 text-center text-blue-700">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-8">
+      <h1 className="text-5xl font-extrabold mb-8 text-center text-blue-700 drop-shadow-lg">
         Mural de Recados
       </h1>
 
@@ -91,19 +93,24 @@ export default function RecadosPage() {
         {recados.map((recado) => (
           <div
             key={recado.id}
-            className="relative bg-blue-100 border-l-8 border-blue-500 shadow-lg rounded-lg p-6"
+            className="relative bg-white border-l-8 border-blue-500 shadow-lg rounded-lg p-6 hover:scale-105 transform transition duration-300"
           >
-            <div className="absolute top-0 right-0 transform -translate-y-1/2 translate-x-1/2 w-8 h-8 bg-red-400 rounded-full shadow">
-              <span className="block w-3 h-3 bg-red-700 rounded-full mx-auto mt-2"></span>
+            <div className="flex items-center gap-4 mb-4">
+              <FaUserAlt className="text-blue-500 text-2xl" />
+              <h2 className="text-xl font-semibold text-blue-700">{recado.autor}</h2>
             </div>
-            <h2 className="text-xl font-semibold text-blue-700 mb-2">{recado.autor}</h2>
-            <p className="text-gray-700 mb-4">{recado.mensagem}</p>
-            <p className="text-sm text-gray-500 text-right">{recado.data}</p>
+            <p className="text-gray-700 mb-4 flex items-start gap-2">
+              <MdMessage className="text-gray-500 text-xl" />
+              {recado.mensagem}
+            </p>
+            <p className="text-sm text-gray-500 flex justify-end items-center gap-1">
+              <FaCalendarAlt className="text-gray-400" /> {recado.data}
+            </p>
             <button
               onClick={() => handleDeleteRecado(recado.id)}
-              className="mt-4 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600"
+              className="mt-4 flex items-center justify-center gap-2 w-full bg-gradient-to-r from-red-500 to-red-600 text-white py-2 rounded-lg shadow hover:shadow-lg hover:from-red-600 hover:to-red-700 transition duration-300"
             >
-              Excluir
+              <FaTrashAlt /> Excluir
             </button>
           </div>
         ))}
@@ -113,39 +120,41 @@ export default function RecadosPage() {
       <div className="flex justify-center mt-8">
         <button
           onClick={() => setShowForm(!showForm)}
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg"
+          className="px-6 py-3 flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow-lg hover:from-blue-600 hover:to-blue-700 transform hover:scale-105 transition duration-300"
         >
+          <FaPlusCircle className="text-2xl" />
           {showForm ? "Cancelar" : "Adicionar Recado"}
         </button>
       </div>
 
       {/* Formulário para adicionar recado */}
       {showForm && (
-        <div className="mt-8 bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
-          <h2 className="text-xl font-semibold text-blue-700 mb-4">
+        <div className="mt-8 bg-white p-8 rounded-lg shadow-2xl max-w-lg mx-auto border-t-4 border-blue-500">
+          <h2 className="text-2xl font-semibold text-blue-700 mb-6 text-center">
             Novo Recado
           </h2>
-          <div className="space-y-4">
+          <div className="space-y-6">
             <input
               type="text"
               placeholder="Autor"
               value={newRecado.autor}
               onChange={(e) => setNewRecado({ ...newRecado, autor: e.target.value })}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
             />
             <textarea
               placeholder="Mensagem"
               value={newRecado.mensagem}
               onChange={(e) => setNewRecado({ ...newRecado, mensagem: e.target.value })}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
               rows={4}
             ></textarea>
           </div>
-          <div className="flex justify-end mt-4">
+          <div className="flex justify-end mt-6">
             <button
               onClick={handleAddRecado}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              className="px-6 py-3 flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow hover:shadow-lg hover:from-blue-600 hover:to-blue-700 transition duration-300"
             >
+              <FaPlusCircle className="text-xl" />
               Salvar
             </button>
           </div>
