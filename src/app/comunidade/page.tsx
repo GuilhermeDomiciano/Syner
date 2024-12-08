@@ -46,14 +46,13 @@ export default function ComunidadePage() {
   const [videos, setVideos] = useState<Video[]>([]);
   const [materiais, setMateriais] = useState<Material[]>([]);
 
-
   const normalizeText = (text: string): string =>
     text
-      .normalize("NFD") 
-      .replace(/[\u0300-\u036f]/g, "") 
-      .replace(/[^\w\s]/gi, "") 
-      .toLowerCase(); 
-  
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^\w\s]/gi, "")
+      .toLowerCase();
+
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredMateriais = materiais.filter((material) => {
@@ -66,13 +65,10 @@ export default function ComunidadePage() {
   });
 
   const filteredVideos = videos.filter((video) =>
-    `${video.titulo} ${video.publicadoPor} ${video.tema}`
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .includes(searchTerm.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""))
+    normalizeText(video.titulo).includes(normalizeText(searchTerm)) ||
+    normalizeText(video.publicadoPor).includes(normalizeText(searchTerm)) ||
+    normalizeText(video.tema).includes(normalizeText(searchTerm))
   );
-  
 
   useEffect(() => {
     const fetchGrupos = async () => {
@@ -116,7 +112,7 @@ export default function ComunidadePage() {
   useEffect(() => {
     const fetchMateriais = async () => {
       try {
-        const response = await fetch("/materiais.json"); 
+        const response = await fetch("/materiais.json");
         if (!response.ok) {
           throw new Error("Erro ao carregar os materiais.");
         }
@@ -130,13 +126,6 @@ export default function ComunidadePage() {
     fetchMateriais();
   }, []);
 
-  const livrosSugeridos = [
-    { id: 1, titulo: "Clean Code", imagem: "/livros/clean-code.png" },
-    { id: 2, titulo: "Estruturas de Dados em Java", imagem: "/livros/estruturas-java.png" },
-    { id: 3, titulo: "Cálculo para Engenharia", imagem: "/livros/calculo.png" },
-  ];
-
-  
   const renderContent = () => {
     switch (activeTab) {
       case "grupos":
@@ -164,7 +153,7 @@ export default function ComunidadePage() {
 
             <div className="mt-12">
               <h2 className="text-3xl font-bold mb-6 text-blue-600">Sugestões de Grupos</h2>
-              
+
               <div className="relative mb-6">
                 <input
                   type="text"
@@ -192,11 +181,10 @@ export default function ComunidadePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {gruposSugeridos
                   .filter((grupo) =>
-                    grupo.nome
-                      .toLowerCase()
-                      .normalize("NFD")
-                      .replace(/[\u0300-\u036f]/g, "")
-                      .includes(searchTerm.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""))
+                    normalizeText(grupo.nome).includes(normalizeText(searchTerm)) ||
+                    grupo.participantes.some((participante) =>
+                      normalizeText(participante.name).includes(normalizeText(searchTerm))
+                    )
                   )
                   .map((grupo) => (
                     <div
@@ -225,7 +213,6 @@ export default function ComunidadePage() {
                   ))}
               </div>
             </div>
-
           </>
         );
 
@@ -259,7 +246,7 @@ export default function ComunidadePage() {
               </div>
         
               <div className="space-y-12">
-                {Array.from(new Set(filteredVideos.map((video) => video.tema))).map((tema, index) => {
+                {Array.from(new Set(filteredVideos.map((video) => video.tema))).map((tema) => {
                   const videosDoTema = filteredVideos.filter((video) => video.tema === tema);
         
                   const lotesDeVideos = [];
@@ -278,11 +265,14 @@ export default function ComunidadePage() {
                           >
                             <Link href={video.link} target="_blank" rel="noopener noreferrer">
                               <div className="w-full overflow-hidden rounded-t-lg">
-                                <img
-                                  src={video.imagem}
-                                  alt={video.titulo}
-                                  className="w-full h-auto"
-                                />
+                              <Image
+                                src={video.imagem}
+                                alt={video.titulo}
+                                width={320}
+                                height={180}
+                                className="w-full h-auto"
+                              />
+
                               </div>
                             </Link>
                             <div className="p-4">
@@ -367,28 +357,28 @@ export default function ComunidadePage() {
           return null;
       }
     };
-  
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-gray-100 p-8">
-        <h1 className="text-4xl font-bold mb-10 text-center text-blue-600 drop-shadow-md">Comunidade</h1>
-  
-        <div className="flex justify-center gap-4 mb-12">
-          {["grupos", "videos", "materiais"].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-6 py-3 rounded-lg font-medium transition ${
-                activeTab === tab
-                  ? "bg-blue-600 text-white shadow-lg"
-                  : "bg-gray-200 text-gray-700 hover:bg-blue-100"
-              }`}
-            >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          ))}
-        </div>
-  
-        {renderContent()}
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-gray-100 p-8">
+      <h1 className="text-4xl font-bold mb-10 text-center text-blue-600 drop-shadow-md">Comunidade</h1>
+
+      <div className="flex justify-center gap-4 mb-12">
+        {["grupos", "videos", "materiais"].map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`px-6 py-3 rounded-lg font-medium transition ${
+              activeTab === tab
+                ? "bg-blue-600 text-white shadow-lg"
+                : "bg-gray-200 text-gray-700 hover:bg-blue-100"
+            }`}
+          >
+            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+          </button>
+        ))}
       </div>
-    );
+
+      {renderContent()}
+    </div>
+  );
 }
