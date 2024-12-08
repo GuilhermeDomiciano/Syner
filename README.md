@@ -46,7 +46,8 @@ obs.2: Use no terminal do propio visual estudio code, após abrir a pasta onde f
 4 - git clone https://github.com/GuilhermeDomiciano/Syner<br>
 5 - cd Syner<br>
 6 - npm install <br>
-7 - npm run dev <br>
+7 - npm install react-icons
+8 - npm run dev <br>
 
 ## Para adicionar as mudanças no github
 
