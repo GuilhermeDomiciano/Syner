@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { FaTrashAlt, FaPlusCircle, FaUserAlt, FaCalendarAlt } from "react-icons/fa";
-import { MdMessage, MdChat } from "react-icons/md";
+import { MdMessage } from "react-icons/md";
 
-// Definição do tipo Recado
 type Recado = {
   id: number;
   autor: string;
@@ -13,7 +12,6 @@ type Recado = {
 };
 
 export default function RecadosPage() {
-  // Recados padrão de base
   const baseRecados: Recado[] = [
     {
       id: 1,
@@ -42,7 +40,6 @@ export default function RecadosPage() {
     mensagem: "",
   });
 
-  // Carregar recados do Local Storage ou inicializar com os recados padrão
   useEffect(() => {
     const storedRecados = localStorage.getItem("recados");
     if (storedRecados) {
@@ -51,19 +48,18 @@ export default function RecadosPage() {
       setRecados(baseRecados);
       localStorage.setItem("recados", JSON.stringify(baseRecados));
     }
-  }, []);
+  }, []); // Remova dependências porque o `baseRecados` é constante
 
-  // Salvar recados no Local Storage sempre que forem alterados
   useEffect(() => {
     if (recados.length > 0) {
       localStorage.setItem("recados", JSON.stringify(recados));
     }
-  }, [recados]);
+  }, [recados]); // Certifique-se de incluir apenas `recados` aqui
 
   const handleAddRecado = () => {
     if (newRecado.autor && newRecado.mensagem) {
       const novoRecado: Recado = {
-        id: recados.length + 1, // Garantir IDs únicos
+        id: recados.length + 1,
         autor: newRecado.autor,
         mensagem: newRecado.mensagem,
         data: new Date().toLocaleDateString(),
@@ -76,7 +72,6 @@ export default function RecadosPage() {
     }
   };
 
-  // Função para excluir um recado pelo ID
   const handleDeleteRecado = (id: number) => {
     const filteredRecados = recados.filter((recado) => recado.id !== id);
     setRecados(filteredRecados);
@@ -88,7 +83,6 @@ export default function RecadosPage() {
         Mural de Recados
       </h1>
 
-      {/* Mural de Recados */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {recados.map((recado) => (
           <div
@@ -116,7 +110,6 @@ export default function RecadosPage() {
         ))}
       </div>
 
-      {/* Botão Adicionar Recado */}
       <div className="flex justify-center mt-8">
         <button
           onClick={() => setShowForm(!showForm)}
@@ -127,7 +120,6 @@ export default function RecadosPage() {
         </button>
       </div>
 
-      {/* Formulário para adicionar recado */}
       {showForm && (
         <div className="mt-8 bg-white p-8 rounded-lg shadow-2xl max-w-lg mx-auto border-t-4 border-blue-500">
           <h2 className="text-2xl font-semibold text-blue-700 mb-6 text-center">
@@ -138,13 +130,13 @@ export default function RecadosPage() {
               type="text"
               placeholder="Autor"
               value={newRecado.autor}
-              onChange={(e) => setNewRecado({ ...newRecado, autor: e.target.value })}
+              onChange={(e) => setNewRecado({ autor: e.target.value, mensagem: newRecado.mensagem })}
               className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
             />
             <textarea
               placeholder="Mensagem"
               value={newRecado.mensagem}
-              onChange={(e) => setNewRecado({ ...newRecado, mensagem: e.target.value })}
+              onChange={(e) => setNewRecado({ autor: newRecado.autor, mensagem: e.target.value })}
               className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
               rows={4}
             ></textarea>
