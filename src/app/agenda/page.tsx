@@ -1,6 +1,7 @@
 "use client";
 
 import { FaCheck, FaTimes, FaSearch, FaPlus, FaBook } from "react-icons/fa";
+import Link from 'next/link'; // Importe o Link do Next.js
 
 export default function Page() {
   return (
@@ -21,10 +22,12 @@ export default function Page() {
               </p>
             </div>
             <div className="flex mt-4 md:mt-0 gap-4">
-              <button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2">
-                <FaCheck />
-                Ir para a sala
-              </button>
+              <Link href="/monitoria">
+                <button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2">
+                  <FaCheck />
+                  Ir para a sala
+                </button>
+              </Link>
               <button className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center gap-2">
                 <FaTimes />
                 Cancelar
@@ -46,10 +49,12 @@ export default function Page() {
                 </p>
               </div>
               <div className="flex mt-4 md:mt-0 gap-4">
-                <button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2">
-                  <FaCheck />
-                  Ir para a sala
-                </button>
+                <Link href="/monitoria">
+                  <button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2">
+                    <FaCheck />
+                    Ir para a sala
+                  </button>
+                </Link>
                 <button className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center gap-2">
                   <FaTimes />
                   Cancelar
@@ -93,10 +98,12 @@ export default function Page() {
                 </p>
               </div>
               <div className="flex gap-4">
-                <button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2">
-                  <FaCheck />
-                  Entrar
-                </button>
+                <Link href="/monitoria">
+                  <button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2">
+                    <FaCheck />
+                    Entrar
+                  </button>
+                </Link>
                 <button className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center gap-2">
                   <FaTimes />
                   Sair
@@ -120,10 +127,12 @@ export default function Page() {
                 </p>
               </div>
               <div className="flex gap-4">
-                <button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2">
-                  <FaCheck />
-                  Entrar
-                </button>
+                <Link href="/monitoria">
+                  <button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2">
+                    <FaCheck />
+                    Entrar
+                  </button>
+                </Link>
                 <button className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center gap-2">
                   <FaTimes />
                   Sair

@@ -1,0 +1,27 @@
+[
+    {
+      "id": 1,
+      "titulo": "Monitoria de HTML",
+      "data": "2024-05-19T20:00:00",
+      "status": "agendado"
+    },
+    {
+      "id": 2,
+      "titulo": "Monitoria de CSS",
+      "data": "2024-05-20T18:00:00",
+      "status": "agendado"
+    },
+    {
+      "id": 3,
+      "titulo": "Monitoria de JavaScript",
+      "data": "2024-05-21T19:00:00",
+      "status": "agendado"
+    },
+    {
+      "id": 4,
+      "titulo": "Monitoria de React",
+      "data": "2024-05-22T20:00:00",
+      "status": "agendado"
+    }
+  ]
+  

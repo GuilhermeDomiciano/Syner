@@ -52,70 +52,65 @@ export default function MateriaPage() {
     fetchMaterias();
   }, [id]);
 
-  if (!materia) return <p>Carregando...</p>;
+  if (!materia) return <p className="text-center mt-12">Carregando...</p>;
 
   const handleViewAll = (section: string) => {
     router.push(`/materias/${materia.id}/${section}`);
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-50 text-gray-800">
       {/* Cabeçalho */}
-      <header className="w-full max-w-6xl p-6 bg-white rounded-lg shadow-lg flex flex-col md:flex-row md:items-center md:justify-between">
-        <div className="flex items-center gap-6">
+      <header className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg">
+        <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center gap-8">
           <Image
             src={materia.imagemSrc || "/icons/fallback.png"}
             alt={materia.nome || "Imagem da Matéria"}
             width={150}
             height={150}
-            className="rounded-full"
+            className="rounded-full shadow-md border-4 border-white"
           />
           <div>
-            <h1 className="text-5xl font-bold text-gray-800">{materia.nome}</h1>
-            <p className="text-2xl text-gray-600 mt-4">
+            <h1 className="text-4xl md:text-5xl font-bold">{materia.nome}</h1>
+            <p className="text-lg mt-4">
               {materia.monitores?.length || 0} monitores disponíveis
             </p>
           </div>
         </div>
       </header>
 
-      {/* Conteúdo Dinâmico */}
-      <main className="w-full max-w-6xl flex-1 mt-8 bg-white rounded-lg shadow-lg p-8 space-y-12">
-        {/* Seção de Monitores */}
+      {/* Conteúdo */}
+      <main className="max-w-6xl mx-auto mt-8 space-y-12 px-6">
+        {/* Monitores */}
         <section>
-          <h2 className="text-3xl font-bold mb-6 text-gray-800">Monitores</h2>
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h2 className="text-3xl font-semibold mb-6">Monitores</h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {materia.monitores.slice(0, 6).map((monitor) => (
               <li
                 key={monitor.id}
-                className="flex flex-col items-center p-6 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition"
+                className="p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition"
               >
-                <button
+                <div
                   onClick={() => router.push(`/monitores/${monitor.id}`)}
-                  className="hover:opacity-80"
+                  className="cursor-pointer text-center"
                 >
                   <Image
                     src={monitor.img || "/icons/monitor.png"}
                     alt={monitor.name || "Monitor"}
                     width={80}
                     height={80}
-                    className="rounded-full"
+                    className="rounded-full mx-auto"
                   />
-                </button>
-                <button
-                  onClick={() => router.push(`/monitores/${monitor.id}`)}
-                  className="text-center mt-4 hover:underline"
-                >
-                  <p className="text-xl font-semibold">{monitor.name}</p>
-                  <p className="text-gray-500 text-sm">{monitor.role}</p>
-                </button>
-                <div className="flex items-center gap-4 mt-4">
-                  <span className="text-blue-600 font-bold text-xl">
+                  <h3 className="mt-4 text-xl font-bold">{monitor.name}</h3>
+                  <p className="text-sm text-gray-500">{monitor.role}</p>
+                </div>
+                <div className="flex justify-between items-center mt-4">
+                  <span className="text-blue-600 font-bold text-lg">
                     {monitor.nota?.toFixed(1) || "N/A"}
                   </span>
                   <button
                     onClick={() => router.push(`/monitores/${monitor.id}`)}
-                    className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm shadow-md hover:bg-blue-700 transition"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition"
                   >
                     Ver Perfil
                   </button>
@@ -133,16 +128,16 @@ export default function MateriaPage() {
           )}
         </section>
 
-        {/* Seção de Materiais */}
+        {/* Materiais */}
         <section>
-          <h2 className="text-3xl font-bold mb-6 text-gray-800">Materiais</h2>
+          <h2 className="text-3xl font-semibold mb-6">Materiais</h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {materia.materiais.slice(0, 6).map((material, index) => (
               <li
                 key={index}
-                className="p-6 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition"
+                className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition"
               >
-                <p className="text-xl font-semibold text-gray-800">{material.titulo}</p>
+                <h3 className="text-xl font-semibold">{material.titulo}</h3>
                 <p className="text-sm text-gray-600 mt-2">Por {material.monitor}</p>
               </li>
             ))}
@@ -157,16 +152,16 @@ export default function MateriaPage() {
           )}
         </section>
 
-        {/* Seção de Testes */}
+        {/* Testes */}
         <section>
-          <h2 className="text-3xl font-bold mb-6 text-gray-800">Testes</h2>
+          <h2 className="text-3xl font-semibold mb-6">Testes</h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {materia.testes.slice(0, 6).map((teste, index) => (
               <li
                 key={index}
-                className="p-6 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition"
+                className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition"
               >
-                <p className="text-xl font-semibold text-gray-800">{teste.titulo}</p>
+                <h3 className="text-xl font-semibold">{teste.titulo}</h3>
                 <p className="text-sm text-gray-600 mt-2">Por {teste.monitor}</p>
               </li>
             ))}
