@@ -1,44 +1,58 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+type Participante = {
+  name: string;
+  role: string;
+  img: string;
+  nota: number;
+};
+
+type Material = {
+  titulo: string;
+  monitor: string;
+};
+
+type Grupo = {
+  id: number;
+  nome: string;
+  imagem: string;
+  participando: boolean;
+  participantes: Participante[];
+  materiais: Material[];
+};
+
 export default function ComunidadePage() {
-  const [activeTab, setActiveTab] = useState("grupos");
+  const [activeTab, setActiveTab] = useState<string>("grupos");
+  const [gruposParticipando, setGruposParticipando] = useState<Grupo[]>([]);
+  const [gruposSugeridos, setGruposSugeridos] = useState<Grupo[]>([]);
 
-  const comunidadesParticipando = [
-    { id: 1, nome: "POO 2N Ulbra", imagem: "/comunidades/POO 2N Ulbra.png" },
-    { id: 2, nome: "Unidos da Estrutura de Dados", imagem: "/comunidades/Unidos da Estrutura.png" },
-    { id: 3, nome: "Cálculo 4N -0609", imagem: "/comunidades/Cálculo 4N -0609.png" },
-    { id: 4, nome: "Grupo de Estudos", imagem: "/comunidades/Grupo de Estudos.png" },
-    { id: 5, nome: "Modelagem de Software", imagem: "/comunidades/Modelagem de .png" },
-    { id: 6, nome: "SYNER - Desenvolvimento", imagem: "/comunidades/SYNER.png" },
-  ];
+  useEffect(() => {
+    const fetchGrupos = async () => {
+      try {
+        const response = await fetch("/grupos.json");
+        if (!response.ok) {
+          throw new Error("Erro ao carregar os grupos.");
+        }
+        const data: Grupo[] = await response.json();
 
-  const comunidadesSugeridas = [
-    {
-      id: 4,
-      nome: "Unidos da Computação",
-      membros: 124,
-      materiais: 72,
-      imagem: "/comunidades/computacao.png",
-    },
-    {
-      id: 5,
-      nome: "Engenharia de Software",
-      membros: 12,
-      materiais: 5,
-      imagem: "/comunidades/software.png",
-    },
-    {
-      id: 6,
-      nome: "Estruturas de Dados",
-      membros: 40,
-      materiais: 18,
-      imagem: "/comunidades/estruturas.png",
-    },
-  ];
+        const gruposParticipando = data.filter((grupo) => grupo.participando === true);
+        const gruposSugeridos = data.filter((grupo) => grupo.participando === false);
+
+        setGruposParticipando(gruposParticipando);
+        setGruposSugeridos(gruposSugeridos);
+      } catch (error) {
+        console.error("Erro ao carregar os grupos:", error);
+      }
+    };
+
+    fetchGrupos();
+  }, []);
+
+  
 
   const videosSugeridos = [
     { id: 1, titulo: "Introdução ao POO", imagem: "/videos/poo.png" },
@@ -63,48 +77,53 @@ export default function ComunidadePage() {
       case "grupos":
         return (
           <>
-            <h2 className="text-2xl font-semibold mb-6 text-blue-500">Comunidades que você participa</h2>
+            <h2 className="text-3xl font-bold mb-6 text-blue-600">Comunidades que você participa</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-              {comunidadesParticipando.map((comunidade) => (
-                <Link key={comunidade.id} href={`/comunidade/${comunidade.id}`} passHref>
+              {gruposParticipando.map((grupo) => (
+                <Link key={grupo.id} href={`/comunidade/${grupo.id}`} passHref>
                   <div className="group flex flex-col items-center bg-white p-6 rounded-xl shadow-lg cursor-pointer hover:shadow-2xl hover:scale-105 transform transition duration-300">
                     <Image
-                      src={comunidade.imagem}
-                      alt={comunidade.nome}
+                      src={grupo.imagem}
+                      alt={grupo.nome}
                       width={120}
                       height={120}
                       className="rounded-lg"
                     />
                     <p className="mt-4 font-medium text-center text-gray-800 truncate w-full group-hover:text-blue-600">
-                      {comunidade.nome}
+                      {grupo.nome}
                     </p>
                   </div>
                 </Link>
               ))}
             </div>
-            {/* Sugestões de Grupos */}  
+
             <div className="mt-12">
-              <h2 className="text-2xl font-semibold mb-6 text-blue-500">Sugestões de Grupos</h2>
+              <h2 className="text-3xl font-bold mb-6 text-blue-600">Sugestões de Grupos</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {comunidadesSugeridas.map((sugestao) => (
+                {gruposSugeridos.map((grupo) => (
                   <div
-                    key={sugestao.id}
-                    className="flex items-center gap-6 bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transform hover:scale-105 transition duration-300"
+                    key={grupo.id}
+                    className="flex flex-col items-center bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
                   >
-                    <Image
-                      src={sugestao.imagem}
-                      alt={sugestao.nome}
-                      width={80}
-                      height={80}
-                      className="rounded-lg shadow"
-                    />
-                    <div className="flex flex-col flex-grow">
-                      <p className="font-semibold text-lg truncate">{sugestao.nome}</p>
+                    {/* Imagem quadrada com bordas arredondadas */}
+                    <div className="w-24 h-24 mb-4 overflow-hidden rounded-lg shadow">
+                      <Image
+                        src={grupo.imagem}
+                        alt={grupo.nome}
+                        width={96}
+                        height={96}
+                        className="object-cover"
+                      />
+                    </div>
+                    {/* Detalhes do grupo */}
+                    <div className="flex flex-col items-center text-center mb-4">
+                      <p className="font-semibold text-lg text-gray-800 truncate">{grupo.nome}</p>
                       <p className="text-gray-600 text-sm">
-                        {sugestao.membros} membros - {sugestao.materiais} materiais
+                        {grupo.participantes.length} membros - {grupo.materiais.length} materiais
                       </p>
                     </div>
-                    <button className="px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow hover:from-blue-600 hover:to-blue-700 transition duration-300">
+                    {/* Botão */}
+                    <button className="px-6 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-medium rounded-lg shadow hover:shadow-lg hover:from-blue-600 hover:to-indigo-600 transition-all duration-300">
                       Participar
                     </button>
                   </div>
@@ -184,12 +203,8 @@ export default function ComunidadePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-gray-100 p-8">
-      {/* Título */}
-      <h1 className="text-4xl font-bold mb-10 text-center text-blue-600 drop-shadow-md">
-        Comunidade
-      </h1>
+      <h1 className="text-4xl font-bold mb-10 text-center text-blue-600 drop-shadow-md">Comunidade</h1>
 
-      {/* Botões de Navegação */}
       <div className="flex justify-center gap-4 mb-12">
         {["grupos", "videos", "materiais", "livros"].map((tab) => (
           <button
@@ -206,7 +221,6 @@ export default function ComunidadePage() {
         ))}
       </div>
 
-      {/* Conteúdo Dinâmico */}
       {renderContent()}
     </div>
   );
