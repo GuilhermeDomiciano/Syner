@@ -1,0 +1,53 @@
+[
+    {
+      "id": 1,
+      "titulo": "Introdução à Programação Orientada a Objetos",
+      "duracao": "15:30",
+      "link": "https://www.youtube.com/watch?v=HhkwsoBGFV8",
+      "imagem": "https://i.ytimg.com/vi/HhkwsoBGFV8/hq720.jpg",
+      "tema": "POO",
+      "publicadoPor": "João Silva",
+      "visualizacoes": 10230
+    },
+    {
+      "id": 2,
+      "titulo": "Estruturas de Dados - Pilhas e Filas",
+      "duracao": "20:45",
+      "link": "https://example.com/videos/estruturas",
+      "imagem": "https://i.ytimg.com/vi/HhkwsoBGFV8/hq720.jpg",
+      "tema": "POO",
+      "publicadoPor": "Maria Santos",
+      "visualizacoes": 8790
+    },
+    {
+      "id": 3,
+      "titulo": "Modelagem de Software na Prática",
+      "duracao": "12:10",
+      "link": "https://example.com/videos/modelagem",
+      "imagem": "https://i.ytimg.com/vi/HhkwsoBGFV8/hq720.jpg",
+      "tema": "POO",
+      "publicadoPor": "Ana Costa",
+      "visualizacoes": 6590
+    },
+    {
+      "id": 4,
+      "titulo": "Algoritmos de Busca e Ordenação",
+      "duracao": "18:50",
+      "link": "https://example.com/videos/algoritmos",
+      "imagem": "https://i.ytimg.com/vi/HhkwsoBGFV8/hq720.jpg",
+      "tema": "POO",
+      "publicadoPor": "Carlos Souza",
+      "visualizacoes": 12500
+    },
+    {
+      "id": 5,
+      "titulo": "Clean Code: Práticas Essenciais",
+      "duracao": "25:00",
+      "link": "https://example.com/videos/clean-code",
+      "imagem": "https://i.ytimg.com/vi/HhkwsoBGFV8/hq720.jpg",
+      "tema": "POO",
+      "publicadoPor": "Lúcia Ferreira",
+      "visualizacoes": 14300
+    }
+]
+  
