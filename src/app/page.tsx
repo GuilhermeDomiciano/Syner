@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { FaSearch, FaUserGraduate, FaBookOpen } from "react-icons/fa";
 
 type Materia = {
   id: number;
@@ -14,7 +15,7 @@ type Materia = {
 export default function HomePage() {
   const [materias, setMaterias] = useState<Materia[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [error, setError] = useState(false); // Para lidar com erros de carregamento
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchMaterias = async () => {
@@ -25,7 +26,7 @@ export default function HomePage() {
         setMaterias(data);
       } catch (error) {
         console.error(error);
-        setError(true); // Marcar erro como verdadeiro
+        setError(true);
       }
     };
 
@@ -51,8 +52,9 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen p-8">
-      <div className="flex justify-center mb-8">
+    <div className="min-h-screen p-8 bg-gradient-to-br from-blue-50 to-blue-100">
+      {/* Barra de Pesquisa */}
+      <div className="flex justify-center items-center mb-8 relative">
         <input
           type="text"
           value={searchTerm}
@@ -60,32 +62,40 @@ export default function HomePage() {
           placeholder="O que quer aprender hoje?"
           className="bg-white w-full md:w-1/2 p-4 rounded-full border border-gray-300 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
         />
+        <FaSearch className="absolute right-[15%] md:right-[26.5%] text-blue-500 text-xl" />
       </div>
 
-      <h1 className="text-3xl font-bold mb-6 text-left ml-2 text-blue-600">
+      {/* Título */}
+      <h1 className="text-4xl font-extrabold mb-6 text-left ml-2 text-blue-600 flex items-center gap-2">
+        <FaBookOpen className="text-blue-500" />
         Bem-vindo!
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+      {/* Lista de Matérias */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-6">
         {filteredMaterias.map((materia) => (
-          <div key={materia.id}>
+          <div
+            key={materia.id}
+            className="flex flex-col items-center bg-white p-4 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transform transition-transform duration-300 h-full"
+          >
             <Link href={`/materias/${materia.id}`} passHref>
-              <div className="bg-white p-6 rounded-3xl shadow-lg text-center hover:shadow-xl hover:scale-105 transform transition-transform duration-300 cursor-pointer">
+              <div className="flex justify-center items-center h-48 w-full">
                 <Image
-                  src={materia.imagemSrc || "/fallback.png"} // Adicionado fallback
+                  src={materia.imagemSrc || "/fallback.png"}
                   alt={materia.nome || "Matéria"}
-                  width={150}
-                  height={150}
-                  className="rounded-md object-cover mx-auto"
+                  width={120}
+                  height={120}
+                  className="rounded-md object-contain"
                 />
               </div>
             </Link>
             <h2 className="text-lg font-semibold text-center mt-4 text-blue-800">
               {materia.nome}
             </h2>
-            <p className="text-gray-600 text-center">
-              Monitores: {materia.monitores.length}
-            </p>
+            <div className="mt-auto flex justify-center items-center text-gray-600 text-sm gap-2 w-full border-t border-gray-300 pt-2">
+              <FaUserGraduate className="text-blue-500 text-lg" />
+              <span>Monitores: {materia.monitores.length}</span>
+            </div>
           </div>
         ))}
       </div>
