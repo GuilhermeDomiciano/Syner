@@ -146,7 +146,7 @@ export default function Page() {
               ) : (
                 <div className="text-gray-600 text-center">
                   <p>Selecione um contato para ver as mensagens.</p>
-                  <div className="grid place-items-center h-screen ">
+                  <div className="grid place-items-center h-screen">
                     <Image
                       src={"/fotos/coruja.png"}
                       alt="chat"
