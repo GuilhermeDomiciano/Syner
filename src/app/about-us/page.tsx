@@ -9,7 +9,7 @@ export default function AboutUsPage() {
       name: "Nicole",
       image: "https://i.pinimg.com/736x/ca/74/5d/ca745dac308fc3be1ffaed94d4284564.jpg",
       description:
-        "Sendo de nós a mais nova, com 18 anos, e a única mulher, Nicole é uma estudante dedicada de Engenharia de Software na Ulbra Palmas. Apaixonada por inovação, ela adora explorar novas tecnologias e está sempre pronta para trabalhar com sua mente brilhante e incrível inteligência em projetos criativos, representando em nosso grupo as mulheres na área da tecnologia. Seu interesse especial é na área de processamento e análise de dados.",
+        "Sendo de nós a mais nova, com 18 anos, Nicole é uma estudante inteligente de Engenharia de Software na Ulbra Palmas. Apaixonada por inovação, ela adora explorar novas tecnologias e está sempre pronta para trabalhar em projetos criativos. Seu interesse especial é na área de processamento e análise de dados.",
       nomelink: "",
       link: "",
     },
