@@ -10,30 +10,40 @@ export default function AboutUsPage() {
       image: "/fotos/nicole.jpg",
       description:
         "Nicole é uma estudante dedicada de Engenharia de Software na Ulbra Palmas. Apaixonada por inovação, ela adora explorar novas tecnologias e está sempre pronta para liderar projetos criativos. Seu interesse especial é no design de interfaces intuitivas e amigáveis.",
+      nomelink: "Site Saint Seiya",
+      link: "https://site-saint-seiya2-0.vercel.app/",
     },
     {
       name: "João Pedro",
       image: "/fotos/jp.jpg",
       description:
-        "Com 19 anos, João Pedro é um entusiasta da área de desenvolvimento de software. Estudante na Ulbra Palmas, ele se destaca em programação e gosta de criar soluções práticas para problemas do dia a dia. Atualmente, está focado em aprofundar seus conhecimentos em JavaScript e frameworks modernos.",
+        "Com 19 anos, João Pedro é um entusiasta da área de desenvolvimento de software. Estudante na Ulbra Palmas, ele se destaca em programação e gosta de criar soluções práticas para problemas do dia a dia. Atualmente, está focado em aprofundar seus conhecimentos em JavaScript e frameworks modernos. Projeto Secundário:",
+      nomelink: "Site Saint Seiya",
+      link: "https://site-saint-seiya2-0.vercel.app/",
     },
     {
       name: "Guilherme Domiciano",
       image: "/fotos/domiciano.jpg",
       description:
         "Também com 19 anos, Domiciano é um estudante apaixonado por engenharia de software. Ele tem um grande interesse em sistemas distribuídos e otimização de desempenho. Sempre disposto a aprender algo novo, ele acredita que trabalho em equipe é a chave para o sucesso.",
+      nomelink: "",
+      link: "",
     },
     {
       name: "Davi Pinheiro",
       image: "/fotos/davi.jpg",
       description:
         "Davi, de 19 anos, é um estudante focado e comprometido com seus objetivos. Na Ulbra Palmas, ele explora as diversas áreas da engenharia de software, com um interesse especial em inteligência artificial e aprendizado de máquina. Sempre curioso, ele está constantemente em busca de novos desafios.",
+      nomelink: "",
+      link: "",
     },
     {
       name: "Rafael Tavares",
       image: "/fotos/rafinha.jpg",
       description:
         "Com 22 anos, Rafael é um estudante com uma visão ampla da engenharia de software. Ele se interessa por gestão de projetos e metodologias ágeis, sendo uma líder natural em projetos colaborativos. Além disso, Rafael é apaixonado por tecnologia e inovação.",
+      nomelink: "",
+      link: "",
     },
   ];
 
@@ -61,9 +71,21 @@ export default function AboutUsPage() {
             </div>
 
             {/* Texto */}
-            <div className="text-center md:text-left max-w-lg">
+            <div className={`text-center ${index % 2 === 0 ? "md:text-left" : "md:text-right"} max-w-lg`}>
               <h2 className="text-3xl font-semibold text-blue-800 mb-4">{student.name}</h2>
               <p className="text-gray-700 leading-relaxed">{student.description}</p>
+              {student.link && (
+                <p className={`mt-4 ${index % 2 === 0 ? "text-left" : "text-right"}`}>
+                  <a
+                    href={student.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 font-semibold hover:text-blue-800 transition"
+                  >
+                    {student.nomelink}
+                  </a>
+                </p>
+              )}
             </div>
           </div>
         ))}
@@ -80,7 +102,7 @@ export default function AboutUsPage() {
         </p>
         <div className="flex justify-center mt-8">
           <Image
-            src="/icons/syner-logo.png" // Substitua pelo caminho correto do logo
+            src="/icons/syner-logo.png"
             alt="Logo Syner"
             width={100}
             height={100}
