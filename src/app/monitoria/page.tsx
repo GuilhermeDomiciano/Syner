@@ -20,16 +20,14 @@ export default function MonitoriasPage() {
   return (
     <div className="flex w-full h-screen">
       {/* Coluna do Vídeo */}
-      <div className="w-1/2 h-full bg-gray-300 flex items-center justify-center">
+      <div className="w-1/2 h-full bg-gray-300">
         <iframe
-          width="560"
-          height="315"
           src="https://www.youtube.com/embed/rqMorNThj1s"
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-          className="w-4/5 h-3/4"
+          className="w-full h-full"
         ></iframe>
       </div>
 
@@ -48,7 +46,10 @@ export default function MonitoriasPage() {
         {/* Corpo do Chat */}
         <main className="flex flex-col flex-1 p-4">
           {/* Mensagens */}
-          <div className="flex flex-col gap-4 overflow-y-auto bg-white p-6 rounded-lg shadow-lg flex-1">
+          <div
+            className="flex flex-col gap-4 overflow-y-auto bg-white p-6 rounded-lg shadow-lg flex-1"
+            style={{ maxHeight: "calc(100% - 80px)" }}
+          >
             {mensagens.map((mensagem) => (
               <div
                 key={mensagem.id}
