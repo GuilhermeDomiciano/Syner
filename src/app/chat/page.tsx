@@ -19,9 +19,18 @@ interface Contato {
 }
 
 const contatosIniciais: Contato[] = [
-  { nome: "Matheus", novasMsg: 9, mensagens: [{ texto: "Oi, tudo bem?", autor: "Matheus", dataHora: new Date(2024, 10, 11, 9, 30) }] },
-  { nome: "Luis", novasMsg: 9, mensagens: [{ texto: "Oi, como vai?", autor: "Luis", dataHora: new Date(2024, 10, 11, 10, 15) }] },
-  { nome: "Ana", novasMsg: 3, mensagens: [{ texto: "Bom dia!", autor: "Ana", dataHora: new Date(2024, 10, 11, 8, 45) }] },
+  { nome: "Matheus", novasMsg: 4, mensagens: [
+    { texto: "Oi", autor: "Matheus", dataHora: new Date(2024, 10, 11, 9, 30) },
+    { texto: "Tudo bem?", autor: "Matheus", dataHora: new Date(2024, 10, 11, 9, 30) },
+    { texto: "Preciso falar com você!", autor: "Matheus", dataHora: new Date(2024, 10, 11, 9, 31) },
+    { texto: "Urgentemente!!!", autor: "Matheus", dataHora: new Date(2024, 10, 11, 9, 31) }
+
+  ] },
+  { nome: "Luis", novasMsg: 2, mensagens: [
+    { texto: "Você já fez sua parte?", autor: "Luis", dataHora: new Date(2024, 10, 11, 10, 15) },
+    { texto: "Do trabalho?", autor: "Luis", dataHora: new Date(2024, 10, 11, 10, 17) }
+  ] },
+  { nome: "Ana", novasMsg: 1, mensagens: [{ texto: "Bom dia!", autor: "Ana", dataHora: new Date(2024, 10, 11, 8, 45) }] },
 ];
 
 const EmojiPicker = dynamic(() => import("emoji-picker-react"), { ssr: false });

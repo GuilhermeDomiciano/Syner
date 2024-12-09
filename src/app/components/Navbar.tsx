@@ -63,17 +63,6 @@ export default function Navbar() {
             </Link>
           </li>
 
-          {/* Link: Recados */}
-          <li>
-            <Link
-              href="/recados"
-              className="flex flex-col items-center space-y-1 px-3 py-2 rounded-lg hover:bg-blue-600 transition"
-            >
-              <FaEnvelope className="text-white text-2xl" />
-              <span className="text-xs font-medium text-white">Recados</span>
-            </Link>
-          </li>
-
           {/* Link: Agenda */}
           <li>
             <Link
