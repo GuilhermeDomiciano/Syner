@@ -28,6 +28,13 @@ export default function Page() {
     coletivas: [],
   });
 
+  const [showForm, setShowForm] = useState(false);
+  const [newMonitoria, setNewMonitoria] = useState<Monitoria>({
+    titulo: "",
+    data: "",
+    hora: "",
+  });
+
   useEffect(() => {
     fetch("/monitorias.json")
       .then((response) => response.json())
@@ -35,8 +42,24 @@ export default function Page() {
       .catch((error) => console.error("Erro ao carregar JSON:", error));
   }, []);
 
+  const handleAddMonitoria = () => {
+    if (!newMonitoria.titulo || !newMonitoria.data || !newMonitoria.hora) {
+      alert("Por favor, preencha todos os campos!");
+      return;
+    }
+
+    setMonitorias((prev) => ({
+      ...prev,
+      ensinar: [...prev.ensinar, newMonitoria],
+    }));
+
+    setNewMonitoria({ titulo: "", data: "", hora: "" });
+    setShowForm(false);
+    alert("Monitoria agendada com sucesso!");
+  };
+
   const removerMonitoriaEnsinar = (indexToRemove: number) => {
-    if (confirm("Você quer mesmo sair dessa monitoria?")) {
+    if (confirm("Você quer mesmo cancelar essa monitoria?")) {
       setMonitorias((prev) => ({
         ...prev,
         ensinar: prev.ensinar.filter((_, index) => index !== indexToRemove),
@@ -77,29 +100,79 @@ export default function Page() {
                   Agendada para dia {monitoria.data} às {monitoria.hora} horas
                 </p>
               </div>
-              <div className="flex mt-4 md:mt-0 gap-4">
+              <div className="flex mt-4 md:mt-0 gap-2">
                 <Link href="/monitoria">
-                  <button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2">
+                  <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2 text-sm">
                     <FaCheck />
                     Ir para a sala
                   </button>
                 </Link>
                 <button
                   onClick={() => removerMonitoriaEnsinar(index)}
-                  className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center gap-2"
+                  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center gap-2 text-sm"
                 >
                   <FaTimes />
-                  Sair
+                  Cancelar Monitoria
                 </button>
               </div>
             </div>
           ))}
+
+          {/* Botão para abrir o formulário */}
           <div className="flex justify-center mt-8">
-            <button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 shadow flex items-center gap-2">
+            <button
+              onClick={() => setShowForm(!showForm)}
+              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 shadow flex items-center gap-2 text-sm"
+            >
               <FaPlus />
               Agendar nova monitoria
             </button>
           </div>
+
+          {/* Formulário para agendar nova monitoria */}
+          {showForm && (
+            <div className="mt-8 bg-white p-8 rounded-lg shadow-2xl max-w-lg mx-auto border-t-4 border-blue-500">
+              <h2 className="text-2xl font-semibold text-blue-700 mb-6 text-center">
+                Nova Monitoria
+              </h2>
+              <div className="space-y-6">
+                <input
+                  type="text"
+                  placeholder="Nome da monitoria"
+                  value={newMonitoria.titulo}
+                  onChange={(e) =>
+                    setNewMonitoria({ ...newMonitoria, titulo: e.target.value })
+                  }
+                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+                />
+                <input
+                  type="date"
+                  value={newMonitoria.data}
+                  onChange={(e) =>
+                    setNewMonitoria({ ...newMonitoria, data: e.target.value })
+                  }
+                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+                />
+                <input
+                  type="time"
+                  value={newMonitoria.hora}
+                  onChange={(e) =>
+                    setNewMonitoria({ ...newMonitoria, hora: e.target.value })
+                  }
+                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+                />
+              </div>
+              <div className="flex justify-end mt-6">
+                <button
+                  onClick={handleAddMonitoria}
+                  className="px-4 py-2 flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow hover:shadow-lg hover:from-blue-600 hover:to-blue-700 transition duration-300 text-sm"
+                >
+                  <FaPlus />
+                  Salvar
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -143,7 +216,7 @@ export default function Page() {
                 <div className="flex gap-4">
                   {monitoria.status === "Acontecendo agora" && (
                     <Link href="/monitoria">
-                      <button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2">
+                      <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2 text-sm">
                         <FaCheck />
                         Entrar
                       </button>
@@ -151,53 +224,34 @@ export default function Page() {
                   )}
                   <button
                     onClick={() => removerMonitoriaIndividual(index)}
-                    className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center gap-2"
+                    className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center gap-2 text-sm"
                   >
                     <FaTimes />
-                    Sair
+                    Cancelar Monitoria
                   </button>
                 </div>
               </div>
             ))}
-            <div className="flex justify-center mt-6">
-              <button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 shadow flex items-center gap-2">
-                <FaSearch />
-                Buscar monitorias individuais
-              </button>
-            </div>
           </div>
         </div>
+
         {/* Monitorias Coletivas */}
         <div>
           <h2 className="text-xl font-semibold mb-4">Coletivas</h2>
           <div className="space-y-6">
-            {monitorias.coletivas.length === 0 ? (
-              <div className="p-8 border rounded-lg bg-gray-100 text-gray-600 shadow-lg flex flex-col items-center">
-                <img
-                  src="/fotos/carinhaTriste.jpg"
-                  alt="Nenhuma monitoria agendada"
-                  className="w-20 h-20 mb-6"
-                />
-                <h3 className="text-2xl font-semibold text-gray-700">
-                  Nenhuma monitoria coletiva agendada
+            {monitorias.coletivas.map((monitoria, index) => (
+              <div
+                key={index}
+                className="p-6 border-l-4 border-blue-500 rounded-lg shadow-md bg-gray-50"
+              >
+                <h3 className="text-xl font-medium text-blue-800">
+                  {monitoria.titulo}
                 </h3>
-                <p className="text-lg text-gray-500 mt-4 text-center">
-                  Ainda não há monitorias coletivas disponíveis.
+                <p className="text-gray-600">
+                  Agendada para dia {monitoria.data} às {monitoria.hora} horas
                 </p>
-                <button className="mt-6 px-6 py-3 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2">
-                  <FaSearch />
-                  Buscar monitorias coletivas
-                </button>
               </div>
-            ) : (
-              monitorias.coletivas.map((monitoria, index) => (
-                <div
-                  key={index}
-                  className="p-8 border-l-4 border-blue-500 rounded-lg shadow-md bg-gray-50"
-                >
-                </div>
-              ))
-            )}
+            ))}
           </div>
         </div>
       </div>
