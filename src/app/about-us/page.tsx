@@ -6,10 +6,10 @@ export default function AboutUsPage() {
   // Dados dos estudantes
   const students = [
     {
-      name: "Nicole França",
+      name: "Nicole",
       image: "/fotos/nicole.jpg",
       description:
-        "Nick é uma estudante dedicada de Engenharia de Software na Ulbra Palmas. Apaixonada por inovação, ela adora explorar novas tecnologias e está sempre pronta para liderar projetos criativos. Seu interesse especial é no design de interfaces intuitivas e amigáveis.",
+        "Nicole é uma estudante dedicada de Engenharia de Software na Ulbra Palmas. Apaixonada por inovação, ela adora explorar novas tecnologias e está sempre pronta para liderar projetos criativos. Seu interesse especial é no design de interfaces intuitivas e amigáveis.",
     },
     {
       name: "João Pedro",
@@ -70,11 +70,23 @@ export default function AboutUsPage() {
       </div>
 
       {/* Texto Final */}
-      <div className="mt-16 bg-blue-600 text-white py-8 px-6 md:px-12 rounded-lg shadow-md">
-        <h2 className="text-3xl font-bold text-center mb-4">Nosso Compromisso</h2>
-        <p className="text-lg text-center leading-relaxed">
-          Trabalhamos dia e noite no sonho do <span className="font-bold">Syner</span>, sempre buscando torná-lo o melhor possível. Cada linha de código, cada design e cada decisão é feita com dedicação e paixão. Acreditamos que juntos podemos transformar esse sonho em uma realidade que impactará muitas vidas.
+      <div className="mt-16 px-6 py-10 bg-gradient-to-r from-blue-50 to-blue-100 border-t-4 border-blue-300 rounded-lg shadow-md">
+        <h2 className="text-4xl font-bold text-center text-blue-700 mb-4">Nosso Compromisso</h2>
+        <p className="text-lg text-center text-gray-700 leading-relaxed">
+          Trabalhamos dia e noite no sonho do <span className="font-bold text-blue-800">Syner</span>,
+          sempre buscando torná-lo o melhor possível. Cada linha de código, cada design e cada
+          decisão é feita com dedicação e paixão. Acreditamos que juntos podemos transformar esse
+          sonho em uma realidade que impactará muitas vidas.
         </p>
+        <div className="flex justify-center mt-8">
+          <Image
+            src="/icons/syner-logo.png" // Substitua pelo caminho correto do logo
+            alt="Logo Syner"
+            width={100}
+            height={100}
+            className="opacity-80"
+          />
+        </div>
       </div>
     </div>
   );
