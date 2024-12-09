@@ -33,17 +33,42 @@ export default function GrupoPage() {
   const [newMessage, setNewMessage] = useState("");
   const router = useRouter();
 
-    // Hooks para posição e tamanho
+  let isResizing = false;
+  let startSize = { width: 300, height: 400 };
+
+  const handleResizeStart = (e: React.MouseEvent) => {
+    isResizing = true;
+    dragStart = { x: e.clientX, y: e.clientY };
+    startSize = { ...chatSize };
+  
+    document.addEventListener("mousemove", handleResizing);
+    document.addEventListener("mouseup", handleResizeEnd);
+  };
+  
+  const handleResizing = (e: MouseEvent) => {
+    if (!isResizing) return;
+  
+    const newWidth = Math.max(200, startSize.width + (e.clientX - dragStart.x));
+    const newHeight = Math.max(200, startSize.height + (e.clientY - dragStart.y));
+  
+    setChatSize({ width: newWidth, height: newHeight });
+  };
+  
+  const handleResizeEnd = () => {
+    isResizing = false;
+    document.removeEventListener("mousemove", handleResizing);
+    document.removeEventListener("mouseup", handleResizeEnd);
+  };
+  
+
     const [chatPosition, setChatPosition] = useState({ x: 100, y: 100 });
     const [chatSize, setChatSize] = useState({ width: 300, height: 400 });
     const chatRef = useRef<HTMLDivElement | null>(null);
 
-    // Flags para rastreamento
     let isDragging = false;
     let dragStart = { x: 0, y: 0 };
     let startPos = { x: 0, y: 0 };
 
-    // Início do arraste
     const handleDragStart = (e: React.MouseEvent) => {
     isDragging = true;
     dragStart = { x: e.clientX, y: e.clientY };
@@ -52,7 +77,6 @@ export default function GrupoPage() {
     document.addEventListener("mouseup", handleDragEnd);
     };
 
-    // Enquanto arrasta
     const handleDragging = (e: MouseEvent) => {
     if (!isDragging) return;
     const dx = e.clientX - dragStart.x;
@@ -63,7 +87,6 @@ export default function GrupoPage() {
     });
     };
 
-    // Finaliza o arraste
     const handleDragEnd = () => {
     isDragging = false;
     document.removeEventListener("mousemove", handleDragging);
@@ -212,72 +235,76 @@ export default function GrupoPage() {
         </section>
       </main>
 
-      {/* Chat */}
-{chatOpen && (
-  <div
-    className="fixed z-50 bg-white shadow-lg rounded-lg border border-gray-300 resize"
-    style={{
-      top: chatPosition.y,
-      left: chatPosition.x,
-      width: chatSize.width,
-      height: chatSize.height,
-    }}
-    ref={chatRef}
-    onMouseDown={handleDragStart}
-  >
-    {/* Título */}
-    <div
-      className="bg-blue-600 text-white px-4 py-3 flex justify-between items-center cursor-move"
-      onMouseDown={handleDragStart}
-    >
-      <h3 className="text-lg font-bold">{grupo.nome}</h3>
-      <button
-        onClick={() => setChatOpen(false)}
-        className="text-white text-xl hover:text-gray-200 transition"
-      >
-        ✖
-      </button>
-    </div>
+      {chatOpen && (
+        <div
+            className="fixed z-50 bg-white shadow-lg rounded-lg border border-gray-300"
+            style={{
+            top: chatPosition.y,
+            left: chatPosition.x,
+            width: chatSize.width,
+            height: chatSize.height,
+            }}
+            ref={chatRef}
+            onMouseDown={handleDragStart}
+        >
+            {/* Título */}
+            <div
+            className="bg-blue-600 text-white px-4 py-3 flex justify-between items-center cursor-move"
+            onMouseDown={handleDragStart}
+            >
+            <h3 className="text-lg font-bold">{grupo.nome}</h3>
+            <button
+                onClick={() => setChatOpen(false)}
+                className="text-white text-xl hover:text-gray-200 transition"
+            >
+                ✖
+            </button>
+            </div>
 
-    {/* Mensagens */}
-    <div className="p-4 h-3/4 overflow-y-auto">
-      {messages.length > 0 ? (
-        messages.map((msg, index) => (
-          <div
-            key={index}
-            className={`p-2 mb-2 rounded-lg ${
-              index % 2 === 0
-                ? "bg-blue-100 text-gray-800 self-start"
-                : "bg-blue-600 text-white self-end"
-            }`}
-          >
-            {msg}
-          </div>
-        ))
-      ) : (
-        <p className="text-gray-500 text-center">Nenhuma mensagem ainda.</p>
+            {/* Mensagens */}
+            <div className="p-4 overflow-y-auto" style={{ height: `calc(${chatSize.height}px - 120px)` }}>
+            {messages.length > 0 ? (
+                messages.map((msg, index) => (
+                <div
+                    key={index}
+                    className={`p-2 mb-2 rounded-lg ${
+                    index % 2 === 0
+                        ? "bg-blue-100 text-gray-800 self-start"
+                        : "bg-blue-600 text-white self-end"
+                    }`}
+                >
+                    {msg}
+                </div>
+                ))
+            ) : (
+                <p className="text-gray-500 text-center">Nenhuma mensagem ainda.</p>
+            )}
+            </div>
+
+            {/* Campo de Envio */}
+            <div className="flex items-center border-t border-gray-200 p-2">
+            <input
+                type="text"
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+                placeholder="Escreva sua mensagem..."
+                className="flex-1 px-4 py-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+            />
+            <button
+                onClick={sendMessage}
+                className="bg-blue-600 text-white px-4 py-2 rounded-r-lg hover:bg-blue-700 transition"
+            >
+                Enviar
+            </button>
+            </div>
+
+            {/* Controle de redimensionamento */}
+            <div
+            className="absolute bottom-0 right-0 w-4 h-4 bg-blue-600 cursor-se-resize"
+            onMouseDown={handleResizeStart}
+            />
+        </div>
       )}
-    </div>
-
-    {/* Campo de Envio */}
-    <div className="flex items-center border-t border-gray-200 p-2">
-      <input
-        type="text"
-        value={newMessage}
-        onChange={(e) => setNewMessage(e.target.value)}
-        placeholder="Escreva sua mensagem..."
-        className="flex-1 px-4 py-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-      />
-      <button
-        onClick={sendMessage}
-        className="bg-blue-600 text-white px-4 py-2 rounded-r-lg hover:bg-blue-700 transition"
-      >
-        Enviar
-      </button>
-    </div>
-  </div>
-)}
-
     </div>
   );
 }
