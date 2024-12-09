@@ -1,6 +1,6 @@
 "use client";
 
-import { FaInstagram, FaEnvelope, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
+import { FaInstagram, FaEnvelope, FaTwitter } from "react-icons/fa";
 
 export default function SocialMediaPage() {
   return (
@@ -37,7 +37,8 @@ export default function SocialMediaPage() {
             <span className="text-xl font-semibold">Email</span>
             <span className="text-sm">syneroficial@gmail.com</span>
           </a>
-          {/* Twitter (opcional, fictício) */}
+
+          {/* Twitter */}
           <a
             href="https://twitter.com/syner_oficial"
             target="_blank"
