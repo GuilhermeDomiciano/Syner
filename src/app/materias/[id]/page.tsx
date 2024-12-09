@@ -83,12 +83,14 @@ export default function MateriaPage() {
       <main className="max-w-6xl mx-auto mt-8 space-y-12 px-6">
         {/* Monitores */}
         <section>
-          <h2 className="text-3xl font-semibold mb-6">Monitores</h2>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h2 className="text-3xl font-semibold mb-6 text-gray-900 border-b-4 border-blue-600 pb-2">
+            Monitores
+          </h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {materia.monitores.slice(0, 6).map((monitor) => (
               <li
                 key={monitor.id}
-                className="p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition"
+                className="p-6 bg-gradient-to-r from-blue-50 to-white rounded-xl shadow-lg transform hover:-translate-y-2 transition duration-300"
               >
                 <div
                   onClick={() => router.push(`/monitores/${monitor.id}`)}
@@ -97,20 +99,20 @@ export default function MateriaPage() {
                   <Image
                     src={monitor.img || "/icons/monitor.png"}
                     alt={monitor.name || "Monitor"}
-                    width={80}
-                    height={80}
-                    className="rounded-full mx-auto"
+                    width={100}
+                    height={100}
+                    className="rounded-full mx-auto border-4 border-blue-200 shadow-md"
                   />
-                  <h3 className="mt-4 text-xl font-bold">{monitor.name}</h3>
-                  <p className="text-sm text-gray-500">{monitor.role}</p>
+                  <h3 className="mt-4 text-xl font-bold text-gray-800">{monitor.name}</h3>
+                  <p className="text-sm text-gray-500 italic">{monitor.role}</p>
                 </div>
-                <div className="flex justify-between items-center mt-4">
-                  <span className="text-blue-600 font-bold text-lg">
+                <div className="flex justify-between items-center mt-4 bg-blue-100 p-3 rounded-lg">
+                  <span className="text-blue-800 font-bold text-lg">
                     {monitor.nota?.toFixed(1) || "N/A"}
                   </span>
                   <button
                     onClick={() => router.push(`/monitores/${monitor.id}`)}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg transition"
                   >
                     Ver Perfil
                   </button>
@@ -119,59 +121,82 @@ export default function MateriaPage() {
             ))}
           </ul>
           {materia.monitores.length > 6 && (
-            <button
-              onClick={() => handleViewAll("monitores")}
-              className="mt-4 text-blue-600 hover:underline"
-            >
-              Ver todos
-            </button>
+            <div className="mt-6 text-center">
+              <button
+                onClick={() => handleViewAll("monitores")}
+                className="text-blue-600 font-semibold hover:text-blue-800 transition"
+              >
+                Ver todos
+              </button>
+            </div>
           )}
         </section>
 
+
         {/* Materiais */}
         <section>
-          <h2 className="text-3xl font-semibold mb-6">Materiais</h2>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h2 className="text-3xl font-semibold mb-6 text-gray-800">Materiais</h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {materia.materiais.slice(0, 6).map((material, index) => (
               <li
                 key={index}
-                className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition"
+                className="relative p-6 bg-gradient-to-r from-blue-100 to-white rounded-xl shadow-lg hover:shadow-2xl transition group"
               >
-                <h3 className="text-xl font-semibold">{material.titulo}</h3>
-                <p className="text-sm text-gray-600 mt-2">Por {material.monitor}</p>
+                <div className="absolute top-4 right-4 text-blue-600 text-2xl group-hover:scale-125 transition-transform">
+                  📘
+                </div>
+                <h3 className="text-2xl font-semibold text-gray-900 group-hover:text-blue-700">
+                  {material.titulo}
+                </h3>
+                <p className="text-sm text-gray-700 mt-3">Por <span className="font-medium">{material.monitor}</span></p>
+                <button
+                  className="mt-6 px-4 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition"
+                >
+                  Ver mais
+                </button>
               </li>
             ))}
           </ul>
           {materia.materiais.length > 6 && (
             <button
               onClick={() => handleViewAll("materiais")}
-              className="mt-4 text-blue-600 hover:underline"
+              className="mt-6 block text-center text-blue-600 hover:underline font-medium"
             >
-              Ver todos
+              Ver todos os materiais
             </button>
           )}
         </section>
 
         {/* Testes */}
         <section>
-          <h2 className="text-3xl font-semibold mb-6">Testes</h2>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h2 className="text-3xl font-semibold mb-6 text-gray-800">Testes</h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {materia.testes.slice(0, 6).map((teste, index) => (
               <li
                 key={index}
-                className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition"
+                className="relative p-6 bg-gradient-to-r from-green-100 to-white rounded-xl shadow-lg hover:shadow-2xl transition group"
               >
-                <h3 className="text-xl font-semibold">{teste.titulo}</h3>
-                <p className="text-sm text-gray-600 mt-2">Por {teste.monitor}</p>
+                <div className="absolute top-4 right-4 text-green-600 text-2xl group-hover:scale-125 transition-transform">
+                  📝
+                </div>
+                <h3 className="text-2xl font-semibold text-gray-900 group-hover:text-green-700">
+                  {teste.titulo}
+                </h3>
+                <p className="text-sm text-gray-700 mt-3">Por <span className="font-medium">{teste.monitor}</span></p>
+                <button
+                  className="mt-6 px-4 py-2 bg-green-600 text-white rounded-md shadow-md hover:bg-green-700 transition"
+                >
+                  Tentar agora
+                </button>
               </li>
             ))}
           </ul>
           {materia.testes.length > 6 && (
             <button
               onClick={() => handleViewAll("testes")}
-              className="mt-4 text-blue-600 hover:underline"
+              className="mt-6 block text-center text-green-600 hover:underline font-medium"
             >
-              Ver todos
+              Ver todos os testes
             </button>
           )}
         </section>
