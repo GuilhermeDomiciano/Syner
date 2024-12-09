@@ -3,7 +3,19 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FaHome, FaUsers, FaEnvelope, FaCalendarAlt, FaComments, FaUserAlt, FaEllipsisV } from "react-icons/fa";
+import {
+  FaHome,
+  FaUsers,
+  FaEnvelope,
+  FaCalendarAlt,
+  FaComments,
+  FaUserAlt,
+  FaEllipsisV,
+  FaInfoCircle,
+  FaCog,
+  FaBug,
+  FaAddressCard,
+} from "react-icons/fa";
 
 export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -27,36 +39,8 @@ export default function Navbar() {
         </Link>
       </div>
 
-      {/* Botão de menu dropdown (3 pontinhos simples) */}
-      <div className="relative mb-6">
-        <button
-          onClick={toggleDropdown}
-          className="text-white text-2xl hover:text-gray-300 transition transform hover:scale-110"
-        >
-          <FaEllipsisV />
-        </button>
-
-        {/* Dropdown reposicionado */}
-        {isDropdownOpen && (
-          <div className="absolute top-10 left-12 bg-white shadow-lg rounded-lg w-40 z-50">
-            <Link
-              href="/more-info"
-              className="block px-4 py-2 text-sm text-blue-600 hover:bg-blue-100 hover:text-blue-800 transition"
-            >
-              Mais Informações
-            </Link>
-            <Link
-              href="/settings"
-              className="block px-4 py-2 text-sm text-blue-600 hover:bg-blue-100 hover:text-blue-800 transition"
-            >
-              Configurações
-            </Link>
-          </div>
-        )}
-      </div>
-
       {/* Navegação principal */}
-      <nav className="w-full relative">
+      <nav className="w-full relative flex-grow">
         <ul className="flex flex-col space-y-6 px-1">
           {/* Link: Início */}
           <li>
@@ -125,6 +109,50 @@ export default function Navbar() {
           </li>
         </ul>
       </nav>
+
+      {/* Botão de menu dropdown (3 pontinhos simples) no final */}
+      <div className="relative mt-auto mb-4">
+        <button
+          onClick={toggleDropdown}
+          className="text-white text-2xl hover:text-gray-300 transition transform hover:scale-110"
+        >
+          <FaEllipsisV />
+        </button>
+
+        {/* Dropdown com mais opções */}
+        {isDropdownOpen && (
+          <div className="absolute bottom-14 left-12 bg-white shadow-lg rounded-lg w-48 z-50">
+            <Link
+              href="/more-info"
+              className="flex items-center gap-2 px-4 py-2 text-sm text-blue-600 hover:bg-blue-100 hover:text-blue-800 transition"
+            >
+              <FaInfoCircle />
+              Mais Informações
+            </Link>
+            <Link
+              href="/about-us"
+              className="flex items-center gap-2 px-4 py-2 text-sm text-blue-600 hover:bg-blue-100 hover:text-blue-800 transition"
+            >
+              <FaAddressCard />
+              Sobre Nós
+            </Link>
+            <Link
+              href="/settings"
+              className="flex items-center gap-2 px-4 py-2 text-sm text-blue-600 hover:bg-blue-100 hover:text-blue-800 transition"
+            >
+              <FaCog />
+              Configurações
+            </Link>
+            <Link
+              href="/report-issue"
+              className="flex items-center gap-2 px-4 py-2 text-sm text-blue-600 hover:bg-blue-100 hover:text-blue-800 transition"
+            >
+              <FaBug />
+              Relatar Problema
+            </Link>
+          </div>
+        )}
+      </div>
     </aside>
   );
 }
