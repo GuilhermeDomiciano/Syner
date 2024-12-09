@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 
@@ -33,6 +33,44 @@ export default function GrupoPage() {
   const [newMessage, setNewMessage] = useState("");
   const router = useRouter();
 
+    // Hooks para posição e tamanho
+    const [chatPosition, setChatPosition] = useState({ x: 100, y: 100 });
+    const [chatSize, setChatSize] = useState({ width: 300, height: 400 });
+    const chatRef = useRef<HTMLDivElement | null>(null);
+
+    // Flags para rastreamento
+    let isDragging = false;
+    let dragStart = { x: 0, y: 0 };
+    let startPos = { x: 0, y: 0 };
+
+    // Início do arraste
+    const handleDragStart = (e: React.MouseEvent) => {
+    isDragging = true;
+    dragStart = { x: e.clientX, y: e.clientY };
+    startPos = { x: chatPosition.x, y: chatPosition.y };
+    document.addEventListener("mousemove", handleDragging);
+    document.addEventListener("mouseup", handleDragEnd);
+    };
+
+    // Enquanto arrasta
+    const handleDragging = (e: MouseEvent) => {
+    if (!isDragging) return;
+    const dx = e.clientX - dragStart.x;
+    const dy = e.clientY - dragStart.y;
+    setChatPosition({
+        x: startPos.x + dx,
+        y: startPos.y + dy,
+    });
+    };
+
+    // Finaliza o arraste
+    const handleDragEnd = () => {
+    isDragging = false;
+    document.removeEventListener("mousemove", handleDragging);
+    document.removeEventListener("mouseup", handleDragEnd);
+    };
+
+
   useEffect(() => {
     const fetchGrupos = async () => {
       try {
@@ -56,7 +94,7 @@ export default function GrupoPage() {
       setNewMessage("");
     }
   };
-  
+
   const handleViewAll = (section: string) => {
     router.push(`/comunidade/${grupo.id}/${section}`);
   };
@@ -175,27 +213,23 @@ export default function GrupoPage() {
       </main>
 
       {/* Chat */}
-      {/* Chat */}
 {chatOpen && (
   <div
-    className="fixed bottom-4 right-4 w-80 bg-white shadow-lg rounded-lg overflow-hidden border border-gray-300 cursor-move"
-    style={{ position: "absolute" }}
-    draggable
-    onDragEnd={(e) => {
-      const chatBox = e.target as HTMLElement;
-      const newX = e.clientX - chatBox.offsetWidth / 2;
-      const newY = e.clientY - chatBox.offsetHeight / 2;
-
-      // Impedir que a aba saia dos limites da janela
-      const boundedX = Math.max(0, Math.min(window.innerWidth - chatBox.offsetWidth, newX));
-      const boundedY = Math.max(0, Math.min(window.innerHeight - chatBox.offsetHeight, newY));
-
-      chatBox.style.right = `${window.innerWidth - boundedX - chatBox.offsetWidth}px`;
-      chatBox.style.bottom = `${window.innerHeight - boundedY - chatBox.offsetHeight}px`;
+    className="fixed z-50 bg-white shadow-lg rounded-lg border border-gray-300 resize"
+    style={{
+      top: chatPosition.y,
+      left: chatPosition.x,
+      width: chatSize.width,
+      height: chatSize.height,
     }}
+    ref={chatRef}
+    onMouseDown={handleDragStart}
   >
-    {/* Cabeçalho */}
-    <div className="bg-blue-600 text-white px-4 py-3 flex justify-between items-center">
+    {/* Título */}
+    <div
+      className="bg-blue-600 text-white px-4 py-3 flex justify-between items-center cursor-move"
+      onMouseDown={handleDragStart}
+    >
       <h3 className="text-lg font-bold">{grupo.nome}</h3>
       <button
         onClick={() => setChatOpen(false)}
@@ -206,7 +240,7 @@ export default function GrupoPage() {
     </div>
 
     {/* Mensagens */}
-    <div className="p-4 h-60 overflow-y-auto">
+    <div className="p-4 h-3/4 overflow-y-auto">
       {messages.length > 0 ? (
         messages.map((msg, index) => (
           <div
