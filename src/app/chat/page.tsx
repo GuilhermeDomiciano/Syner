@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic"; // Para carregar o emoji-picker dinamicamente
+import { FaSmile } from "react-icons/fa";
 
 interface Mensagem {
   texto: string;
@@ -20,10 +22,14 @@ const contatosIniciais: Contato[] = [
   { nome: "Ana", novasMsg: 3, mensagens: [{ texto: "Bom dia!", autor: "Ana", dataHora: new Date(2024, 10, 11, 8, 45) }] }
 ];
 
+// Carregando o emoji-picker dinamicamente
+const EmojiPicker = dynamic(() => import("emoji-picker-react"), { ssr: false });
+
 export default function Page() {
   const [contatos, setContatos] = useState(contatosIniciais);
   const [contatoAtivo, setContatoAtivo] = useState<Contato | null>(null);
   const [mensagem, setMensagem] = useState("");
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   const enviarMensagem = () => {
     if (!mensagem || !contatoAtivo) return;
@@ -70,8 +76,13 @@ export default function Page() {
     setContatoAtivo(contato);
   };
 
+  const onEmojiClick = (emojiObject: any) => {
+    setMensagem((prev) => prev + emojiObject.emoji);
+  };
+
   return (
     <div className="flex h-screen overflow-hidden bg-gray-100">
+      {/* Lista de Contatos */}
       <div className="w-1/4 bg-white border-r shadow-lg p-4 overflow-y-auto">
         <h2 className="text-2xl font-semibold mb-6 text-gray-800">Conversas</h2>
         {contatos.map((contato, index) => (
@@ -97,6 +108,7 @@ export default function Page() {
         ))}
       </div>
 
+      {/* Janela de Mensagens */}
       <div className="flex flex-col w-3/4 bg-white relative">
         <div className="p-4 bg-blue-600 text-white shadow-md flex items-center justify-between">
           {contatoAtivo ? (
@@ -119,8 +131,12 @@ export default function Page() {
                   }`}
                 >
                   <p>{mensagem.texto}</p>
-                  <span className="text-xs text-gray-500">
-                    {mensagem.dataHora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  <span
+                    className={`text-xs ${
+                      mensagem.autor === "Você" ? "text-white" : "text-gray-500"
+                    }`}
+                  >
+                    {mensagem.dataHora.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                   </span>
                 </div>
               </div>
@@ -132,8 +148,20 @@ export default function Page() {
           )}
         </div>
 
+        {/* Campo de Mensagem */}
         {contatoAtivo && (
-          <div className="p-4 border-t bg-white flex items-center">
+          <div className="p-4 border-t bg-white flex items-center relative">
+            <button
+              className="p-3 bg-gray-200 rounded-full hover:bg-gray-300 transition mr-4"
+              onClick={() => setShowEmojiPicker((prev) => !prev)}
+            >
+              <FaSmile className="text-xl text-gray-600" />
+            </button>
+            {showEmojiPicker && (
+              <div className="absolute bottom-16 left-4 z-50">
+                <EmojiPicker onEmojiClick={onEmojiClick} />
+              </div>
+            )}
             <input
               type="text"
               placeholder="Digite sua mensagem"
