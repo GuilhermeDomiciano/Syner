@@ -6,7 +6,6 @@ import Image from "next/image";
 import {
   FaHome,
   FaUsers,
-  FaEnvelope,
   FaCalendarAlt,
   FaComments,
   FaUserAlt,
