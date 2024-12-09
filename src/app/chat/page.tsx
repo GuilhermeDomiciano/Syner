@@ -78,34 +78,46 @@ export default function Page() {
   return (
     <div className="flex h-screen overflow-hidden bg-gray-100">
       {/* Lista de Contatos */}
-      <div className="w-1/4 bg-white border-r shadow-lg p-4 overflow-y-auto">
-        <h2 className="text-2xl font-semibold mb-6 text-gray-800">Conversas</h2>
-        {contatos.map((contato, index) => (
-          <div
-            key={index}
-            onClick={() => selecionarContato(contato)}
-            className={`mb-4 p-4 border-b cursor-pointer hover:bg-blue-50 rounded-lg transition-all duration-300 ${
-              contatoAtivo?.nome === contato.nome ? "bg-blue-100 border-blue-300" : ""
-            }`}
-          >
-            <div className="flex justify-between items-center">
-              <h3 className="text-lg font-semibold text-gray-900">{contato.nome}</h3>
+      <div className="w-1/4 flex flex-col bg-blue-600">
+        {/* Cabeçalho e Lista unificados */}
+        <div className="p-4">
+          <h2 className="text-2xl font-bold text-white">Conversas</h2>
+        </div>
+        {/* Lista de contatos */}
+        <div className="flex-grow overflow-y-auto bg-white">
+          {contatos.map((contato, index) => (
+            <div
+              key={index}
+              onClick={() => selecionarContato(contato)}
+              className={`p-4 border-b cursor-pointer flex items-center space-x-4 hover:bg-blue-50 transition-all ${
+                contatoAtivo?.nome === contato.nome ? "bg-blue-100" : ""
+              }`}
+            >
+              {/* Avatar circular com inicial do contato */}
+              <div className="bg-blue-500 text-white h-10 w-10 rounded-full flex items-center justify-center font-semibold">
+                {contato.nome[0]}
+              </div>
+              {/* Informações do contato */}
+              <div className="flex-grow">
+                <h3 className="text-lg font-semibold text-gray-900">{contato.nome}</h3>
+                <p className="text-sm text-gray-600 truncate">
+                  {contato.mensagens[contato.mensagens.length - 1]?.texto}
+                </p>
+              </div>
+              {/* Badge de mensagens não lidas */}
               {contato.novasMsg > 0 && (
                 <span className="bg-blue-500 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center">
                   {contato.novasMsg}
                 </span>
               )}
             </div>
-            <p className="text-sm text-gray-600 mt-1 truncate">
-              {contato.mensagens[contato.mensagens.length - 1]?.texto}
-            </p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Janela de Mensagens */}
       <div className="flex flex-col w-3/4 bg-white relative">
-        <div className="p-4 bg-blue-600 text-white shadow-md flex items-center justify-between">
+        <div className="p-4 bg-blue-600 text-white shadow-md flex items-center justify-between rounded-t-lg">
           {contatoAtivo ? (
             <h3 className="text-xl font-semibold">{contatoAtivo.nome}</h3>
           ) : (
