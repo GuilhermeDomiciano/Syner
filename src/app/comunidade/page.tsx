@@ -219,12 +219,12 @@ export default function ComunidadePage() {
         case "videos":
           return (
             <>
-              <h2 className="text-3xl font-bold mb-6 text-blue-600">Vídeos Recomendados</h2>
-        
+              <h2 className="text-3xl font-semibold mb-6 text-gray-800">Vídeos Recomendados</h2>
+
               <div className="relative mb-6">
                 <input
                   type="text"
-                  placeholder="Pesquisar"
+                  placeholder="Pesquisar vídeos..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full px-4 py-3 pl-10 border rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 placeholder-gray-400"
@@ -244,114 +244,125 @@ export default function ComunidadePage() {
                   />
                 </svg>
               </div>
-        
+
               <div className="space-y-12">
                 {Array.from(new Set(filteredVideos.map((video) => video.tema))).map((tema) => {
                   const videosDoTema = filteredVideos.filter((video) => video.tema === tema);
-        
+
                   const lotesDeVideos = [];
                   for (let i = 0; i < videosDoTema.length; i += 3) {
                     lotesDeVideos.push(videosDoTema.slice(i, i + 3));
                   }
-        
+
                   return lotesDeVideos.map((lote, loteIndex) => (
-                    <div key={`${tema}-${loteIndex}`}>
-                      <h3 className="text-2xl font-semibold mb-4 text-blue-500">{tema}</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <section key={`${tema}-${loteIndex}`}>
+                      <h3 className="text-2xl font-semibold mb-6 text-gray-800 border-b-2 border-blue-500">{tema}</h3>
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         {lote.map((video) => (
-                          <div
+                          <li
                             key={video.id}
-                            className="flex flex-col bg-white rounded-lg shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300"
+                            className="group relative p-6 bg-gradient-to-r from-blue-100 to-white rounded-xl shadow-lg hover:shadow-2xl transition transform hover:scale-105"
                           >
                             <Link href={video.link} target="_blank" rel="noopener noreferrer">
-                              <div className="w-full overflow-hidden rounded-t-lg">
-                              <Image
-                                src={video.imagem}
-                                alt={video.titulo}
-                                width={320}
-                                height={180}
-                                className="w-full h-auto"
-                              />
-
+                              <div className="w-full overflow-hidden rounded-lg mb-4">
+                                <Image
+                                  src={video.imagem}
+                                  alt={video.titulo}
+                                  width={320}
+                                  height={180}
+                                  className="object-cover w-full h-auto group-hover:brightness-90 transition"
+                                />
                               </div>
                             </Link>
-                            <div className="p-4">
-                              <h3 className="font-semibold text-sm text-gray-800">{video.titulo}</h3>
-                              <p className="text-xs text-gray-500 mt-1">{video.publicadoPor}</p>
-                              <p className="text-xs text-gray-400">
-                                {video.visualizacoes} visualizações
-                              </p>
+                            <h3 className="text-lg font-bold text-gray-800 group-hover:text-blue-600">
+                              {video.titulo}
+                            </h3>
+                            <p className="text-sm text-gray-600 mt-1">
+                              Por: <span className="font-medium">{video.publicadoPor}</span>
+                            </p>
+                            <p className="text-xs text-gray-500 mt-2">
+                              {video.visualizacoes} visualizações • {video.duracao}
+                            </p>
+                            <div className="absolute top-4 right-4 text-blue-500 text-2xl group-hover:scale-125 transition-transform">
+                              🎥
                             </div>
-                          </div>
+                          </li>
                         ))}
-                      </div>
-                    </div>
+                      </ul>
+                    </section>
                   ));
                 })}
               </div>
             </>
           );
+
         
 
-        case "materiais":
-          return (
-            <>
-              <h2 className="text-3xl font-bold mb-6 text-blue-600">Materiais Disponíveis</h2>
-              <div className="relative mb-6">
-                <input
-                  type="text"
-                  placeholder="Pesquisar"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-4 py-3 pl-10 border rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 placeholder-gray-400"
-                />
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
+          case "materiais":
+            return (
+              <>
+              <h2 className="text-2xl font-semibold mb-6 text-gray-800 border-blue-600">Materiais Disponíveis</h2>
+                <div className="relative mb-6">
+                  <input
+                    type="text"
+                    placeholder="Pesquisar"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full px-4 py-3 pl-10 border rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 placeholder-gray-400"
                   />
-                </svg>
-              </div>
-              <div className="space-y-12">
-                {Array.from(new Set(filteredMateriais.map((material) => material.tema))).map((tema) => (
-                  <div key={tema}>
-                    <h3 className="text-xl font-bold mb-4 text-blue-600">{tema}</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {filteredMateriais
-                        .filter((material) => material.tema === tema)
-                        .map((material) => (
-                          <div
-                            key={material.id}
-                            className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition"
-                          >
-                            <p className="font-bold text-gray-800 text-lg">{material.nome}</p>
-                            <p className="text-sm text-gray-600 mt-2">Por: {material.autor}</p>
-                            <div className="mt-4 flex justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
+                    />
+                  </svg>
+                </div>
+                <div className="space-y-12">
+                  {Array.from(new Set(filteredMateriais.map((material) => material.tema))).map((tema) => (
+                    <section key={tema}>
+                      <h3 className="text-2xl font-semibold mb-6 text-gray-800 border-b-4 border-blue-600">{tema}</h3>
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {filteredMateriais
+                          .filter((material) => material.tema === tema)
+                          .map((material, index) => (
+                            <li
+                              key={index}
+                              className="relative p-6 bg-gradient-to-r from-blue-100 to-white rounded-xl shadow-lg hover:shadow-2xl transition group"
+                            >
+                              <div className="absolute top-4 right-4 text-blue-600 text-2xl group-hover:scale-125 transition-transform">
+                                📘
+                              </div>
+                              <h3 className="text-2xl font-semibold text-gray-900 group-hover:text-blue-700">
+                                {material.nome}
+                              </h3>
+                              <p className="text-sm text-gray-700 mt-3">
+                                Por <span className="font-medium">{material.autor}</span>
+                              </p>
                               <a
                                 href={material.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="px-4 py-2 bg-blue-500 text-white text-sm rounded-lg shadow hover:bg-blue-600 transition"
+                                className="mt-6 px-4 py-2 inline-block bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition"
                               >
                                 Baixar Material
                               </a>
-                            </div>
-                          </div>
-                        ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </>
-          );
+                            </li>
+                          ))}
+                      </ul>
+                    </section>
+                  ))}
+                </div>
+              </>
+            );
+          
 
         default:
           return null;
