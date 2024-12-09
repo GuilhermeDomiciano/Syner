@@ -11,7 +11,7 @@ import {
   FaComments,
   FaUserAlt,
   FaEllipsisV,
-  FaInfoCircle,
+  FaShareAlt,
   FaCog,
   FaBug,
   FaAddressCard,
@@ -123,11 +123,11 @@ export default function Navbar() {
         {isDropdownOpen && (
           <div className="absolute bottom-14 left-12 bg-white shadow-lg rounded-lg w-48 z-50">
             <Link
-              href="/more-info"
+              href="/social-media"
               className="flex items-center gap-2 px-4 py-2 text-sm text-blue-600 hover:bg-blue-100 hover:text-blue-800 transition"
             >
-              <FaInfoCircle />
-              Mais Informações
+              <FaShareAlt />
+              Redes Sociais
             </Link>
             <Link
               href="/about-us"
