@@ -66,7 +66,7 @@ export default function ProfilePage() {
             </ul>
           </div>
 
-          <div className="mt-8 space-y-4">
+          <div className="mt-8 space-x-4">
             <button
               onClick={() => setIsEditModalOpen(true)}
               className="bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg"
@@ -74,7 +74,7 @@ export default function ProfilePage() {
               Editar Perfil
             </button>
             <Link href="/login">
-              <button className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg">
+              <button className="bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg">
                 Sair
               </button>
             </Link>
