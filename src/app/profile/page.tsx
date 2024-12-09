@@ -11,6 +11,9 @@ export default function ProfilePage() {
     idade: 21,
     local: 'Palmas, Tocantins',
     curso: 'Engenharia de Software',
+    perfilPublico: true,
+    materiaisPublicos: true,
+    comentariosPublicos: true,
   });
 
   const renderStars = (rating: number) => {
@@ -181,15 +184,16 @@ export default function ProfilePage() {
 
       {isEditModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-8 rounded-lg shadow-lg w-[90%] max-w-md">
+          <div className="bg-gradient-to-b from-blue-500 to-blue-400 text-white p-8 rounded-lg shadow-lg w-[90%] max-w-md">
             <h2 className="text-xl font-semibold mb-4">Editar Perfil</h2>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 setIsEditModalOpen(false);
               }}
-              className="space-y-4"
+              className="space-y-6"
             >
+              {/* Inputs */}
               <div>
                 <label className="block text-sm font-medium">Nome</label>
                 <input
@@ -198,7 +202,7 @@ export default function ProfilePage() {
                   onChange={(e) =>
                     setProfileData((prev) => ({ ...prev, nome: e.target.value }))
                   }
-                  className="mt-1 p-2 border rounded w-full"
+                  className="mt-1 p-2 border rounded w-full text-black"
                 />
               </div>
               <div>
@@ -209,7 +213,7 @@ export default function ProfilePage() {
                   onChange={(e) =>
                     setProfileData((prev) => ({ ...prev, idade: parseInt(e.target.value, 10) }))
                   }
-                  className="mt-1 p-2 border rounded w-full"
+                  className="mt-1 p-2 border rounded w-full text-black"
                 />
               </div>
               <div>
@@ -220,7 +224,7 @@ export default function ProfilePage() {
                   onChange={(e) =>
                     setProfileData((prev) => ({ ...prev, local: e.target.value }))
                   }
-                  className="mt-1 p-2 border rounded w-full"
+                  className="mt-1 p-2 border rounded w-full text-black"
                 />
               </div>
               <div>
@@ -231,23 +235,102 @@ export default function ProfilePage() {
                   onChange={(e) =>
                     setProfileData((prev) => ({ ...prev, curso: e.target.value }))
                   }
-                  className="mt-1 p-2 border rounded w-full"
+                  className="mt-1 p-2 border rounded w-full text-black"
                 />
               </div>
-              <div className="flex justify-end space-x-4">
+
+              {/* Toggles */}
+              <div>
+                <label className="flex items-center justify-between">
+                  <span>Perfil Público</span>
+                  <div
+                    className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer ${
+                      profileData.perfilPublico ? 'bg-blue-600' : 'bg-gray-300'
+                    }`}
+                    onClick={() =>
+                      setProfileData((prev) => ({
+                        ...prev,
+                        perfilPublico: !prev.perfilPublico,
+                      }))
+                    }
+                  >
+                    <div
+                      className={`w-4 h-4 bg-white rounded-full shadow-md transform duration-300 ${
+                        profileData.perfilPublico ? 'translate-x-6' : 'translate-x-0'
+                      }`}
+                    ></div>
+                  </div>
+                </label>
+              </div>
+              <div>
+                <label className="flex items-center justify-between">
+                  <span>Materiais Públicos</span>
+                  <div
+                    className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer ${
+                      profileData.materiaisPublicos ? 'bg-blue-600' : 'bg-gray-300'
+                    }`}
+                    onClick={() =>
+                      setProfileData((prev) => ({
+                        ...prev,
+                        materiaisPublicos: !prev.materiaisPublicos,
+                      }))
+                    }
+                  >
+                    <div
+                      className={`w-4 h-4 bg-white rounded-full shadow-md transform duration-300 ${
+                        profileData.materiaisPublicos ? 'translate-x-6' : 'translate-x-0'
+                      }`}
+                    ></div>
+                  </div>
+                </label>
+              </div>
+              <div>
+                <label className="flex items-center justify-between">
+                  <span>Comentários Públicos</span>
+                  <div
+                    className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer ${
+                      profileData.comentariosPublicos ? 'bg-blue-600' : 'bg-gray-300'
+                    }`}
+                    onClick={() =>
+                      setProfileData((prev) => ({
+                        ...prev,
+                        comentariosPublicos: !prev.comentariosPublicos,
+                      }))
+                    }
+                  >
+                    <div
+                      className={`w-4 h-4 bg-white rounded-full shadow-md transform duration-300 ${
+                        profileData.comentariosPublicos ? 'translate-x-6' : 'translate-x-0'
+                      }`}
+                    ></div>
+                  </div>
+                </label>
+              </div>
+
+              {/* Buttons */}
+              <div className="flex justify-between space-x-4">
                 <button
                   type="button"
                   onClick={() => setIsEditModalOpen(false)}
-                  className="bg-gray-300 py-2 px-4 rounded hover:bg-gray-400 transition"
+                  className="bg-gray-300 py-2 px-4 rounded text-black hover:bg-gray-400 transition"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+                  className="bg-blue-600 py-2 px-4 rounded text-white hover:bg-blue-700 transition"
                 >
                   Salvar
                 </button>
+                <a href='/login'>
+                  <button
+                    type="button"
+                    className="bg-red-500 py-2 px-4 rounded text-white hover:bg-red-600 transition"
+                    onClick={() => alert('Conta excluída!')}
+                  >
+                    Excluir Conta
+                  </button>
+                </a>
               </div>
             </form>
           </div>
