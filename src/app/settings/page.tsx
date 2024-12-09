@@ -3,50 +3,25 @@
 import { useState, useEffect } from "react";
 
 export default function ConfiguracoesPage() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-  const [language, setLanguage] = useState<"pt-br" | "en" | "es">("pt-br");
-  const [emailNotifications, setEmailNotifications] = useState(false);
-  const [password, setPassword] = useState("");
   const [tempTheme, setTempTheme] = useState<"light" | "dark">("light");
   const [tempLanguage, setTempLanguage] = useState<"pt-br" | "en" | "es">("pt-br");
-  const [tempEmailNotifications, setTempEmailNotifications] = useState(false);
-  const [tempPassword, setTempPassword] = useState("");
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const savedTheme = (localStorage.getItem("theme") || "light") as "light" | "dark";
     const savedLanguage = (localStorage.getItem("language") || "pt-br") as "pt-br" | "en" | "es";
-    const savedEmailNotifications = localStorage.getItem("emailNotifications") === "true";
-    const savedPassword = localStorage.getItem("password") || "";
-
-    setTheme(savedTheme);
-    setLanguage(savedLanguage);
-    setEmailNotifications(savedEmailNotifications);
-    setPassword(savedPassword);
-
     setTempTheme(savedTheme);
     setTempLanguage(savedLanguage);
-    setTempEmailNotifications(savedEmailNotifications);
-    setTempPassword(savedPassword);
-
     document.documentElement.classList.toggle("dark", savedTheme === "dark");
   }, []);
 
   const handleSave = () => {
-    setTheme(tempTheme);
-    setLanguage(tempLanguage);
-    setEmailNotifications(tempEmailNotifications);
-    setPassword(tempPassword);
-
     localStorage.setItem("theme", tempTheme);
     localStorage.setItem("language", tempLanguage);
-    localStorage.setItem("emailNotifications", String(tempEmailNotifications));
-    localStorage.setItem("password", tempPassword);
-
     document.documentElement.classList.toggle("dark", tempTheme === "dark");
 
-    setShowPopup(true);
-    setTimeout(() => setShowPopup(false), 3000);
+    setShowPopup(true); // Exibe o pop-up
+    setTimeout(() => setShowPopup(false), 3000); // Oculta o pop-up após 3 segundos
   };
 
   const translations = {
@@ -91,7 +66,7 @@ export default function ConfiguracoesPage() {
     },
   };
 
-  const t = translations[language];
+  const t = translations[tempLanguage];
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-darkBackground flex flex-col items-center transition-colors">
@@ -136,8 +111,6 @@ export default function ConfiguracoesPage() {
             <input
               type="checkbox"
               id="email-notifications"
-              checked={tempEmailNotifications}
-              onChange={(e) => setTempEmailNotifications(e.target.checked)}
               className="w-5 h-5 text-blue-600 focus:ring focus:ring-blue-300"
             />
             <label htmlFor="email-notifications" className="text-gray-700 dark:text-gray-300">
@@ -154,8 +127,6 @@ export default function ConfiguracoesPage() {
           <input
             type="password"
             id="password"
-            value={tempPassword}
-            onChange={(e) => setTempPassword(e.target.value)}
             placeholder={t.newPassword}
             className="w-full border-gray-300 dark:border-gray-600 dark:bg-darkBackground dark:text-white rounded-lg px-4 py-2 focus:ring focus:ring-blue-300"
           />
