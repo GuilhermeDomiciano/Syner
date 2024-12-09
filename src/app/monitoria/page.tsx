@@ -18,61 +18,69 @@ export default function MonitoriasPage() {
   };
 
   return (
-    <div className="flex flex-col w-full h-screen bg-gray-50">
-      {/* Imagem da Monitoria (Topo da página) */}
-      <div className="w-full h-1/2 bg-gray-300 relative aspect-w-16 aspect-h-9">
-        <img
-          src="/monitoria/monitoria.png"
-          alt="Monitoria de Matemática"
-          className="w-full h-full object-contain"
-        />
+    <div className="flex w-full h-screen">
+      {/* Coluna do Vídeo */}
+      <div className="w-1/2 h-full bg-gray-300 flex items-center justify-center">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/rqMorNThj1s"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="w-4/5 h-3/4"
+        ></iframe>
       </div>
 
-      {/* Abas de Navegação (Bate Papo e Pessoas) */}
-      <div className="p-4 flex gap-4 justify-center bg-white shadow-md sticky top-0 z-10">
-        <button className="bg-blue-500 text-white py-2 px-6 rounded-full hover:bg-blue-600 shadow-lg">
-          Bate Papo
-        </button>
-        <button className="bg-gray-200 py-2 px-6 rounded-full hover:bg-gray-300 shadow-lg">
-          Pessoas
-        </button>
-      </div>
-
-      {/* Corpo do Chat e Campo de Mensagem */}
-      <main className="flex flex-col flex-1 overflow-y-auto p-4">
-        {/* Mensagens */}
-        <div className="mt-6 flex flex-col gap-4 overflow-y-auto flex-1 bg-white p-6 rounded-2xl shadow-lg">
-          {mensagens.map((mensagem) => (
-            <div
-              key={mensagem.id}
-              className={`p-4 rounded-xl max-w-sm ${
-                mensagem.autor === "professor"
-                  ? "bg-gray-200 text-gray-700 self-start shadow-md"
-                  : "bg-blue-500 text-white self-end shadow-lg"
-              }`}
-            >
-              {mensagem.texto}
-            </div>
-          ))}
-        </div>
-
-        {/* Campo de Texto */}
-        <div className="mt-4 flex items-center gap-3">
-          <input
-            type="text"
-            value={novaMensagem}
-            onChange={(e) => setNovaMensagem(e.target.value)}
-            placeholder="Digite sua mensagem..."
-            className="flex-1 border border-gray-300 rounded-full px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <button
-            onClick={enviarMensagem}
-            className="bg-blue-500 text-white px-6 py-2 rounded-full shadow-md hover:bg-blue-600 transition"
-          >
-            Enviar
+      {/* Coluna do Chat */}
+      <div className="w-1/2 h-full flex flex-col bg-gray-100">
+        {/* Abas de Navegação */}
+        <div className="p-4 flex gap-4 justify-center bg-white shadow sticky top-0 z-10">
+          <button className="bg-blue-500 text-white py-2 px-8 rounded-full hover:bg-blue-600 transition-shadow shadow-md">
+            Bate Papo
+          </button>
+          <button className="bg-gray-200 text-gray-700 py-2 px-8 rounded-full hover:bg-gray-300 transition-shadow shadow-md">
+            Pessoas
           </button>
         </div>
-      </main>
+
+        {/* Corpo do Chat */}
+        <main className="flex flex-col flex-1 p-4">
+          {/* Mensagens */}
+          <div className="flex flex-col gap-4 overflow-y-auto bg-white p-6 rounded-lg shadow-lg flex-1">
+            {mensagens.map((mensagem) => (
+              <div
+                key={mensagem.id}
+                className={`p-4 rounded-xl max-w-sm ${
+                  mensagem.autor === "professor"
+                    ? "bg-gray-100 text-gray-800 self-start border-l-4 border-blue-500 shadow-sm"
+                    : "bg-blue-500 text-white self-end shadow-md"
+                }`}
+              >
+                {mensagem.texto}
+              </div>
+            ))}
+          </div>
+
+          {/* Campo de Mensagem */}
+          <div className="mt-4 flex items-center gap-3">
+            <input
+              type="text"
+              value={novaMensagem}
+              onChange={(e) => setNovaMensagem(e.target.value)}
+              placeholder="Digite sua mensagem..."
+              className="flex-1 border border-gray-300 rounded-full px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              onClick={enviarMensagem}
+              className="bg-blue-500 text-white px-6 py-2 rounded-full shadow-lg hover:bg-blue-600 transition-transform transform hover:scale-105"
+            >
+              Enviar
+            </button>
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
