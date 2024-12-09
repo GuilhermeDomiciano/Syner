@@ -18,22 +18,22 @@ export default function MonitoriasPage() {
   };
 
   return (
-    <div className="flex flex-col w-full h-screen bg-gray-100">
+    <div className="flex flex-col w-full h-screen bg-gray-50">
       {/* Imagem da Monitoria (Topo da página) */}
-      <div className="w-full h-1/2 bg-gray-300">
+      <div className="w-full h-1/2 bg-gray-300 relative aspect-w-16 aspect-h-9">
         <img
-          src="/images/monitoria.png"
+          src="/monitoria/monitoria.png"
           alt="Monitoria de Matemática"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
         />
       </div>
 
       {/* Abas de Navegação (Bate Papo e Pessoas) */}
-      <div className="p-4 flex gap-4 justify-center bg-white shadow-md">
-        <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 w-1/2">
+      <div className="p-4 flex gap-4 justify-center bg-white shadow-md sticky top-0 z-10">
+        <button className="bg-blue-500 text-white py-2 px-6 rounded-full hover:bg-blue-600 shadow-lg">
           Bate Papo
         </button>
-        <button className="bg-gray-200 py-2 px-4 rounded-lg hover:bg-gray-300 w-1/2">
+        <button className="bg-gray-200 py-2 px-6 rounded-full hover:bg-gray-300 shadow-lg">
           Pessoas
         </button>
       </div>
@@ -41,14 +41,14 @@ export default function MonitoriasPage() {
       {/* Corpo do Chat e Campo de Mensagem */}
       <main className="flex flex-col flex-1 overflow-y-auto p-4">
         {/* Mensagens */}
-        <div className="mt-6 flex flex-col gap-4 overflow-y-auto flex-1 bg-white p-4 rounded-lg shadow-inner">
+        <div className="mt-6 flex flex-col gap-4 overflow-y-auto flex-1 bg-white p-6 rounded-2xl shadow-lg">
           {mensagens.map((mensagem) => (
             <div
               key={mensagem.id}
-              className={`p-4 rounded-lg ${
+              className={`p-4 rounded-xl max-w-sm ${
                 mensagem.autor === "professor"
-                  ? "bg-gray-200 text-gray-700 self-start"
-                  : "bg-blue-500 text-white self-end"
+                  ? "bg-gray-200 text-gray-700 self-start shadow-md"
+                  : "bg-blue-500 text-white self-end shadow-lg"
               }`}
             >
               {mensagem.texto}
@@ -57,17 +57,17 @@ export default function MonitoriasPage() {
         </div>
 
         {/* Campo de Texto */}
-        <div className="mt-4 flex items-center gap-2">
+        <div className="mt-4 flex items-center gap-3">
           <input
             type="text"
             value={novaMensagem}
             onChange={(e) => setNovaMensagem(e.target.value)}
-            placeholder="Digite sua mensagem"
-            className="flex-1 border border-gray-300 rounded-lg px-4 py-2"
+            placeholder="Digite sua mensagem..."
+            className="flex-1 border border-gray-300 rounded-full px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
             onClick={enviarMensagem}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+            className="bg-blue-500 text-white px-6 py-2 rounded-full shadow-md hover:bg-blue-600 transition"
           >
             Enviar
           </button>

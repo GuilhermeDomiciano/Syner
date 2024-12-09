@@ -135,7 +135,7 @@ export default function MateriaPage() {
 
         {/* Materiais */}
         <section>
-          <h2 className="text-3xl font-semibold mb-6 text-gray-800">Materiais</h2>
+          <h2 className="text-3xl font-semibold mb-6 text-gray-800 border-b-4 border-blue-600">Materiais</h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {materia.materiais.slice(0, 6).map((material, index) => (
               <li
@@ -169,7 +169,7 @@ export default function MateriaPage() {
 
         {/* Testes */}
         <section>
-          <h2 className="text-3xl font-semibold mb-6 text-gray-800">Testes</h2>
+          <h2 className="text-3xl font-semibold mb-6 text-gray-800 border-b-4 border-blue-600">Testes</h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {materia.testes.slice(0, 6).map((teste, index) => (
               <li
