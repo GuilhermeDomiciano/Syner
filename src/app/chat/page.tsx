@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic"; // Para carregar o emoji-picker dinamicamente
+import dynamic from "next/dynamic";
 import { FaSmile } from "react-icons/fa";
+import { EmojiClickData } from "emoji-picker-react";
 
 interface Mensagem {
   texto: string;
@@ -19,10 +20,9 @@ interface Contato {
 const contatosIniciais: Contato[] = [
   { nome: "Matheus", novasMsg: 9, mensagens: [{ texto: "Oi, tudo bem?", autor: "Matheus", dataHora: new Date(2024, 10, 11, 9, 30) }] },
   { nome: "Luis", novasMsg: 9, mensagens: [{ texto: "Oi, como vai?", autor: "Luis", dataHora: new Date(2024, 10, 11, 10, 15) }] },
-  { nome: "Ana", novasMsg: 3, mensagens: [{ texto: "Bom dia!", autor: "Ana", dataHora: new Date(2024, 10, 11, 8, 45) }] }
+  { nome: "Ana", novasMsg: 3, mensagens: [{ texto: "Bom dia!", autor: "Ana", dataHora: new Date(2024, 10, 11, 8, 45) }] },
 ];
 
-// Carregando o emoji-picker dinamicamente
 const EmojiPicker = dynamic(() => import("emoji-picker-react"), { ssr: false });
 
 export default function Page() {
@@ -34,18 +34,14 @@ export default function Page() {
   const enviarMensagem = () => {
     if (!mensagem || !contatoAtivo) return;
 
-    const novosContatos = contatos.map((contato) => {
-      if (contato.nome === contatoAtivo.nome) {
-        return {
-          ...contato,
-          mensagens: [
-            ...contato.mensagens,
-            { texto: mensagem, autor: "Você", dataHora: new Date() }
-          ]
-        };
-      }
-      return contato;
-    });
+    const novosContatos = contatos.map((contato) =>
+      contato.nome === contatoAtivo.nome
+        ? {
+            ...contato,
+            mensagens: [...contato.mensagens, { texto: mensagem, autor: "Você", dataHora: new Date() }],
+          }
+        : contato
+    );
 
     setContatos(novosContatos);
     setMensagem("");
@@ -53,8 +49,8 @@ export default function Page() {
       ...contatoAtivo,
       mensagens: [
         ...contatoAtivo.mensagens,
-        { texto: mensagem, autor: "Você", dataHora: new Date() }
-      ]
+        { texto: mensagem, autor: "Você", dataHora: new Date() },
+      ],
     });
   };
 
@@ -65,18 +61,17 @@ export default function Page() {
   };
 
   const selecionarContato = (contato: Contato) => {
-    const novosContatos = contatos.map((contatoItem) => {
-      if (contatoItem.nome === contato.nome) {
-        return { ...contatoItem, novasMsg: 0 }; // Marca como lido
-      }
-      return contatoItem;
-    });
+    const novosContatos = contatos.map((contatoItem) =>
+      contatoItem.nome === contato.nome
+        ? { ...contatoItem, novasMsg: 0 }
+        : contatoItem
+    );
 
     setContatos(novosContatos);
     setContatoAtivo(contato);
   };
 
-  const onEmojiClick = (emojiObject: any) => {
+  const onEmojiClick = (emojiObject: EmojiClickData) => {
     setMensagem((prev) => prev + emojiObject.emoji);
   };
 
