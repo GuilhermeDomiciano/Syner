@@ -81,6 +81,10 @@ export default function Page() {
     setContatoAtivo(contato);
   };
 
+  const resetChat = () => {
+    setContatoAtivo(null); // Reseta o contato ativo
+  };
+
   const onEmojiClick = (emojiObject: EmojiClickData) => {
     setMensagem((prev) => prev + emojiObject.emoji);
   };
@@ -91,7 +95,12 @@ export default function Page() {
         <div className="flex flex-row flex-grow">
           <div className="w-1/4 bg-white overflow-y-auto rounded-tl-3xl mt-10 border-r-2 border-gray-300 shadow-md">
             <div className="p-4">
-              <h2 className="text-2xl font-bold text-blue-600">Conversas</h2>
+              <h2
+                className="text-2xl font-bold text-blue-600 cursor-pointer hover:underline"
+                onClick={resetChat}
+              >
+                Conversas
+              </h2>
             </div>
             <div>
               {contatos.map((contato, index) => (
@@ -150,7 +159,6 @@ export default function Page() {
                 ))
               ) : (
                 <div className="text-gray-600 text-center">
-                  
                   <div className="grid place-items-center h-52">
                     <Image
                       src={"/fotos/chat.png"}
