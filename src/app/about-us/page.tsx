@@ -10,8 +10,8 @@ export default function AboutUsPage() {
       image: "/fotos/nicole.jpg",
       description:
         "Nicole é uma estudante dedicada de Engenharia de Software na Ulbra Palmas. Apaixonada por inovação, ela adora explorar novas tecnologias e está sempre pronta para liderar projetos criativos. Seu interesse especial é no design de interfaces intuitivas e amigáveis.",
-      nomelink: "Site Saint Seiya",
-      link: "https://site-saint-seiya2-0.vercel.app/",
+      nomelink: "",
+      link: "",
     },
     {
       name: "João Pedro",
