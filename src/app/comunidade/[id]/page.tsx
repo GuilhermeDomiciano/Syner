@@ -37,14 +37,12 @@ export default function GrupoPage() {
   const [messages, setMessages] = useState<string[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const router = useRouter();
-  const EmojiPicker = dynamic(() => import("emoji-picker-react"), { ssr: false });
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   const onEmojiClick = (emojiObject: EmojiClickData) => {
     setNewMessage((prev) => prev + emojiObject.emoji);
   };
   
-
   let isResizing = false;
   let startSize = { width: 300, height: 400 };
 
