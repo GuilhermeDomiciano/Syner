@@ -53,10 +53,10 @@ export default function MonitoriasPage() {
             {mensagens.map((mensagem) => (
               <div
                 key={mensagem.id}
-                className={`p-4 rounded-xl max-w-sm ${
+                className={`p-4 rounded-full px-8 max-w-sm ${
                   mensagem.autor === "professor"
-                    ? "bg-gray-100 text-gray-800 self-start border-l-4 border-blue-500 shadow-sm"
-                    : "bg-blue-500 text-white self-end shadow-md"
+                    ? "bg-gray-100 text-gray-800 self-start border-l-4 shadow-sm rounded-full"
+                    : "bg-blue-500 text-white self-end shadow-md rounded-full"
                 }`}
               >
                 {mensagem.texto}
