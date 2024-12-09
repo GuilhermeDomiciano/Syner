@@ -34,7 +34,6 @@ export default function Navbar() {
             alt="Syner Logo"
             width={50}
             height={50}
-            className="rounded-lg"
           />
         </Link>
       </div>
