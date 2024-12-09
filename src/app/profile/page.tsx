@@ -33,57 +33,68 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen flex">
       {/* Sidebar */}
-      <aside className="fixed top-0 left-0 w-1/2 h-full p-8 flex flex-col items-center justify-center bg-white shadow-lg">
-        <div className="w-full max-w-md text-center">
-          <div className="relative w-full h-24 bg-gradient-to-r from-blue-500 to-blue-500 rounded-t-lg flex justify-center items-center">
-            <div className="absolute -bottom-12 w-32 h-32 rounded-full border-4 border-white bg-gray-300 overflow-hidden shadow-md">
-              <Image
-                src="/fotos/lucas.jpg"
-                alt="Profile Image"
-                width={128}
-                height={128}
-                className="object-cover w-full h-full"
-              />
-            </div>
+      <aside className="fixed top-0 left-12 w-full md:w-1/2 h-full flex flex-col items-center bg-gradient-to-br from-blue-50 to-blue-100 shadow-lg">
+        {/* Seção do topo com o quadrado azul */}
+        <div className="relative w-9/12 bg-blue-500 h-48 rounded-b-3xl flex justify-center items-center">
+          {/* Foto de perfil */}
+          <div className="absolute -bottom-16 size-48 rounded-full border-4 border-white bg-gray-300 overflow-hidden shadow-md">
+            <Image
+              src="/fotos/lucas.jpg"
+              alt="Profile Image"
+              width={128}
+              height={128}
+              className="object-cover w-full h-full"
+            />
+          </div>
+        </div>
+
+        {/* Seção do conteúdo */}
+        <div className="mt-20 w-4/5 max-w-md flex flex-col items-center text-center">
+          {/* Nome e curso */}
+          <h1 className="text-3xl font-bold text-gray-800">{profileData.nome}</h1>
+          <p className="text-lg text-gray-600 mt-1">{profileData.curso}</p>
+          <div className="flex justify-center items-center mt-4">
+            <div className="flex">{renderStars(3)}</div>
+            <span className="ml-2 text-blue-600 font-semibold text-lg">3</span>
           </div>
 
-          <div className="mt-20">
-            <h1 className="text-3xl font-bold text-gray-800">{profileData.nome}</h1>
-            <p className="text-lg text-gray-500 mt-1">{profileData.curso}</p>
-            <div className="flex justify-center items-center mt-4">
-              <div className="flex">{renderStars(3)}</div>
-              <span className="ml-2 text-blue-500 font-semibold text-lg">3</span>
-            </div>
-          </div>
-
-          <div className="mt-12">
-            <h2 className="text-xl font-semibold text-gray-900 border-b pb-2 mb-4">Dados pessoais</h2>
-            <ul className="space-y-2 text-left">
-              <li className="text-gray-700"><strong>Nome:</strong> {profileData.nome}</li>
-              <li className="text-gray-700"><strong>Idade:</strong> {profileData.idade}</li>
-              <li className="text-gray-700"><strong>De:</strong> {profileData.local}</li>
-              <li className="text-gray-700"><strong>Curso:</strong> {profileData.curso}</li>
+          {/* Dados pessoais */}
+          <div className="mt-8 w-full bg-white shadow-md rounded-lg p-6">
+            <h2 className="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">
+              Dados pessoais
+            </h2>
+            <ul className="space-y-2 text-left text-gray-800">
+              <li>
+                <strong>Nome:</strong> {profileData.nome}
+              </li>
+              <li>
+                <strong>Idade:</strong> {profileData.idade}
+              </li>
+              <li>
+                <strong>De:</strong> {profileData.local}
+              </li>
+              <li>
+                <strong>Curso:</strong> {profileData.curso}
+              </li>
             </ul>
           </div>
 
-          <div className="mt-8 space-x-4">
+          {/* Botões */}
+          <div className="mt-8 space-x-4 flex">
             <button
               onClick={() => setIsEditModalOpen(true)}
-              className="bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg"
+              className="bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-all shadow-lg"
             >
               Editar Perfil
             </button>
             <Link href="/login">
-              <button className="bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg">
+              <button className="bg-red-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-300 transition-all shadow-lg">
                 Sair
               </button>
             </Link>
           </div>
         </div>
       </aside>
-
-      {/* Vertical Divider */}
-      <div className="fixed top-0 left-1/2 h-full w-[1px] bg-gray-300"></div>
 
       {/* Main Content */}
       <main className="ml-[50%] w-[50%] p-12">
@@ -121,7 +132,10 @@ export default function ProfilePage() {
                   'Geometria Analítica',
                   'Estatística Básica',
                 ].map((material) => (
-                  <li key={material} className="flex items-center justify-between">
+                  <li
+                    key={material}
+                    className="flex items-center justify-between bg-white shadow-md shadow-blue-200 p-4 rounded-lg"
+                  >
                     <div className="flex items-center">
                       <Image
                         src="/icons/material.svg"
@@ -157,7 +171,10 @@ export default function ProfilePage() {
                   foto: '/fotos/Carlos.jpg',
                 },
               ].map((avaliacao) => (
-                <div key={avaliacao.nome} className="bg-gray-100 p-4 rounded-lg shadow-lg">
+                <div
+                  key={avaliacao.nome}
+                  className="bg-white shadow-md shadow-blue-200 p-4 rounded-lg"
+                >
                   <div className="flex items-center mb-2">
                     <div className="rounded-full bg-gray-300 w-10 h-10 overflow-hidden shadow-md">
                       <Image
