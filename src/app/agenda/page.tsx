@@ -1,6 +1,6 @@
 "use client";
 
-import { FaCheck, FaTimes, FaSearch, FaPlus, FaBook } from "react-icons/fa";
+import { FaCheck, FaTimes, FaPlus, FaBook } from "react-icons/fa";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
