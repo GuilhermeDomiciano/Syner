@@ -247,46 +247,48 @@ export default function GrupoPage() {
             ref={chatRef}
             onMouseDown={handleDragStart}
         >
-            {/* Título */}
-            <div
-            className="bg-blue-600 text-white px-4 py-3 flex justify-between items-center cursor-move"
-            onMouseDown={handleDragStart}
-            >
-            <h3 className="text-lg font-bold">{grupo.nome}</h3>
+        {/* Título */}
+        <div
+        className="bg-blue-600 text-white px-4 py-3 flex justify-between items-center cursor-move"
+        onMouseDown={handleDragStart}
+        >
+        <h3 className="text-lg font-bold">{grupo.nome}</h3>
             <button
                 onClick={() => setChatOpen(false)}
                 className="text-white text-xl hover:text-gray-200 transition"
             >
                 ✖
             </button>
-            </div>
+        </div>
 
-            {/* Mensagens */}
-            <div className="p-4 overflow-y-auto" style={{ height: `calc(${chatSize.height}px - 120px)` }}>
-            {messages.length > 0 ? (
-                messages.map((msg, index) => (
-                <div
-                    key={index}
-                    className={`p-2 mb-2 rounded-lg ${
-                    index % 2 === 0
-                        ? "bg-blue-100 text-gray-800 self-start"
-                        : "bg-blue-600 text-white self-end"
-                    }`}
-                >
-                    {msg}
-                </div>
-                ))
-            ) : (
-                <p className="text-gray-500 text-center">Nenhuma mensagem ainda.</p>
-            )}
+        {/* Mensagens */}
+        <div className="p-4 overflow-y-auto" style={{ height: `calc(${chatSize.height}px - 120px)` }}>
+        {messages.length > 0 ? (
+            messages.map((msg, index) => (
+            <div
+                key={index}
+                className="p-2 mb-2 rounded-lg bg-blue-600 text-white self-end"
+            >
+                {msg}
             </div>
+            ))
+        ) : (
+            <p className="text-gray-500 text-center">Nenhuma mensagem ainda.</p>
+        )}
+        </div>
 
-            {/* Campo de Envio */}
-            <div className="flex items-center border-t border-gray-200 p-2">
+
+        {/* Campo de Envio */}
+        <div className="flex items-center border-t border-gray-200 p-2">
             <input
                 type="text"
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
+                onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                    sendMessage(); // Envia a mensagem quando Enter é pressionado
+                }
+                }}
                 placeholder="Escreva sua mensagem..."
                 className="flex-1 px-4 py-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
             />
@@ -296,13 +298,13 @@ export default function GrupoPage() {
             >
                 Enviar
             </button>
-            </div>
+        </div>
 
-            {/* Controle de redimensionamento */}
-            <div
-            className="absolute bottom-0 right-0 w-4 h-4 bg-blue-600 cursor-se-resize"
-            onMouseDown={handleResizeStart}
-            />
+        {/* Controle de redimensionamento */}
+        <div
+        className="absolute bottom-0 right-0 w-4 h-4 bg-blue-600 cursor-se-resize"
+        onMouseDown={handleResizeStart}
+        />
         </div>
       )}
     </div>
