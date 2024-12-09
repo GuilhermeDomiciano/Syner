@@ -126,7 +126,7 @@ export default function Page() {
                     <div className="relative">
                       <div
                         className={`p-3 max-w-xs ${
-                          mensagem.autor === "Você" ? "bg-blue-500 text-white rounded-lg px-8" : "bg-gray-200 text-gray-700 rounded-lg px-8"
+                          mensagem.autor === "Você" ? "bg-blue-500 text-white rounded-full px-8"  : "bg-gray-200 text-gray-700 rounded-full px-8"
                         }`}
                       >
                         <p>{mensagem.texto}</p>
@@ -141,15 +141,16 @@ export default function Page() {
                 ))
               ) : (
                 <div className="text-gray-600 text-center">
-                  <p>Selecione um contato para ver as mensagens.</p>
-                  <div className="grid place-items-center h-screen">
+                  
+                  <div className="grid place-items-center h-52">
                     <Image
-                      src={"/fotos/coruja.png"}
+                      src={"/fotos/chat.png"}
                       alt="chat"
-                      width={550}
-                      height={550}
+                      width={600}
+                      height={600}
                       className="rounded-md object-contain"
                     />
+                    <p className="font-light text-3xl p-4">Selecione um contato para ver as mensagens</p>
                   </div>
                 </div>          
               )}
