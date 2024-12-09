@@ -1,5 +1,6 @@
 import './globals.css';
 import ClientLayout from './components/ClientLayout';
+import { ThemeProvider } from './contexts/ThemeContext'; // Certifique-se do caminho correto
 
 export const metadata = {
   title: 'SYNER',
@@ -10,7 +11,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR">
       <body>
-        <ClientLayout>{children}</ClientLayout>
+        <ThemeProvider>
+          <ClientLayout>{children}</ClientLayout>
+        </ThemeProvider>
       </body>
     </html>
   );
