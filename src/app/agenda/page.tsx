@@ -1,6 +1,6 @@
 "use client";
 
-import { FaCheck, FaTimes, FaPlus, FaBook } from "react-icons/fa";
+import { FaCheck, FaTimes, FaSearch, FaPlus, FaBook } from "react-icons/fa";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -239,22 +239,40 @@ export default function Page() {
         <div>
           <h2 className="text-xl font-semibold mb-4">Coletivas</h2>
           <div className="space-y-6">
-            {monitorias.coletivas.map((monitoria, index) => (
-              <div
-                key={index}
-                className="p-6 border-l-4 border-blue-500 rounded-lg shadow-md bg-gray-50"
-              >
-                <h3 className="text-xl font-medium text-blue-800">
-                  {monitoria.titulo}
+            {monitorias.coletivas.length === 0 ? (
+              <div className="p-8 border rounded-lg bg-blue-200 text-gray-600 shadow-lg flex flex-col items-center">
+                <img
+                  src="/icons/logoSyner2.png"
+                  alt="Nenhuma monitoria agendada"
+                  className="w-20 h-20 mb-6"
+                />
+                <h3 className="text-2xl font-semibold text-gray-700">
+                  Nenhuma monitoria coletiva agendada
                 </h3>
-                <p className="text-gray-600">
-                  Agendada para dia {monitoria.data} às {monitoria.hora} horas
+                <p className="text-lg text-gray-500 mt- text-center">
+                  Ainda não há monitorias coletivas disponíveis.
                 </p>
+                {/* Botão de buscar monitorias coletivas */}
+                <button className="mt-6 px-8 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 flex items-center gap-2">
+                  <Link href="/comunidade" className="flex items-center gap-2">
+                    <FaSearch />
+                    Buscar novas monitorias
+                  </Link>
+                </button>
+
               </div>
-            ))}
+            ) : (
+              monitorias.coletivas.map((monitoria, index) => (
+                <div
+                  key={index}
+                  className="p-8 border-l-4 border-blue-500 rounded-lg shadow-md bg-gray-50"
+                >
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
-    </div>
+      </div>
   );
 }

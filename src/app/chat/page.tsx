@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { FaSmile } from "react-icons/fa";
 import { EmojiClickData } from "emoji-picker-react";
 import Image from "next/image";
+
 interface Mensagem {
   texto: string;
   autor: string;
@@ -77,9 +78,7 @@ export default function Page() {
 
   return (
     <div className="flex h-screen bg-gray-100">
-      {/* Caixa Mãe: Barra Azul */}
       <div className="flex flex-col w-full h-full bg-blue-600">
-        {/* Subcaixa 1: Lista de Contatos */}
         <div className="flex flex-row flex-grow">
           <div className="w-1/4 bg-white overflow-y-auto rounded-tl-3xl mt-10 border-r-2 border-gray-300 shadow-md">
             <div className="p-4">
@@ -108,7 +107,6 @@ export default function Page() {
                       {contato.novasMsg}
                     </span>
                   )}
-                  {/* Exibindo horário da última mensagem */}
                   <span className="text-xs text-gray-500 mt-1">
                     {contato.mensagens[contato.mensagens.length - 1]?.dataHora.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                   </span>
@@ -117,7 +115,6 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Subcaixa 2: Janela de Conversa */}
           <div className="flex flex-col w-3/4 bg-white mt-10 ">
             <div className="flex-grow p-6 bg-gray-50 overflow-y-auto ">
               {contatoAtivo ? (
@@ -126,20 +123,19 @@ export default function Page() {
                     key={index}
                     className={`mb-4 flex ${mensagem.autor === "Você" ? "justify-end" : "justify-start"}`}
                   >
-                    <div
-                      className={`p-3 max-w-xs ${
-                        mensagem.autor === "Você" ? "bg-blue-500 text-white rounded-full px-8" : "bg-gray-200 text-gray-700 rounded-full px-8"
-                      }`}
-                    >
-                      <p>{mensagem.texto}</p>
-                    </div>
-                    {/* Horário abaixo do balão de mensagem */}
-                    <div
-                      className={`text-xs ${
-                        mensagem.autor === "Você" ? "text-gray-500" : "text-gray-500"
-                      } mt-1`}
-                    >
-                      {mensagem.dataHora.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                    <div className="relative">
+                      <div
+                        className={`p-3 max-w-xs ${
+                          mensagem.autor === "Você" ? "bg-blue-500 text-white rounded-lg px-8" : "bg-gray-200 text-gray-700 rounded-lg px-8"
+                        }`}
+                      >
+                        <p>{mensagem.texto}</p>
+                      </div>
+                      <div
+                        className={`text-xs text-gray-500 mt-1 text-right`}
+                      >
+                        {mensagem.dataHora.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                      </div>
                     </div>
                   </div>
                 ))
