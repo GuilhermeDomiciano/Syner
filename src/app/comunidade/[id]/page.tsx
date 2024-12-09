@@ -3,6 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+import { FaSmile } from "react-icons/fa";
+import { EmojiClickData } from "emoji-picker-react";
 
 type Participante = {
   id: number;
@@ -25,6 +28,8 @@ type Grupo = {
   materiais: Material[];
 };
 
+const EmojiPicker = dynamic(() => import("emoji-picker-react"), { ssr: false });
+
 export default function GrupoPage() {
   const { id } = useParams() as { id: string };
   const [grupo, setGrupo] = useState<Grupo | null>(null);
@@ -32,6 +37,13 @@ export default function GrupoPage() {
   const [messages, setMessages] = useState<string[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const router = useRouter();
+  const EmojiPicker = dynamic(() => import("emoji-picker-react"), { ssr: false });
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
+  const onEmojiClick = (emojiObject: EmojiClickData) => {
+    setNewMessage((prev) => prev + emojiObject.emoji);
+  };
+  
 
   let isResizing = false;
   let startSize = { width: 300, height: 400 };
@@ -237,74 +249,96 @@ export default function GrupoPage() {
 
       {chatOpen && (
         <div
-            className="fixed z-50 bg-white shadow-lg rounded-lg border border-gray-300"
-            style={{
+          className="fixed z-50 bg-white shadow-lg rounded-lg border border-gray-300"
+          style={{
             top: chatPosition.y,
             left: chatPosition.x,
             width: chatSize.width,
             height: chatSize.height,
-            }}
-            ref={chatRef}
+            maxWidth: "95vw", // Garante que o chat não ultrapasse a largura da tela
+            maxHeight: "90vh", // Garante que o chat não ultrapasse a altura da tela
+          }}
+          ref={chatRef}
+          onMouseDown={handleDragStart}
+        >
+          {/* Título */}
+          <div
+            className="bg-blue-600 text-white px-4 py-3 flex justify-between items-center cursor-move rounded-t-lg"
             onMouseDown={handleDragStart}
-        >
-        {/* Título */}
-        <div
-        className="bg-blue-600 text-white px-4 py-3 flex justify-between items-center cursor-move"
-        onMouseDown={handleDragStart}
-        >
-        <h3 className="text-lg font-bold">{grupo.nome}</h3>
+          >
+            <h3 className="text-lg font-bold truncate">{grupo.nome}</h3>
             <button
-                onClick={() => setChatOpen(false)}
-                className="text-white text-xl hover:text-gray-200 transition"
+              onClick={() => setChatOpen(false)}
+              className="text-white text-xl hover:text-gray-200 transition"
             >
-                ✖
+              ✖
             </button>
-        </div>
+          </div>
 
-        {/* Mensagens */}
-        <div className="p-4 overflow-y-auto" style={{ height: `calc(${chatSize.height}px - 120px)` }}>
-        {messages.length > 0 ? (
-            messages.map((msg, index) => (
-            <div
-                key={index}
-                className="p-2 mb-2 rounded-lg bg-blue-600 text-white self-end"
+          {/* Mensagens */}
+          <div
+            className="p-4 overflow-y-auto"
+            style={{
+              height: `calc(${chatSize.height}px - 120px)`,
+              maxHeight: "calc(90vh - 120px)", // Mantém altura responsiva
+            }}
+          >
+            {messages.length > 0 ? (
+              messages.map((msg, index) => (
+                <div
+                  key={index}
+                  className={`p-2 mb-2 rounded-lg ${
+                    msg.startsWith("Você")
+                      ? "bg-blue-600 text-white self-end"
+                      : "bg-gray-200 text-gray-700"
+                  }`}
+                >
+                  {msg}
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-500 text-center">Nenhuma mensagem ainda.</p>
+            )}
+          </div>
+
+          {/* Campo de Envio */}
+          <div className="flex items-center border-t border-gray-200 p-2 relative bg-gray-50">
+            <button
+              className="p-3 bg-gray-200 rounded-full hover:bg-gray-300 transition mr-4"
+              onClick={() => setShowEmojiPicker((prev) => !prev)}
             >
-                {msg}
-            </div>
-            ))
-        ) : (
-            <p className="text-gray-500 text-center">Nenhuma mensagem ainda.</p>
-        )}
-        </div>
-
-
-        {/* Campo de Envio */}
-        <div className="flex items-center border-t border-gray-200 p-2">
+              <FaSmile className="text-xl text-gray-600" />
+            </button>
+            {showEmojiPicker && (
+              <div className="absolute bottom-16 left-4 z-50 max-w-xs">
+                <EmojiPicker onEmojiClick={onEmojiClick} />
+              </div>
+            )}
             <input
-                type="text"
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                onKeyDown={(e) => {
+              type="text"
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                    sendMessage(); // Envia a mensagem quando Enter é pressionado
+                  sendMessage();
                 }
-                }}
-                placeholder="Escreva sua mensagem..."
-                className="flex-1 px-4 py-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+              }}
+              placeholder="Escreva sua mensagem..."
+              className="flex-1 px-4 py-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
             />
             <button
-                onClick={sendMessage}
-                className="bg-blue-600 text-white px-4 py-2 rounded-r-lg hover:bg-blue-700 transition"
+              onClick={sendMessage}
+              className="bg-blue-600 text-white px-4 py-2 rounded-r-lg hover:bg-blue-700 transition"
             >
-                Enviar
+              Enviar
             </button>
-        </div>
+          </div>
 
-        {/* Controle de redimensionamento */}
-        <div
-        className="absolute bottom-0 right-0 w-4 h-4 bg-blue-600 cursor-se-resize"
-        onMouseDown={handleResizeStart}
-        />
+          {/* Controle de redimensionamento */}
+          <div
+            className="absolute bottom-0 right-0 w-4 h-4 bg-blue-600 cursor-se-resize"
+            onMouseDown={handleResizeStart}
+          />
         </div>
       )}
     </div>
