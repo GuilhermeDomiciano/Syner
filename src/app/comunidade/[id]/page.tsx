@@ -28,6 +28,9 @@ type Grupo = {
 export default function GrupoPage() {
   const { id } = useParams() as { id: string };
   const [grupo, setGrupo] = useState<Grupo | null>(null);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [messages, setMessages] = useState<string[]>([]);
+  const [newMessage, setNewMessage] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -47,12 +50,19 @@ export default function GrupoPage() {
 
   if (!grupo) return <p className="text-center mt-12">Carregando...</p>;
 
+  const sendMessage = () => {
+    if (newMessage.trim() !== "") {
+      setMessages([...messages, newMessage]);
+      setNewMessage("");
+    }
+  };
+  
   const handleViewAll = (section: string) => {
     router.push(`/comunidade/${grupo.id}/${section}`);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-50 text-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-50 text-gray-800 relative">
       {/* Cabeçalho */}
       <header className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg">
         <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center gap-8">
@@ -74,6 +84,12 @@ export default function GrupoPage() {
 
       {/* Conteúdo */}
       <main className="max-w-6xl mx-auto mt-8 space-y-12 px-6">
+        <button
+          onClick={() => setChatOpen((prev) => !prev)}
+          className="fixed bottom-6 right-6 px-6 py-3 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition"
+        >
+          {chatOpen ? "Fechar Chat" : "Abrir Chat"}
+        </button>
         {/* Participantes */}
         <section>
           <h2 className="text-3xl font-semibold mb-6 text-gray-900 border-b-4 border-blue-600 pb-2">
@@ -157,6 +173,77 @@ export default function GrupoPage() {
           )}
         </section>
       </main>
+
+      {/* Chat */}
+      {/* Chat */}
+{chatOpen && (
+  <div
+    className="fixed bottom-4 right-4 w-80 bg-white shadow-lg rounded-lg overflow-hidden border border-gray-300 cursor-move"
+    style={{ position: "absolute" }}
+    draggable
+    onDragEnd={(e) => {
+      const chatBox = e.target as HTMLElement;
+      const newX = e.clientX - chatBox.offsetWidth / 2;
+      const newY = e.clientY - chatBox.offsetHeight / 2;
+
+      // Impedir que a aba saia dos limites da janela
+      const boundedX = Math.max(0, Math.min(window.innerWidth - chatBox.offsetWidth, newX));
+      const boundedY = Math.max(0, Math.min(window.innerHeight - chatBox.offsetHeight, newY));
+
+      chatBox.style.right = `${window.innerWidth - boundedX - chatBox.offsetWidth}px`;
+      chatBox.style.bottom = `${window.innerHeight - boundedY - chatBox.offsetHeight}px`;
+    }}
+  >
+    {/* Cabeçalho */}
+    <div className="bg-blue-600 text-white px-4 py-3 flex justify-between items-center">
+      <h3 className="text-lg font-bold">{grupo.nome}</h3>
+      <button
+        onClick={() => setChatOpen(false)}
+        className="text-white text-xl hover:text-gray-200 transition"
+      >
+        ✖
+      </button>
+    </div>
+
+    {/* Mensagens */}
+    <div className="p-4 h-60 overflow-y-auto">
+      {messages.length > 0 ? (
+        messages.map((msg, index) => (
+          <div
+            key={index}
+            className={`p-2 mb-2 rounded-lg ${
+              index % 2 === 0
+                ? "bg-blue-100 text-gray-800 self-start"
+                : "bg-blue-600 text-white self-end"
+            }`}
+          >
+            {msg}
+          </div>
+        ))
+      ) : (
+        <p className="text-gray-500 text-center">Nenhuma mensagem ainda.</p>
+      )}
+    </div>
+
+    {/* Campo de Envio */}
+    <div className="flex items-center border-t border-gray-200 p-2">
+      <input
+        type="text"
+        value={newMessage}
+        onChange={(e) => setNewMessage(e.target.value)}
+        placeholder="Escreva sua mensagem..."
+        className="flex-1 px-4 py-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+      />
+      <button
+        onClick={sendMessage}
+        className="bg-blue-600 text-white px-4 py-2 rounded-r-lg hover:bg-blue-700 transition"
+      >
+        Enviar
+      </button>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }
