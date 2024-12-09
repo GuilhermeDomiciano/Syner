@@ -5,14 +5,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface Monitoria {
-  titulo: string;
+  titulo?: string;
   data: string;
   hora: string;
-  tipo: "ensinar" | "individual" | "coletiva";
+  tipo?: "ensinar" | "individual" | "coletiva";
   imagem?: string;
-  nome?: string; 
+  nome?: string;
   materia?: string;
-  status?: string; 
+  status?: string;
 }
 
 interface MonitoriasData {
@@ -34,6 +34,26 @@ export default function Page() {
       .then((data) => setMonitorias(data))
       .catch((error) => console.error("Erro ao carregar JSON:", error));
   }, []);
+
+  const removerMonitoriaEnsinar = (indexToRemove: number) => {
+    if (confirm("Você quer mesmo sair dessa monitoria?")) {
+      setMonitorias((prev) => ({
+        ...prev,
+        ensinar: prev.ensinar.filter((_, index) => index !== indexToRemove),
+      }));
+    }
+  };
+
+  const removerMonitoriaIndividual = (indexToRemove: number) => {
+    if (confirm("Você quer mesmo sair dessa monitoria?")) {
+      setMonitorias((prev) => ({
+        ...prev,
+        individuais: prev.individuais.filter(
+          (_, index) => index !== indexToRemove
+        ),
+      }));
+    }
+  };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen">
@@ -64,9 +84,12 @@ export default function Page() {
                     Ir para a sala
                   </button>
                 </Link>
-                <button className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center gap-2">
+                <button
+                  onClick={() => removerMonitoriaEnsinar(index)}
+                  className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center gap-2"
+                >
                   <FaTimes />
-                  Cancelar
+                  Sair
                 </button>
               </div>
             </div>
@@ -118,13 +141,18 @@ export default function Page() {
                   )}
                 </div>
                 <div className="flex gap-4">
-                  <Link href="/monitoria">
-                    <button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2">
-                      <FaCheck />
-                      Entrar
-                    </button>
-                  </Link>
-                  <button className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center gap-2">
+                  {monitoria.status === "Acontecendo agora" && (
+                    <Link href="/monitoria">
+                      <button className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2">
+                        <FaCheck />
+                        Entrar
+                      </button>
+                    </Link>
+                  )}
+                  <button
+                    onClick={() => removerMonitoriaIndividual(index)}
+                    className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center gap-2"
+                  >
                     <FaTimes />
                     Sair
                   </button>
@@ -167,7 +195,6 @@ export default function Page() {
                   key={index}
                   className="p-8 border-l-4 border-blue-500 rounded-lg shadow-md bg-gray-50"
                 >
-                  {/* Adicione o conteúdo aqui para as monitorias coletivas */}
                 </div>
               ))
             )}
