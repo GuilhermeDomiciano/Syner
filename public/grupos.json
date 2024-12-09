@@ -100,7 +100,7 @@
     {
       "id": 8,
       "nome": "Banco de Dados",
-      "imagem": "/comunidades/4.png",
+      "imagem": "/comunidades/4.jpg",
       "participando": false,
       "participantes": [
         { "name": "Ana Paula", "role": "Monitor de SQL", "img": "/icons/user.png", "nota": 4.6 },

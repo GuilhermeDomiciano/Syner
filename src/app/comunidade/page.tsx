@@ -191,15 +191,14 @@ export default function ComunidadePage() {
                       key={grupo.id}
                       className="flex flex-col items-center bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
                     >
-                      <div className="w-24 h-24 mb-4 overflow-hidden rounded-lg shadow">
-                        <Image
-                          src={grupo.imagem}
-                          alt={grupo.nome}
-                          width={96}
-                          height={96}
-                          className="object-cover"
-                        />
-                      </div>
+                    <div className="w-24 h-24 mb-4 overflow-hidden rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+                      <img
+                        src={grupo.imagem}
+                        alt={grupo.nome}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+
                       <div className="flex flex-col items-center text-center mb-4">
                         <p className="font-semibold text-lg text-gray-800 truncate">{grupo.nome}</p>
                         <p className="text-gray-600 text-sm">
