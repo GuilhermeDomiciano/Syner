@@ -85,8 +85,64 @@
     },
     {
       "id": 7,
+      "nome": "Estruturas de Dados",
+      "imagem": "/comunidades/3.png",
+      "participando": false,
+      "participantes": [
+        { "name": "Felipe Andrade", "role": "Monitor de Estruturas", "img": "/icons/user.png", "nota": 4.4 },
+        { "name": "Priscila Moura", "role": "Monitor de Estruturas", "img": "/icons/user.png", "nota": 4.3 }
+      ],
+      "materiais": [
+        { "titulo": "Filas e Pilhas", "monitor": "Felipe Andrade" },
+        { "titulo": "Algoritmos em Grafos", "monitor": "Priscila Moura" }
+      ]
+    },
+    {
+      "id": 8,
+      "nome": "Banco de Dados",
+      "imagem": "/comunidades/4.png",
+      "participando": false,
+      "participantes": [
+        { "name": "Ana Paula", "role": "Monitor de SQL", "img": "/icons/user.png", "nota": 4.6 },
+        { "name": "Carlos Eduardo", "role": "Monitor de Banco de Dados", "img": "/icons/user.png", "nota": 4.8 }
+      ],
+      "materiais": [
+        { "titulo": "Normalização de Dados", "monitor": "Ana Paula" },
+        { "titulo": "Query Optimization", "monitor": "Carlos Eduardo" }
+      ]
+    },
+    {
+      "id": 9,
+      "nome": "Desenvolvimento Web",
+      "imagem": "/comunidades/5.png",
+      "participando": false,
+      "participantes": [
+        { "name": "Larissa Martins", "role": "Monitor de Frontend", "img": "/icons/user.png", "nota": 4.7 },
+        { "name": "Rafael Costa", "role": "Monitor de Backend", "img": "/icons/user.png", "nota": 4.5 }
+      ],
+      "materiais": [
+        { "titulo": "React Avançado", "monitor": "Larissa Martins" },
+        { "titulo": "APIs RESTful", "monitor": "Rafael Costa" }
+      ]
+    },
+    {
+      "id": 10,
+      "nome": "Redes de Computadores",
+      "imagem": "/comunidades/6.png",
+      "participando": false,
+      "participantes": [
+        { "name": "Fernando Lopes", "role": "Monitor de Redes", "img": "/icons/user.png", "nota": 4.2 },
+        { "name": "Júlia Almeida", "role": "Monitor de Redes", "img": "/icons/user.png", "nota": 4.6 }
+      ],
+      "materiais": [
+        { "titulo": "Modelos OSI e TCP/IP", "monitor": "Fernando Lopes" },
+        { "titulo": "Segurança em Redes", "monitor": "Júlia Almeida" }
+      ]
+    },
+    {
+      "id": 11,
       "nome": "Unidos da Computação",
-      "imagem": "/comunidades/computacao.png",
+      "imagem": "/comunidades/1.png",
       "participando": false,
       "participantes": [
         { "name": "Bruno Nascimento", "role": "Monitor de Computação", "img": "/icons/user.png", "nota": 4.5 },
@@ -98,9 +154,9 @@
       ]
     },
     {
-      "id": 8,
+      "id": 12,
       "nome": "Engenharia de Software",
-      "imagem": "/comunidades/software.png",
+      "imagem": "/comunidades/2.png",
       "participando": false,
       "participantes": [
         { "name": "Renato Farias", "role": "Monitor de Engenharia", "img": "/icons/user.png", "nota": 4.6 },
@@ -109,20 +165,6 @@
       "materiais": [
         { "titulo": "Planejamento de Software", "monitor": "Renato Farias" },
         { "titulo": "Práticas de Scrum", "monitor": "Juliana Alves" }
-      ]
-    },
-    {
-      "id": 9,
-      "nome": "Estruturas de Dados",
-      "imagem": "/comunidades/estruturas.png",
-      "participando": false,
-      "participantes": [
-        { "name": "Felipe Andrade", "role": "Monitor de Estruturas", "img": "/icons/user.png", "nota": 4.4 },
-        { "name": "Priscila Moura", "role": "Monitor de Estruturas", "img": "/icons/user.png", "nota": 4.3 }
-      ],
-      "materiais": [
-        { "titulo": "Filas e Pilhas", "monitor": "Felipe Andrade" },
-        { "titulo": "Algoritmos em Grafos", "monitor": "Priscila Moura" }
       ]
     }
 ]
